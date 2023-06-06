@@ -28,3 +28,6 @@ venv.bak/
 
 # PostgreSQL # 
 postgres_setting.py
+
+# Static #
+static/
