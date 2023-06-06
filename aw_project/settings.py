@@ -30,11 +30,7 @@ SECRET_KEY = getenv("DJANGO_SECRET_KEY")
 DEBUG = getenv("IS_DEVELOPMENT")
 
 ALLOWED_HOSTS = [
-    getenv(
-        "APP_HOST",
-        "127.0.0.1",
-        "localhost",
-    )
+    "*"
 ]
 
 
