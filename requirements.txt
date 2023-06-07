@@ -3,3 +3,4 @@ djangorestframework
 python-dotenv
 django-ckeditor
 django-cors-headers
+gunicorn
