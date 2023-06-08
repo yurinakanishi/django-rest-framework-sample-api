@@ -1,13 +1,11 @@
 from django.contrib import admin
-
-# Register your models here.
 from .models import Article, Tag, Genre
 
 
 class ArticleAdmin(admin.ModelAdmin):
     filter_horizontal = ("tags", "genres")
-    display_fields = ("name", "title", "author", "date_published")
-    prepopulated_fields = {"name": ("title",)}
+    display_fields = "title"
+    prepopulated_fields = {"slug": ("title",)}
 
 
 class TagAdmin(admin.ModelAdmin):

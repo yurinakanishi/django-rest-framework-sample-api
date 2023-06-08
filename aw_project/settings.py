@@ -29,9 +29,7 @@ SECRET_KEY = getenv("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = getenv("IS_DEVELOPMENT")
 
-ALLOWED_HOSTS = [
-    "*"
-]
+ALLOWED_HOSTS = [getenv("APP_HOST"), "127.0.0.1", "localhost", "35.203.178.233"]
 
 
 # Application definition
@@ -88,21 +86,21 @@ WSGI_APPLICATION = "aw_project.wsgi.application"
 
 DATABASES = {
     "default": {
+        "ENGINE": getenv("DATABASE_ENGINE"),
+        "NAME": getenv("DATABASE_NAME"),
+        "USER": getenv("DATABASE_USER"),
+        "PASSWORD": getenv("DATABASE_PASSWORD"),
+        "HOST": getenv("DATABASE_HOST"),
+        "PORT": getenv("DATABASE_PORT"),
+    }
+}
+
+DATABASES = {
+    "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": getenv("DATABASE_ENGINE"),
-#         "NAME": getenv("DATABASE_NAME"),
-#         "USER": getenv("DATABASE_USER"),
-#         "PASSWORD": getenv("DATABASE_PASSWORD"),
-#         "HOST": getenv("DATABASE_HOST"),
-#         "PORT": getenv("DATABASE_PORT"),
-#     }
-# }
 
 
 # Password validation
@@ -129,7 +127,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+TIME_ZONE = "Asia/Tokyo"
 
 USE_I18N = True
 
@@ -155,17 +153,16 @@ REST_FRAMEWORK = {
     ]
 }
 
-CORS_ALLOW_ALL_ORIGINS = (
-    True  # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
-)
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-]  # If this is used, then not need to use `CORS_ALLOW_ALL_ORIGINS = True`
+    "https://www.augmentedworld.dev",
+]
 CORS_ALLOWED_ORIGIN_REGEXES = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "https://www.augmentedworld.dev",
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")

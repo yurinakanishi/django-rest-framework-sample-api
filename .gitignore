@@ -29,5 +29,9 @@ venv.bak/
 # PostgreSQL # 
 postgres_setting.py
 
+# Migurations # 
+articles/migrations/
+api/migrations/
+
 # Static #
 static/

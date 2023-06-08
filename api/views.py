@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from rest_framework import viewsets, generics
 from rest_framework.response import Response
 from rest_framework.decorators import action
@@ -8,21 +8,10 @@ from .serializers import (
     GenreSerializer,
     TagSerializer,
 )
-from django.shortcuts import get_object_or_404
 
 
 class ArticleList(generics.ListAPIView):
     queryset = Article.objects.all()
-    serializer_class = ArticleSerializer
-
-
-class ArticleListEn(generics.ListAPIView):
-    queryset = Article.objects.filter(language="en")
-    serializer_class = ArticleSerializer
-
-
-class ArticleListJa(generics.ListAPIView):
-    queryset = Article.objects.filter(language="ja")
     serializer_class = ArticleSerializer
 
 

@@ -21,14 +21,17 @@ class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
         fields = [
-            "name",
+            "slug",
             "title",
-            "language",
+            "title_jp",
             "excerpt",
+            "excerpt_jp",
             "notesite_url",
             "author",
-            "date_published",
+            "published_date",
+            "updated_date",
             "tags",
             "genres",
             "content",
+            "content_jp",
         ]

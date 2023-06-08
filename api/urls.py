@@ -4,8 +4,6 @@ from .views import (
     ArticleList,
     ArticleCreate,
     ArticleDetail,
-    ArticleListEn,
-    ArticleListJa,
     GenreList,
     GenreCreate,
     GenreDetail,
@@ -16,8 +14,6 @@ from .views import (
 
 urlpatterns = [
     path("articles", ArticleList.as_view(), name="article-list"),
-    path("articles/en", ArticleListEn.as_view(), name="article-list-en"),
-    path("articles/ja", ArticleListJa.as_view(), name="article-list-ja"),
     path(
         "article/<int:pk>/create",
         ArticleCreate.as_view(),
