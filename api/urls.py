@@ -15,11 +15,11 @@ from .views import (
 urlpatterns = [
     path("articles", ArticleList.as_view(), name="article-list"),
     path(
-        "article/<int:pk>/create",
+        "article/<slug:slug>/create",
         ArticleCreate.as_view(),
         name="article-create",
     ),
-    path("article/<int:pk>/", ArticleDetail.as_view(), name="article-detail"),
+    path("article/<slug:slug>/", ArticleDetail.as_view(), name="article-detail"),
     path("genres", GenreList.as_view(), name="genre-list"),
     path("genre/<int:pk>/create", GenreCreate.as_view(), name="genre-create"),
     path("genre/<int:pk>/", GenreDetail.as_view(), name="genre-detail"),

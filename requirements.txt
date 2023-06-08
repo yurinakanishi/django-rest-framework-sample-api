@@ -4,3 +4,4 @@ python-dotenv
 django-ckeditor
 django-cors-headers
 gunicorn
+psycopg2-binary

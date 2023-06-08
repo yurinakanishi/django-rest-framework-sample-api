@@ -23,6 +23,7 @@ class ArticleCreate(generics.CreateAPIView):
 class ArticleDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
+    lookup_field = 'slug'
 
 
 class GenreList(generics.ListAPIView):
