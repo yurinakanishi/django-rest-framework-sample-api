@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from articles.models import Article, Tag, Genre
+from articles.models import Article, Tag, Genre, MovieRating
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -14,9 +14,16 @@ class GenreSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class MovieRatingSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MovieRating
+        fields = "__all__"
+
+
 class ArticleSerializer(serializers.ModelSerializer):
     tags = TagSerializer(many=True, read_only=True)
     genres = GenreSerializer(many=True, read_only=True)
+    movie_rating = MovieRatingSerializer(read_only=True)
 
     class Meta:
         model = Article
@@ -26,6 +33,8 @@ class ArticleSerializer(serializers.ModelSerializer):
             "title_jp",
             "excerpt",
             "excerpt_jp",
+            "references",
+            "references_jp",
             "notesite_url",
             "author",
             "published_date",
@@ -34,4 +43,7 @@ class ArticleSerializer(serializers.ModelSerializer):
             "genres",
             "content",
             "content_jp",
+            "rating",
+            "rating_count",
+            "movie_rating",
         ]

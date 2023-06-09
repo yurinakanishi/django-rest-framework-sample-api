@@ -35,3 +35,6 @@ api/migrations/
 
 # Static #
 static/
+
+# Setting #
+aw_project/settings.py
