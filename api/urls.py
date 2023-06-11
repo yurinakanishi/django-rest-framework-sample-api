@@ -1,12 +1,12 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import (
+from knowledge.views import (
     KnowledgeList,
     KnowledgeDetail,
     KnowledgeCreate,
-    BlogList,
-    BlogDetail,
-    BlogCreate,
+)
+
+from living_things.views import (
     LivingThingsEachList,
     LivingThingsEachDetail,
     LivingThingsEachCreate,
@@ -19,15 +19,20 @@ from .views import (
     LivingThingsCountryList,
     LivingThingsCountryDetail,
     LivingThingsCountryCreate,
+)
+
+from foods.views import (
     FoodEachList,
     FoodEachDetail,
     FoodEachCreate,
     FoodIngredientList,
     FoodIngredientDetail,
     FoodIngredientCreate,
-    FoodCookingList,
-    FoodCookingDetail,
-    FoodCookingCreate,
+    FoodCookingMethodList,
+    FoodCookingMethodDetail,
+    FoodCookingMethodCreate,
+)
+from arts.views import (
     ArtsEachList,
     ArtsEachDetail,
     ArtsEachCreate,
@@ -37,15 +42,23 @@ from .views import (
     ArtsPaintingStyleList,
     ArtsPaintingStyleDetail,
     ArtsPaintingStyleCreate,
-    ArtsPeriodList,
-    ArtsPeriodDetail,
-    ArtsPeriodCreate,
+    # ArtsPeriodList,
+    # ArtsPeriodDetail,
+    # ArtsPeriodCreate,
+)
+
+from countries.views import (
     CountryList,
     CountryDetail,
     CountryCreate,
+)
+from movies.views import (
     MovieList,
     MovieDetail,
     MovieCreate,
+)
+
+from general.views import (
     GenreList,
     GenreCreate,
     GenreDetail,
@@ -53,6 +66,7 @@ from .views import (
     TagCreate,
     TagDetail,
 )
+
 
 urlpatterns = [
     path("knowledge", KnowledgeList.as_view(), name="knowledge-list"),
@@ -62,9 +76,6 @@ urlpatterns = [
         KnowledgeCreate.as_view(),
         name="knowledge-create",
     ),
-    path("blogs", BlogList.as_view(), name="blog-list"),
-    path("blog/<slug:slug>/", BlogDetail.as_view(), name="blog-detail"),
-    path("blog/<slug:slug>/create", BlogCreate.as_view(), name="blog-create"),
     path(
         "living-things/each",
         LivingThingsEachList.as_view(),
@@ -158,17 +169,17 @@ urlpatterns = [
         ArtsPaintingStyleCreate.as_view(),
         name="arts-painting-style-create",
     ),
-    path("arts/periods", ArtsPeriodList.as_view(), name="arts-periods-list"),
-    path(
-        "arts/period/<slug:slug>/",
-        ArtsPeriodDetail.as_view(),
-        name="arts-period-detail",
-    ),
-    path(
-        "arts/period/<slug:slug>/create",
-        ArtsPeriodCreate.as_view(),
-        name="arts-period-create",
-    ),
+    # path("arts/periods", ArtsPeriodList.as_view(), name="arts-periods-list"),
+    # path(
+    #     "arts/period/<slug:slug>/",
+    #     ArtsPeriodDetail.as_view(),
+    #     name="arts-period-detail",
+    # ),
+    # path(
+    #     "arts/period/<slug:slug>/create",
+    #     ArtsPeriodCreate.as_view(),
+    #     name="arts-period-create",
+    # ),
     path("foods/each", FoodEachList.as_view(), name="food-each-list"),
     path("foods/each/<slug:slug>/", FoodEachDetail.as_view(), name="food-each-detail"),
     path(
@@ -189,15 +200,15 @@ urlpatterns = [
         FoodIngredientCreate.as_view(),
         name="food-ingredients-create",
     ),
-    path("foods/cooking", FoodCookingList.as_view(), name="food-cooking-list"),
+    path("foods/cooking", FoodCookingMethodList.as_view(), name="food-cooking-list"),
     path(
         "foods/cooking/<slug:slug>/",
-        FoodCookingDetail.as_view(),
+        FoodCookingMethodDetail.as_view(),
         name="food-cooking-detail",
     ),
     path(
         "foods/cooking/<slug:slug>/create",
-        FoodCookingCreate.as_view(),
+        FoodCookingMethodCreate.as_view(),
         name="food-cooking-create",
     ),
     path("movies", MovieList.as_view(), name="movie-list"),

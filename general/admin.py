@@ -3,9 +3,10 @@ from .models import Article, Tag, Genre
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    filter_horizontal = ("tags", "genres")
-    display_fields = "title"
-    prepopulated_fields = {"slug": ("title",)}
+    pass
+    # filter_horizontal = ("tags", "genres")
+    # display_fields = "name"
+    # prepopulated_fields = {"slug": ("name",)}
 
 
 class TagAdmin(admin.ModelAdmin):

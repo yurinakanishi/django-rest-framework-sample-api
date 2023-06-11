@@ -30,8 +30,7 @@ venv.bak/
 postgres_setting.py
 
 # Migurations # 
-articles/migrations/
-api/migrations/
+*/migrations
 
 # Static #
 static/
