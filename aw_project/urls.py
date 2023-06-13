@@ -22,7 +22,17 @@ from django.conf import settings
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("ckeditor/", include("ckeditor_uploader.urls")),
-    path("api/", include("api.urls")),
+    # path("api/", include("api.urls")),
+    path("knowledge/", include("knowledge.urls")),
+    path("arts/", include("arts.urls")),
+    path("foods/", include("foods.urls")),
+    path("dates/", include("dates.urls")),
+    path("general/", include("general.urls")),
+    path("living_things/", include("living_things.urls")),
+    path("movies/", include("movies.urls")),
+    path("locations/", include("locations.urls")),
+    path("people/", include("people.urls")),
+    path("users/", include("users.urls")),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class CountriesConfig(AppConfig):
+class PeriodsConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "countries"
+    name = "dates"

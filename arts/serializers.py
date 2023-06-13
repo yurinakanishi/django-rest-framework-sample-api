@@ -1,5 +1,6 @@
 from rest_framework import serializers
-from .models import Art, Museum, PaintingMethod, PaintingStyle, Artist
+from .models import Art, Museum, ArtMethod, ArtStyle, Artist
+from dates.models import Period
 
 
 class ArtSerializer(serializers.ModelSerializer):
@@ -16,17 +17,23 @@ class MuseumSerializer(serializers.ModelSerializer):
 
 class PaintingMethodSerializer(serializers.ModelSerializer):
     class Meta:
-        model = PaintingMethod
+        model = ArtMethod
         fields = "__all__"
 
 
 class PaintingStyleSerializer(serializers.ModelSerializer):
     class Meta:
-        model = PaintingStyle
+        model = ArtStyle
         fields = "__all__"
 
 
 class ArtistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Artist
+        fields = "__all__"
+
+
+class ArtPeriodSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Period
         fields = "__all__"

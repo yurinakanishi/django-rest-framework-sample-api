@@ -47,7 +47,7 @@ from arts.views import (
     # ArtsPeriodCreate,
 )
 
-from countries.views import (
+from locations.views import (
     CountryList,
     CountryDetail,
     CountryCreate,
@@ -66,9 +66,17 @@ from general.views import (
     TagCreate,
     TagDetail,
 )
-
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 urlpatterns = [
+    # path('register/', resistraion_view, name='register'),
+    # path('login/', obtain_auth_token, name='login'),
+    # path('logout/', logout_view, name='logout'),
+    path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
     path("knowledge", KnowledgeList.as_view(), name="knowledge-list"),
     path("knowledge/<slug:slug>/", KnowledgeDetail.as_view(), name="knowledge-detail"),
     path(

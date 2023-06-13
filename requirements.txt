@@ -6,3 +6,4 @@ django-cors-headers
 gunicorn
 psycopg2-binary
 pillow
+djangorestframework-simplejwt

@@ -7,24 +7,25 @@ from .models import Knowledge
 from .serializers import (
     KnowledgeSerializer,
 )
-
-from api.permissions import AdminOrReadOnly
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
+from api.permissions import IsAdminOrReadOnly, IsCreateUserOrReadOnly
 
 
 class KnowledgeList(generics.ListAPIView):
     queryset = Knowledge.objects
     serializer_class = KnowledgeSerializer
+    permission_classes = [IsAdminOrReadOnly]
 
 
 class KnowledgeDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Knowledge.objects
     serializer_class = KnowledgeSerializer
     lookup_field = "slug"
-    permission_classes = [AllowAny]
+    permission_classes = [IsCreateUserOrReadOnly]
 
 
 class KnowledgeCreate(generics.CreateAPIView):
     queryset = Knowledge.objects
     serializer_class = KnowledgeSerializer
     lookup_field = "slug"
+    permission_classes = [IsAdminUser]

@@ -8,23 +8,25 @@ from .serializers import (
     PeriodSerializer,
 )
 
-from api.permissions import AdminOrReadOnly
-from rest_framework.permissions import AllowAny
+from api.permissions import IsAdminOrReadOnly
+from rest_framework.permissions import IsAdminUser
 
 
 class PeriodList(generics.ListAPIView):
     queryset = Period.objects.all()
     serializer_class = PeriodSerializer
+    permission_classes = [IsAdminOrReadOnly]
 
 
 class PeriodDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Period.objects
     serializer_class = PeriodSerializer
     lookup_field = "slug"
-    permission_classes = [AllowAny]
+    permission_classes = [IsAdminOrReadOnly]
 
 
 class PeriodCreate(generics.CreateAPIView):
     queryset = Period.objects
     serializer_class = PeriodSerializer
     lookup_field = "slug"
+    permission_classes = [IsAdminUser]
