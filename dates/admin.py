@@ -3,11 +3,13 @@ from .models import Date, Period
 
 
 class DateAdmin(admin.ModelAdmin):
-    pass
+    display_fields = "date"
 
 
 class PeriodAdmin(admin.ModelAdmin):
-    pass
+    # filter_horizontal = ("tag", "genre")
+    display_fields = "name"
+    prepopulated_fields = {"slug": ("name",)}
 
 
 admin.site.register(Date, DateAdmin)

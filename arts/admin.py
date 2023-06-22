@@ -1,29 +1,39 @@
 from django.contrib import admin
-from .models import Art, Artist, ArtMethod, ArtStyle, Museum
+from .models import Art, Artist, PaintingMethod, PaintingStyle, Museum
 
 
 class ArtAdmin(admin.ModelAdmin):
-    pass
+    # filter_horizontal = ("tag", "genre")
+    display_fields = "title"
+    prepopulated_fields = {"slug": ("title",)}
 
 
 class ArtistAdmin(admin.ModelAdmin):
-    pass
+    # filter_horizontal = ("tag", "genre")
+    display_fields = "name"
+    prepopulated_fields = {"slug": ("name",)}
 
 
 class ArtMethodAdmin(admin.ModelAdmin):
-    pass
+    # filter_horizontal = ("tag", "genre")
+    display_fields = "name"
+    prepopulated_fields = {"slug": ("name",)}
 
 
 class ArtStyleAdmin(admin.ModelAdmin):
-    pass
+    # filter_horizontal = ("tag", "genre")
+    display_fields = "name"
+    prepopulated_fields = {"slug": ("name",)}
 
 
 class MuseumAdmin(admin.ModelAdmin):
-    pass
+    # filter_horizontal = ("tag", "genre")
+    display_fields = "name"
+    prepopulated_fields = {"slug": ("name",)}
 
 
 admin.site.register(Art, ArtAdmin)
 admin.site.register(Artist, ArtistAdmin)
-admin.site.register(ArtMethod, ArtMethodAdmin)
-admin.site.register(ArtStyle, ArtStyleAdmin)
+admin.site.register(PaintingMethod, ArtMethodAdmin)
+admin.site.register(PaintingStyle, ArtStyleAdmin)
 admin.site.register(Museum, MuseumAdmin)

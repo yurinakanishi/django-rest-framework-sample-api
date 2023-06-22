@@ -3,15 +3,19 @@ from .models import Food, CookingMethod, Ingredient
 
 
 class FoodAdmin(admin.ModelAdmin):
-    pass
+    display_fields = "name"
+    prepopulated_fields = {"slug": ("name",)}
 
 
 class CookingMethodAdmin(admin.ModelAdmin):
-    pass
+    display_fields = "name"
+    prepopulated_fields = {"slug": ("name",)}
 
 
 class IngredientAdmin(admin.ModelAdmin):
     pass
+    display_fields = "name"
+    prepopulated_fields = {"slug": ("name",)}
 
 
 admin.site.register(Food, FoodAdmin)

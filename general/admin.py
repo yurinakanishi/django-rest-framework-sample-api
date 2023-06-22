@@ -3,18 +3,18 @@ from .models import Article, Tag, Genre
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    pass
-    # filter_horizontal = ("tags", "genres")
-    # display_fields = "name"
-    # prepopulated_fields = {"slug": ("name",)}
+    display_fields = "title"
+    prepopulated_fields = {"slug": ("title",)}
 
 
 class TagAdmin(admin.ModelAdmin):
-    pass
+    display_fields = "name"
+    prepopulated_fields = {"slug": ("name",)}
 
 
 class GenreAdmin(admin.ModelAdmin):
-    pass
+    display_fields = "name"
+    prepopulated_fields = {"slug": ("name",)}
 
 
 admin.site.register(Article, ArticleAdmin)

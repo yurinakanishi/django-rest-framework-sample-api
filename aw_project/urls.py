@@ -28,7 +28,7 @@ urlpatterns = [
     path("foods/", include("foods.urls")),
     path("dates/", include("dates.urls")),
     path("general/", include("general.urls")),
-    path("living_things/", include("living_things.urls")),
+    path("living-things/", include("living_things.urls")),
     path("movies/", include("movies.urls")),
     path("locations/", include("locations.urls")),
     path("people/", include("people.urls")),

@@ -3,7 +3,9 @@ from .models import Person
 
 
 class PersonAdmin(admin.ModelAdmin):
-    pass
+    # filter_horizontal = ("tag", "genre")
+    display_fields = "name"
+    prepopulated_fields = {"slug": ("name",)}
 
 
 admin.site.register(Person, PersonAdmin)

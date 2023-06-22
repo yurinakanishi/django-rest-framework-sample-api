@@ -13,34 +13,32 @@ from foods.views import (
 )
 
 urlpatterns = [
-    path("foods/each", FoodEachList.as_view(), name="food-each-list"),
-    path("foods/each/<slug:slug>/", FoodEachDetail.as_view(), name="food-each-detail"),
+    path("each", FoodEachList.as_view(), name="food-each-list"),
+    path("each/<slug:slug>/", FoodEachDetail.as_view(), name="food-each-detail"),
     path(
-        "foods/each/<slug:slug>/create",
+        "each/<slug:slug>/create",
         FoodEachCreate.as_view(),
         name="food-each-create",
     ),
+    path("ingredients/", FoodIngredientList.as_view(), name="food-ingredients-list"),
     path(
-        "foods/ingredients", FoodIngredientList.as_view(), name="food-ingredients-list"
-    ),
-    path(
-        "foods/ingredients/<slug:slug>/",
+        "ingredients/<slug:slug>/",
         FoodIngredientDetail.as_view(),
         name="food-ingredients-detail",
     ),
     path(
-        "foods/ingredients/<slug:slug>/create",
+        "ingredients/<slug:slug>/create",
         FoodIngredientCreate.as_view(),
         name="food-ingredients-create",
     ),
-    path("foods/cooking", FoodCookingMethodList.as_view(), name="food-cooking-list"),
+    path("cooking-methods/", FoodCookingMethodList.as_view(), name="food-cooking-list"),
     path(
-        "foods/cooking/<slug:slug>/",
+        "cooking-methods/<slug:slug>/",
         FoodCookingMethodDetail.as_view(),
         name="food-cooking-detail",
     ),
     path(
-        "foods/cooking/<slug:slug>/create",
+        "cooking-methods/<slug:slug>/create",
         FoodCookingMethodCreate.as_view(),
         name="food-cooking-create",
     ),

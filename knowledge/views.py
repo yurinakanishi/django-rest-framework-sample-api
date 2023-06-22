@@ -11,21 +11,43 @@ from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 from api.permissions import IsAdminOrReadOnly, IsCreateUserOrReadOnly
 
 
+# class KnowledgeList(generics.ListAPIView):
+#     queryset = Knowledge.objects.all()
+#     serializer_class = KnowledgeSerializer
+#     permission_classes = [IsAdminOrReadOnly]
+#     paginate_by = 30
+
+
+# class KnowledgeDetail(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Knowledge.objects.all()
+#     serializer_class = KnowledgeSerializer
+#     lookup_field = "slug"
+#     permission_classes = [IsAdminOrReadOnly]
+
+
+# class KnowledgeCreate(generics.CreateAPIView):
+#     queryset = Knowledge.objects.all()
+#     serializer_class = KnowledgeSerializer
+#     lookup_field = "slug"
+#     permission_classes = [IsAdminUser]
+
+
 class KnowledgeList(generics.ListAPIView):
-    queryset = Knowledge.objects
+    queryset = Knowledge.objects.all()
     serializer_class = KnowledgeSerializer
-    permission_classes = [IsAdminOrReadOnly]
+    permission_classes = [AllowAny]
+    paginate_by = 30
 
 
 class KnowledgeDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Knowledge.objects
+    queryset = Knowledge.objects.all()
     serializer_class = KnowledgeSerializer
     lookup_field = "slug"
-    permission_classes = [IsCreateUserOrReadOnly]
+    permission_classes = [AllowAny]
 
 
 class KnowledgeCreate(generics.CreateAPIView):
-    queryset = Knowledge.objects
+    queryset = Knowledge.objects.all()
     serializer_class = KnowledgeSerializer
     lookup_field = "slug"
-    permission_classes = [IsAdminUser]
+    permission_classes = [AllowAny]

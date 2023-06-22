@@ -2,8 +2,13 @@ from django.shortcuts import render, get_object_or_404
 from rest_framework import viewsets, generics
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from .models import Movie, MovieRating
-from .serializers import MovieActorSerializer, MovieRatingSerializer, MovieSerializer
+from .models import Movie, MovieRating, MovieReview
+from .serializers import (
+    MovieActorSerializer,
+    MovieRatingSerializer,
+    MovieSerializer,
+    MovieReviewSerializer,
+)
 from api.permissions import IsAdminOrReadOnly, IsCreateUserOrReadOnly
 from rest_framework.permissions import (
     IsAuthenticatedOrReadOnly,
@@ -13,7 +18,7 @@ from rest_framework.permissions import (
 )
 
 
-class MovieList(generics.CreateAPIView):
+class MovieList(generics.ListAPIView):
     queryset = Movie.objects.all()
     serializer_class = MovieSerializer
     lookup_field = "slug"
@@ -64,3 +69,19 @@ class MovieRatingDetail(generics.RetrieveUpdateDestroyAPIView):
 class MovieRatingCreate(generics.CreateAPIView):
     queryset = MovieRating.objects.all()
     serializer_class = MovieRatingSerializer
+
+
+class MovieReviewList(generics.ListCreateAPIView):
+    queryset = MovieReview.objects.all()
+    serializer_class = MovieReviewSerializer
+
+
+class MovieReviewDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = MovieReview.objects.all()
+    serializer_class = MovieReviewSerializer
+    lookup_field = "id"
+
+
+class MovieReviewCreate(generics.CreateAPIView):
+    queryset = MovieReview.objects.all()
+    serializer_class = MovieReviewSerializer

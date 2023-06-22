@@ -4,27 +4,28 @@ from general.models import Article, Tag, Genre
 
 class Country(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    name_jp = models.CharField(max_length=100, unique=True)
+    name_jp = models.CharField(max_length=100, unique=True, blank=True)
     slug = models.SlugField(max_length=100, blank=True)
-    excerpt = models.TextField(max_length=200, default="")
-    excerpt_jp = models.TextField(max_length=200, default="")
-    capital_city = models.CharField(max_length=100)
-    population = models.IntegerField()
-    area = models.DecimalField(max_digits=10, decimal_places=2)
-    currency = models.CharField(max_length=50)
-    article = models.OneToOneField(Article, on_delete=models.CASCADE, null=True)
-    genres = models.ManyToManyField(Genre, related_name="countries")
-    tags = models.ManyToManyField(Tag, related_name="countries")
+    excerpt = models.TextField(max_length=200, blank=True)
+    excerpt_jp = models.TextField(max_length=200, blank=True)
+    capital_city = models.CharField(max_length=100, blank=True)
+    population = models.IntegerField(blank=True, null=True)
+    area_km2 = models.IntegerField(blank=True, null=True)
+    currency = models.CharField(max_length=50, blank=True)
+    article = models.OneToOneField(
+        Article, on_delete=models.CASCADE, blank=True, null=True
+    )
+    genres = models.ManyToManyField(Genre, blank=True, related_name="countries")
+    tags = models.ManyToManyField(Tag, blank=True, related_name="countries")
 
     def __str__(self):
         return self.name
 
 
 class Location(models.Model):
-    country = models.ForeignKey(Country, on_delete=models.SET_NULL, null=True)
-    state = models.CharField(max_length=100, null=True, blank=True)
-    city = models.CharField(max_length=100, null=True, blank=True)
-    street_address = models.CharField(max_length=100, null=True, blank=True)
-
-    def __str__(self):
-        return f"{self.street_address}, {self.city}, {self.state}, {self.country.name}"
+    country = models.ForeignKey(
+        Country, on_delete=models.SET_NULL, blank=True, null=True
+    )
+    state = models.CharField(max_length=100, blank=True)
+    city = models.CharField(max_length=100, blank=True)
+    street_address = models.CharField(max_length=100, blank=True)

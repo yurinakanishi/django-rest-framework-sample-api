@@ -7,10 +7,10 @@ from knowledge.views import (
 )
 
 urlpatterns = [
-    path("knowledge", KnowledgeList.as_view(), name="knowledge-list"),
-    path("knowledge/<slug:slug>/", KnowledgeDetail.as_view(), name="knowledge-detail"),
+    path("", KnowledgeList.as_view(), name="knowledge-list"),
+    path("<slug:slug>/", KnowledgeDetail.as_view(), name="knowledge-detail"),
     path(
-        "knowledge/<slug:slug>/create",
+        "<slug:slug>/create",
         KnowledgeCreate.as_view(),
         name="knowledge-create",
     ),

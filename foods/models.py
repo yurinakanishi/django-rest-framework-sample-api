@@ -9,18 +9,26 @@ from locations.models import Location
 
 class CookingMethod(models.Model):
     METHOD_CHOICES = [
-        ("stew", "Stew", "シチュー"),
-        ("deep_fried", "Deep Fried", "揚げ物"),
+        ("stew", "Stew"),
+        ("deep-fried", "Deep fried"),
     ]
-    name = [en for _, en, _ in METHOD_CHOICES]
-    name_jp = [jp for _, _, jp in METHOD_CHOICES]
-    slug = models.SlugField(max_length=200, blank=True)
-    excerpt = models.TextField(max_length=200, default="")
-    excerpt_jp = models.TextField(max_length=200, default="")
-    description = models.TextField()
-    article = models.OneToOneField(Article, on_delete=models.CASCADE, null=True)
-    genres = models.ManyToManyField(Genre, related_name="cooking_methods")
-    tags = models.ManyToManyField(Tag, related_name="cooking_methods")
+    METHOD_CHOICES_JP = [
+        ("stew", "シチュー"),
+        ("deep-fried", "揚げ物"),
+    ]
+
+    name = models.CharField(max_length=200, choices=METHOD_CHOICES)
+    name_jp = models.CharField(max_length=200, choices=METHOD_CHOICES_JP, blank=True)
+    slug = models.SlugField(max_length=200)
+    excerpt = models.TextField(max_length=200, blank=True)
+    excerpt_jp = models.TextField(max_length=200, blank=True)
+    article = models.OneToOneField(
+        Article, on_delete=models.CASCADE, blank=True, null=True
+    )
+    genres = models.ManyToManyField(
+        Genre, blank=True, related_name="cooking_method_genres"
+    )
+    tags = models.ManyToManyField(Tag, blank=True, related_name="cooking_method_tags")
 
     def __str__(self):
         return self.name
@@ -28,24 +36,42 @@ class CookingMethod(models.Model):
 
 class Ingredient(models.Model):
     TYPE_CHOICES = [
-        ("fruits", "Fruits", "果物"),
-        ("vegetables", "Vegetables", "野菜"),
-        ("meats", "Meats", "肉"),
-        ("dairy_products", "Dairy Products", "乳製品"),
-        ("grains", "Grains", "穀物"),
-        ("eggs", "Eggs", "卵"),
-        ("fish", "Fish", "魚"),
-        ("beans", "Beans", "豆"),
+        ("fruits", "Fruits"),
+        ("vegetables", "Vegetables"),
+        ("meats", "Meats"),
+        ("dairy_products", "Dairy Products"),
+        ("grains", "Grains"),
+        ("eggs", "Eggs"),
+        ("fish", "Fish"),
+        ("beans", "Beans"),
     ]
-    name = [en for _, en, _ in TYPE_CHOICES]
-    name_jp = [jp for _, _, jp in TYPE_CHOICES]
-    slug = models.SlugField(max_length=200, blank=True)
-    excerpt = models.TextField(max_length=200, default="")
-    excerpt_jp = models.TextField(max_length=200, default="")
-    location = models.ForeignKey(Location, on_delete=models.CASCADE)
-    article = models.OneToOneField(Article, on_delete=models.CASCADE, null=True)
-    genres = models.ManyToManyField(Genre, related_name="ingredients")
-    tags = models.ManyToManyField(Tag, related_name="ingredients")
+
+    TYPE_CHOICES_JP = [
+        ("fruits", "果物"),
+        ("vegetables", "野菜"),
+        ("meats", "肉"),
+        ("dairy_products", "乳製品"),
+        ("grains", "穀物"),
+        ("eggs", "卵"),
+        ("fish", "魚"),
+        ("beans", "豆"),
+    ]
+
+    name = models.CharField(max_length=200, choices=TYPE_CHOICES)
+    name_jp = models.CharField(max_length=200, choices=TYPE_CHOICES_JP, blank=True)
+    slug = models.SlugField(max_length=200)
+    excerpt = models.TextField(max_length=200, blank=True)
+    excerpt_jp = models.TextField(max_length=200, blank=True)
+    location = models.ForeignKey(
+        Location, on_delete=models.CASCADE, blank=True, null=True
+    )
+    article = models.OneToOneField(
+        Article, on_delete=models.CASCADE, blank=True, null=True
+    )
+    genres = models.ManyToManyField(
+        Genre, blank=True, related_name="ingredients_genres"
+    )
+    tags = models.ManyToManyField(Tag, blank=True, related_name="ingredients_tags")
 
     def __str__(self):
         return self.name
@@ -53,16 +79,22 @@ class Ingredient(models.Model):
 
 class Food(models.Model):
     name = models.CharField(max_length=100)
-    name_jp = models.CharField(max_length=100)
-    slug = models.SlugField(max_length=100, unique=True)
-    excerpt = models.TextField(max_length=200, default="")
-    excerpt_jp = models.TextField(max_length=200, default="")
-    ingredients = models.ManyToManyField("Ingredient", related_name="foods")
-    cooking_method = models.ForeignKey(CookingMethod, on_delete=models.CASCADE)
+    name_jp = models.CharField(max_length=100, blank=True)
+    slug = models.SlugField(max_length=100)
+    excerpt = models.TextField(max_length=200, blank=True)
+    excerpt_jp = models.TextField(max_length=200, blank=True)
+    ingredients = models.ManyToManyField(
+        Ingredient, blank=True, related_name="foods_ingredients"
+    )
+    cooking_method = models.ForeignKey(
+        CookingMethod, on_delete=models.CASCADE, blank=True, null=True
+    )
     calories = models.IntegerField()
-    article = models.OneToOneField(Article, on_delete=models.CASCADE, null=True)
-    genres = models.ManyToManyField(Genre, related_name="foods")
-    tags = models.ManyToManyField(Tag, related_name="foods")
+    article = models.OneToOneField(
+        Article, on_delete=models.CASCADE, blank=True, null=True
+    )
+    genres = models.ManyToManyField(Genre, blank=True, related_name="foods_genres")
+    tags = models.ManyToManyField(Tag, blank=True, related_name="foods_tags")
 
     def __str__(self):
         return self.name

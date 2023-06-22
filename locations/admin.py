@@ -3,7 +3,9 @@ from .models import Country, Location
 
 
 class CountryAdmin(admin.ModelAdmin):
-    pass
+    # filter_horizontal = ("tag", "genre")
+    display_fields = "name"
+    prepopulated_fields = {"slug": ("name",)}
 
 
 class LocationAdmin(admin.ModelAdmin):

@@ -18,62 +18,62 @@ from living_things.views import (
 
 urlpatterns = [
     path(
-        "living-things/each",
+        "each/",
         LivingThingsEachList.as_view(),
         name="living-things-each-list",
     ),
     path(
-        "living-things/each/<slug:slug>/",
+        "each/<slug:slug>/",
         LivingThingsEachDetail.as_view(),
         name="living-things-each-detail",
     ),
     path(
-        "living-things/each/<slug:slug>/create",
+        "each/<slug:slug>/create/",
         LivingThingsEachCreate.as_view(),
         name="living-things-each-create",
     ),
     path(
-        "living-things/habitats",
+        "habitats/",
         LivingThingsHabitatList.as_view(),
         name="living-things-habitat-list",
     ),
     path(
-        "living-things/habitat/<slug:slug>/",
+        "habitats/<slug:slug>/",
         LivingThingsHabitatDetail.as_view(),
         name="living-things-habitat-detail",
     ),
     path(
-        "living-things/habitat/<slug:slug>/create",
+        "habitats/<slug:slug>/create/",
         LivingThingsHabitatCreate.as_view(),
         name="living-things-habitat-create",
     ),
     path(
-        "living-things/species",
+        "species/",
         LivingThingsSpecieList.as_view(),
         name="living-things-specie-list",
     ),
     path(
-        "living-things/species/<slug:slug>/",
+        "species/<slug:slug>/",
         LivingThingsSpecieDetail.as_view(),
         name="living-things-specie-detail",
     ),
     path(
-        "living-things/species/<slug:slug>/create",
+        "species/<slug:slug>/create/",
         LivingThingsSpecieCreate.as_view(),
         name="living-things-specie-create",
     ),
     path(
-        "living-things/countries",
+        "countries/",
         LivingThingsCountryList.as_view(),
         name="living-things-country-list",
     ),
     path(
-        "living-things/country/<slug:slug>/",
+        "country/<slug:slug>/",
         LivingThingsCountryDetail.as_view(),
         name="living-things-country-detail",
     ),
     path(
-        "living-things/country/<slug:slug>/create",
+        "country/<slug:slug>/create/",
         LivingThingsCountryCreate.as_view(),
         name="living-things-country-create",
     ),

@@ -1,0 +1,86 @@
+[
+  {
+    "model": "living_things.habitat",
+    "pk": 1,
+    "fields": {
+      "name": "forest",
+      "name_jp": "",
+      "slug": "forest",
+      "excerpt": "",
+      "excerpt_jp": "",
+      "climate": "",
+      "article": null,
+      "genres": [
+        4,
+        7
+      ],
+      "tags": []
+    }
+  },
+  {
+    "model": "living_things.habitat",
+    "pk": 2,
+    "fields": {
+      "name": "deep-sea",
+      "name_jp": "deep-sea",
+      "slug": "deep-sea",
+      "excerpt": "",
+      "excerpt_jp": "",
+      "climate": "",
+      "article": 44,
+      "genres": [
+        4,
+        7
+      ],
+      "tags": []
+    }
+  },
+  {
+    "model": "living_things.species",
+    "pk": 1,
+    "fields": {
+      "name": "mammal",
+      "name_jp": "",
+      "slug": "mammal",
+      "excerpt": "",
+      "excerpt_jp": "",
+      "article": null,
+      "tags": [],
+      "genres": []
+    }
+  },
+  {
+    "model": "living_things.livingthings",
+    "pk": 1,
+    "fields": {
+      "name": "African Elephant",
+      "name_jp": "",
+      "slug": "african-elephant",
+      "excerpt": "",
+      "excerpt_jp": "",
+      "habitat": 1,
+      "species": 1,
+      "article": 42,
+      "location": [],
+      "genres": [],
+      "tags": []
+    }
+  },
+  {
+    "model": "living_things.livingthings",
+    "pk": 2,
+    "fields": {
+      "name": "Blue And Yellow Macaw",
+      "name_jp": "",
+      "slug": "blue-and-yellow-macaw",
+      "excerpt": "",
+      "excerpt_jp": "",
+      "habitat": null,
+      "species": null,
+      "article": 43,
+      "location": [],
+      "genres": [],
+      "tags": []
+    }
+  }
+]

@@ -9,11 +9,11 @@ from locations.models import Location
 
 class Person(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    slug = models.SlugField(max_length=100, unique=True)
-    name_jp = models.CharField(max_length=100, unique=True)
-    excerpt = models.TextField(max_length=200, default="")
-    excerpt_jp = models.TextField(max_length=200, default="")
-    birth_date = models.DateField()
+    slug = models.SlugField(max_length=100)
+    name_jp = models.CharField(max_length=100, blank=True)
+    excerpt = models.TextField(max_length=200, blank=True)
+    excerpt_jp = models.TextField(max_length=200, blank=True)
+    birth_date = models.DateField(null=True, blank=True)
     death_date = models.DateField(null=True, blank=True)
     born_in = models.ForeignKey(
         Location, on_delete=models.SET_NULL, null=True, blank=True
@@ -21,9 +21,9 @@ class Person(models.Model):
     article = models.OneToOneField(
         Article, on_delete=models.SET_NULL, null=True, blank=True
     )
-    genres = models.ManyToManyField(Genre, related_name="person_genres")
-    tags = models.ManyToManyField(Tag, related_name="person_tags")
-    occupation = models.CharField(max_length=100, default="")
+    genres = models.ManyToManyField(Genre, blank=True, related_name="person_genres")
+    tags = models.ManyToManyField(Tag, blank=True, related_name="person_tags")
+    occupation = models.CharField(max_length=100, default="", blank=True)
 
     class Meta:
         ordering = ["name"]

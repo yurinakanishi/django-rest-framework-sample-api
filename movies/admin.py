@@ -3,23 +3,32 @@ from .models import Movie, MovieDirector, MovieRating, MovieActor, MovieReview
 
 
 class MovieAdmin(admin.ModelAdmin):
-    pass
+    # filter_horizontal = ("tag", "genre")
+    display_fields = "title"
+    prepopulated_fields = {"title": ("title",)}
 
 
 class MovieDirectorAdmin(admin.ModelAdmin):
-    pass
+    # filter_horizontal = ("tag", "genre")
+    display_fields = "name"
+    prepopulated_fields = {"slug": ("name",)}
 
 
 class MovieRatingAdmin(admin.ModelAdmin):
-    pass
+    display_fields = "movie_name"
+    prepopulated_fields = {"slug": ("movie_name",)}
 
 
 class MovieActorAdmin(admin.ModelAdmin):
-    pass
+    # filter_horizontal = ("tag", "genre")
+    display_fields = "name"
+    prepopulated_fields = {"slug": ("name",)}
 
 
 class MovieReviewAdmin(admin.ModelAdmin):
-    pass
+    # filter_horizontal = ("tag", "genre")
+    display_fields = "review_title"
+    prepopulated_fields = {"slug": ("review_title",)}
 
 
 admin.site.register(Movie, MovieAdmin)
