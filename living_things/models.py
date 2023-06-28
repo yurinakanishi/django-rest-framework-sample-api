@@ -4,7 +4,7 @@ from django.conf import settings
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
 from locations.models import Location
-from general.models import Article, Tag, Genre
+from general.models import Article, Tag, GenreForURL
 
 
 class Habitat(models.Model):
@@ -45,7 +45,13 @@ class Habitat(models.Model):
     article = models.OneToOneField(
         Article, on_delete=models.CASCADE, blank=True, null=True
     )
-    genres = models.ManyToManyField(Genre, blank=True, related_name="habitat_genres")
+    genre_for_url = models.ForeignKey(
+        GenreForURL,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        related_name="habitat_genre_for_url",
+    )
     tags = models.ManyToManyField(Tag, blank=True, related_name="habitat_tags")
 
     def __str__(self):
@@ -84,7 +90,13 @@ class Species(models.Model):
         Article, on_delete=models.CASCADE, blank=True, null=True
     )
     tags = models.ManyToManyField(Tag, blank=True, related_name="species_tags")
-    genres = models.ManyToManyField(Genre, blank=True, related_name="species_genres")
+    genre_for_url = models.ForeignKey(
+        GenreForURL,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        related_name="species_genre_for_url",
+    )
 
     def __str__(self):
         return self.name
@@ -108,8 +120,12 @@ class LivingThings(models.Model):
     article = models.OneToOneField(
         Article, on_delete=models.CASCADE, blank=True, null=True
     )
-    genres = models.ManyToManyField(
-        Genre, blank=True, related_name="living_things_genres"
+    genre_for_url = models.ForeignKey(
+        GenreForURL,
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        related_name="living_things_genre_for_url",
     )
     tags = models.ManyToManyField(Tag, blank=True, related_name="living_things_tags")
 

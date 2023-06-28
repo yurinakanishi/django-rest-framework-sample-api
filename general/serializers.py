@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Article, Tag, Genre
+from .models import Article, Tag, GenreForURL
 
 
 class TagSerializer(serializers.ModelSerializer):
@@ -10,18 +10,11 @@ class TagSerializer(serializers.ModelSerializer):
 
 class GenreSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Genre
+        model = GenreForURL
         fields = "__all__"
 
 
 class ArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
-        fields = [
-            "references",
-            "references_jp",
-            "content",
-            "content_jp",
-            "rating",
-            "rating_count",
-        ]
+        fields = "__all__"

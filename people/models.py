@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.conf import settings
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
-from general.models import Article, Tag, Genre
+from general.models import Article, Tag, GenreForURL
 from locations.models import Location
 
 
@@ -21,9 +21,15 @@ class Person(models.Model):
     article = models.OneToOneField(
         Article, on_delete=models.SET_NULL, null=True, blank=True
     )
-    genres = models.ManyToManyField(Genre, blank=True, related_name="person_genres")
+    genre_for_url = models.ForeignKey(
+        GenreForURL,
+        null=True,
+        on_delete=models.CASCADE,
+        blank=True,
+        related_name="person_genre_for_url",
+    )
     tags = models.ManyToManyField(Tag, blank=True, related_name="person_tags")
-    occupation = models.CharField(max_length=100, default="", blank=True)
+    occupation = models.CharField(max_length=100, blank=True)
 
     class Meta:
         ordering = ["name"]

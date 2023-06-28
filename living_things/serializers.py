@@ -4,9 +4,9 @@ from general.serializers import TagSerializer, GenreSerializer, ArticleSerialize
 
 
 class LivingThingsSerializer(serializers.ModelSerializer):
-    article = ArticleSerializer(read_only=True)
-    tags = TagSerializer(many=True, read_only=True)
-    genres = GenreSerializer(many=True, read_only=True)
+    article = ArticleSerializer(read_only=False)
+    tags = TagSerializer(many=True, read_only=False)
+    genres_for_url = GenreSerializer(many=True, read_only=False)
 
     class Meta:
         model = LivingThings
@@ -14,9 +14,9 @@ class LivingThingsSerializer(serializers.ModelSerializer):
 
 
 class HabitatSerializer(serializers.ModelSerializer):
-    article = ArticleSerializer(read_only=True)
-    tags = TagSerializer(many=True, read_only=True)
-    genres = GenreSerializer(many=True, read_only=True)
+    article = ArticleSerializer(read_only=False)
+    tags = TagSerializer(many=True, read_only=False)
+    genres_for_url = GenreSerializer(many=True, read_only=False)
 
     class Meta:
         model = Habitat
@@ -24,9 +24,9 @@ class HabitatSerializer(serializers.ModelSerializer):
 
 
 class SpeciesSerializer(serializers.ModelSerializer):
-    article = ArticleSerializer(read_only=True)
-    tags = TagSerializer(many=True, read_only=True)
-    genres = GenreSerializer(many=True, read_only=True)
+    article = ArticleSerializer(read_only=False)
+    tags = TagSerializer(many=True, read_only=False)
+    genres_for_url = GenreSerializer(many=True, read_only=False)
 
     class Meta:
         model = Species

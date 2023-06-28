@@ -4,9 +4,9 @@ from general.serializers import TagSerializer, GenreSerializer, ArticleSerialize
 
 
 class FoodSerializer(serializers.ModelSerializer):
-    article = ArticleSerializer(read_only=True)
-    tags = TagSerializer(many=True, read_only=True)
-    genres = GenreSerializer(many=True, read_only=True)
+    article = ArticleSerializer(read_only=False)
+    tags = TagSerializer(many=True, read_only=False)
+    genre_for_url = GenreSerializer(many=True, read_only=False)
 
     class Meta:
         model = Food
@@ -14,9 +14,9 @@ class FoodSerializer(serializers.ModelSerializer):
 
 
 class CookingMethodSerializer(serializers.ModelSerializer):
-    article = ArticleSerializer(read_only=True)
-    tags = TagSerializer(many=True, read_only=True)
-    genres = GenreSerializer(many=True, read_only=True)
+    article = ArticleSerializer(read_only=False)
+    tags = TagSerializer(many=True, read_only=False)
+    genre_for_url = GenreSerializer(many=True, read_only=False)
 
     class Meta:
         model = CookingMethod
@@ -24,9 +24,9 @@ class CookingMethodSerializer(serializers.ModelSerializer):
 
 
 class IngredientsSerializer(serializers.ModelSerializer):
-    article = ArticleSerializer(read_only=True)
-    tags = TagSerializer(many=True, read_only=True)
-    genres = GenreSerializer(many=True, read_only=True)
+    article = ArticleSerializer(read_only=False)
+    tags = TagSerializer(many=True, read_only=False)
+    genre_for_url = GenreSerializer(many=True, read_only=False)
 
     class Meta:
         model = Ingredient

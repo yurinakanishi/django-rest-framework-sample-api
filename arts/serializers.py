@@ -5,9 +5,9 @@ from general.serializers import TagSerializer, GenreSerializer, ArticleSerialize
 
 
 class ArtSerializer(serializers.ModelSerializer):
-    article = ArticleSerializer(read_only=True)
-    tags = TagSerializer(many=True, read_only=True)
-    genres = GenreSerializer(many=True, read_only=True)
+    article = ArticleSerializer(read_only=False)
+    tags = TagSerializer(many=True, read_only=False)
+    genre_for_url = GenreSerializer(many=True, read_only=False)
 
     class Meta:
         model = Art
@@ -15,9 +15,9 @@ class ArtSerializer(serializers.ModelSerializer):
 
 
 class MuseumSerializer(serializers.ModelSerializer):
-    article = ArticleSerializer(read_only=True)
-    tags = TagSerializer(many=True, read_only=True)
-    genres = GenreSerializer(many=True, read_only=True)
+    article = ArticleSerializer(read_only=False)
+    tags = TagSerializer(many=True, read_only=False)
+    genre_for_url = GenreSerializer(many=True, read_only=False)
 
     class Meta:
         model = Museum
@@ -25,9 +25,9 @@ class MuseumSerializer(serializers.ModelSerializer):
 
 
 class PaintingMethodSerializer(serializers.ModelSerializer):
-    article = ArticleSerializer(read_only=True)
-    tags = TagSerializer(many=True, read_only=True)
-    genres = GenreSerializer(many=True, read_only=True)
+    article = ArticleSerializer(read_only=False)
+    tags = TagSerializer(many=True, read_only=False)
+    genre_for_url = GenreSerializer(many=True, read_only=False)
 
     class Meta:
         model = PaintingMethod
@@ -35,9 +35,9 @@ class PaintingMethodSerializer(serializers.ModelSerializer):
 
 
 class PaintingStyleSerializer(serializers.ModelSerializer):
-    article = ArticleSerializer(read_only=True)
-    tags = TagSerializer(many=True, read_only=True)
-    genres = GenreSerializer(many=True, read_only=True)
+    article = ArticleSerializer(read_only=False)
+    tags = TagSerializer(many=True, read_only=False)
+    genre_for_url = GenreSerializer(many=True, read_only=False)
 
     class Meta:
         model = PaintingStyle
@@ -45,9 +45,9 @@ class PaintingStyleSerializer(serializers.ModelSerializer):
 
 
 class ArtistSerializer(serializers.ModelSerializer):
-    article = ArticleSerializer(read_only=True)
-    tags = TagSerializer(many=True, read_only=True)
-    genres = GenreSerializer(many=True, read_only=True)
+    article = ArticleSerializer(read_only=False)
+    tags = TagSerializer(many=True, read_only=False)
+    genre_for_url = GenreSerializer(many=True, read_only=False)
 
     class Meta:
         model = Artist

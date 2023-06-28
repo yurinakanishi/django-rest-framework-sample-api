@@ -4,9 +4,9 @@ from general.serializers import TagSerializer, GenreSerializer, ArticleSerialize
 
 
 class MovieRatingSerializer(serializers.ModelSerializer):
-    article = ArticleSerializer(read_only=True)
-    tags = TagSerializer(many=True, read_only=True)
-    genres = GenreSerializer(many=True, read_only=True)
+    article = ArticleSerializer(read_only=False)
+    tags = TagSerializer(many=True, read_only=False)
+    genre_for_url = GenreSerializer(many=True, read_only=False)
 
     class Meta:
         model = MovieRating
@@ -14,10 +14,10 @@ class MovieRatingSerializer(serializers.ModelSerializer):
 
 
 class MovieReviewSerializer(serializers.ModelSerializer):
-    rating = MovieRatingSerializer(read_only=True)
-    article = ArticleSerializer(read_only=True)
-    tags = TagSerializer(many=True, read_only=True)
-    genres = GenreSerializer(many=True, read_only=True)
+    rating = MovieRatingSerializer(read_only=False)
+    article = ArticleSerializer(read_only=False)
+    tags = TagSerializer(many=True, read_only=False)
+    genre_for_url = GenreSerializer(many=True, read_only=False)
 
     class Meta:
         model = MovieReview
@@ -25,9 +25,9 @@ class MovieReviewSerializer(serializers.ModelSerializer):
 
 
 class MovieSerializer(serializers.ModelSerializer):
-    article = ArticleSerializer(read_only=True)
-    tags = TagSerializer(many=True, read_only=True)
-    genres = GenreSerializer(many=True, read_only=True)
+    article = ArticleSerializer(read_only=False)
+    tags = TagSerializer(many=True, read_only=False)
+    genre_for_url = GenreSerializer(many=True, read_only=False)
 
     class Meta:
         model = Movie
@@ -35,9 +35,9 @@ class MovieSerializer(serializers.ModelSerializer):
 
 
 class MovieActorSerializer(serializers.ModelSerializer):
-    article = ArticleSerializer(read_only=True)
-    tags = TagSerializer(many=True, read_only=True)
-    genres = GenreSerializer(many=True, read_only=True)
+    article = ArticleSerializer(read_only=False)
+    tags = TagSerializer(many=True, read_only=False)
+    genre_for_url = GenreSerializer(many=True, read_only=False)
 
     class Meta:
         model = MovieActor

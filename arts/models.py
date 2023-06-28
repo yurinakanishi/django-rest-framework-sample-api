@@ -1,5 +1,5 @@
 from django.db import models
-from general.models import Article, Tag, Genre
+from general.models import Article, Tag, GenreForURL
 from locations.models import Location
 from dates.models import Date, Period
 from people.models import Person
@@ -17,7 +17,13 @@ class Museum(models.Model):
     )
     excerpt = models.TextField(max_length=200, blank=True)
     excerpt_jp = models.TextField(max_length=200, blank=True)
-    genres = models.ManyToManyField(Genre, blank=True, related_name="museums_genres")
+    genre_for_url = models.ForeignKey(
+        GenreForURL,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name="museums_genre_for_url",
+    )
     tags = models.ManyToManyField(Tag, blank=True, related_name="museums_tags")
 
     def __str__(self):
@@ -34,7 +40,13 @@ class Artist(models.Model):
     article = models.OneToOneField(
         Article, on_delete=models.CASCADE, blank=True, null=True
     )
-    genres = models.ManyToManyField(Genre, blank=True, related_name="artists_genres")
+    genre_for_url = models.ForeignKey(
+        GenreForURL,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name="artists_genre_for_url",
+    )
     tags = models.ManyToManyField(Tag, blank=True, related_name="artists_tags")
 
     def __str__(self):
@@ -57,8 +69,6 @@ class PaintingMethod(models.Model):
     name = models.CharField(max_length=200, choices=METHODS_CHOICES)
     name_jp = models.CharField(max_length=200, choices=METHODS_CHOICES_JP, blank=True)
     slug = models.SlugField(max_length=200)
-    excerpt = models.TextField(max_length=200, blank=True)
-    excerpt_jp = models.TextField(max_length=200, blank=True)
     period = models.ForeignKey(Period, on_delete=models.CASCADE, blank=True, null=True)
     location = models.ForeignKey(
         Location, on_delete=models.CASCADE, blank=True, null=True
@@ -66,8 +76,12 @@ class PaintingMethod(models.Model):
     article = models.OneToOneField(
         Article, on_delete=models.CASCADE, blank=True, null=True
     )
-    genres = models.ManyToManyField(
-        Genre, blank=True, related_name="painting_methods_genres"
+    genre_for_url = models.ForeignKey(
+        GenreForURL,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name="painting_methods_genre_for_url",
     )
     tags = models.ManyToManyField(Tag, blank=True, related_name="painting_methods_tags")
 
@@ -116,8 +130,12 @@ class PaintingStyle(models.Model):
     article = models.OneToOneField(
         Article, on_delete=models.CASCADE, blank=True, null=True
     )
-    genres = models.ManyToManyField(
-        Genre, blank=True, related_name="painting_styles_genres"
+    genre_for_url = models.ForeignKey(
+        GenreForURL,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name="painting_styles_genre_for_url",
     )
     tags = models.ManyToManyField(Tag, blank=True, related_name="painting_styles_tags")
 
@@ -140,7 +158,13 @@ class Art(models.Model):
     article = models.OneToOneField(
         Article, on_delete=models.CASCADE, blank=True, null=True
     )
-    genres = models.ManyToManyField(Genre, blank=True, related_name="arts_genres")
+    genre_for_url = models.ForeignKey(
+        GenreForURL,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name="arts_genre_for_url",
+    )
     tags = models.ManyToManyField(Tag, blank=True, related_name="arts_tags")
     method = models.ForeignKey(
         PaintingMethod,

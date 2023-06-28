@@ -27,8 +27,8 @@ class MovieActorAdmin(admin.ModelAdmin):
 
 class MovieReviewAdmin(admin.ModelAdmin):
     # filter_horizontal = ("tag", "genre")
-    display_fields = "review_title"
-    prepopulated_fields = {"slug": ("review_title",)}
+    display_fields = "name"
+    prepopulated_fields = {"slug": ("name",)}
 
 
 admin.site.register(Movie, MovieAdmin)

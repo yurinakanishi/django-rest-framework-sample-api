@@ -1,10 +1,9 @@
 from django.contrib import admin
-from .models import Article, Tag, Genre
+from .models import Article, Tag, GenreForURL
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    display_fields = "title"
-    prepopulated_fields = {"slug": ("title",)}
+    pass
 
 
 class TagAdmin(admin.ModelAdmin):
@@ -14,9 +13,8 @@ class TagAdmin(admin.ModelAdmin):
 
 class GenreAdmin(admin.ModelAdmin):
     display_fields = "name"
-    prepopulated_fields = {"slug": ("name",)}
 
 
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Tag, TagAdmin)
-admin.site.register(Genre, GenreAdmin)
+admin.site.register(GenreForURL, GenreAdmin)

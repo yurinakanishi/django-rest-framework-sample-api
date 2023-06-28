@@ -1,13 +1,34 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
-from general.models import Article, Tag, Genre
+from general.models import Article, Tag, GenreForURL
+from django.conf import settings
+
+# class TypeChoices(models.TextChoices):
+#     KNOWLEDGE = "knowledge", "Knowledge"
+#     BLOG = "blog", "Blog"
+
+# class TypeChoicesJP(models.TextChoices):
+#     KNOWLEDGE = "knowledge", "知識"
+#     BLOG = "blog", "ブログ"
 
 
 class Knowledge(models.Model):
+    name = models.CharField(max_length=100)
+    name_jp = models.CharField(max_length=100, blank=True)
+    slug = models.SlugField(max_length=100, unique=True)
+    tags = models.ManyToManyField(Tag, blank=True, related_name="knowledge_tags")
+    genre_for_url = models.ForeignKey(
+        GenreForURL,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name="knowledge_genre_for_url",
+    )
+
     TYPE_CHOICES = [
-        ("knowledge", "Knowledge"),
-        ("blog", "Blog"),
+        ("knowledge", "knowledge"),
+        ("blog", "blog"),
     ]
 
     TYPE_CHOICES_JP = [
@@ -15,31 +36,20 @@ class Knowledge(models.Model):
         ("blog", "ブログ"),
     ]
 
-    type_en = models.CharField(max_length=20, choices=TYPE_CHOICES, default="knowledge")
+    type = models.CharField(max_length=20, choices=TYPE_CHOICES, default="knowledge")
     type_jp = models.CharField(
         max_length=20, choices=TYPE_CHOICES_JP, default="knowledge"
     )
-    name = models.CharField(max_length=100)
-    name_jp = models.CharField(max_length=100, blank=True)
-    slug = models.SlugField(max_length=100, unique=True)
-    excerpt = models.TextField(max_length=200, blank=True)
-    excerpt_jp = models.TextField(max_length=200, blank=True)
+    notesite_url = models.URLField(max_length=200, null=True, blank=True)
     article = models.OneToOneField(
         Article,
         on_delete=models.CASCADE,
         blank=True,
         null=True,
-        related_name="knowledge_articles",
+        related_name="knowledge_article",
     )
-    tags = models.ManyToManyField(Tag, blank=True, related_name="knowledge_tags")
-    genres = models.ManyToManyField(Genre, blank=True, related_name="knowledge_genres")
-    kicker = models.CharField(max_length=100, blank=True)
-    notesite_url = models.URLField(max_length=200, null=True, blank=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
-    published_date = models.DateTimeField(default=timezone.now, blank=True)
-    updated_date = models.DateTimeField(auto_now=True, blank=True)
-    knowledge_type = models.CharField(
-        max_length=100, choices=TYPE_CHOICES, default="knowledge", blank=True
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True
     )
 
     def __str__(self):

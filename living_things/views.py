@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from rest_framework import viewsets, generics
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from general.models import Article, Tag, Genre
+from general.models import Article, Tag, GenreForURL
 from .serializers import LivingThingsSerializer, SpeciesSerializer, HabitatSerializer
 from locations.serializers import CountrySerializer
 from locations.models import Country

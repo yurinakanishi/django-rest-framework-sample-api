@@ -1,5 +1,5 @@
 from django.db import models
-from general.models import Article, Tag, Genre
+from general.models import Article, Tag, GenreForURL
 
 
 class Country(models.Model):
@@ -15,7 +15,13 @@ class Country(models.Model):
     article = models.OneToOneField(
         Article, on_delete=models.CASCADE, blank=True, null=True
     )
-    genres = models.ManyToManyField(Genre, blank=True, related_name="countries")
+    genre_for_url = models.ForeignKey(
+        GenreForURL,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name="countries",
+    )
     tags = models.ManyToManyField(Tag, blank=True, related_name="countries")
 
     def __str__(self):

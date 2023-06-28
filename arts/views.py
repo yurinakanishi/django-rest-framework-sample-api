@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from rest_framework import viewsets, generics
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from general.models import Article, Tag, Genre
+from general.models import Article, Tag, GenreForURL
 from .models import Art, Artist, Museum, PaintingMethod, PaintingStyle
 from .serializers import (
     ArtSerializer,

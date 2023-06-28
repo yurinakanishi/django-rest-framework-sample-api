@@ -2,7 +2,7 @@ from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
 from ckeditor_uploader.fields import RichTextUploadingField
-from general.models import Article, Tag, Genre
+from general.models import Article, Tag, GenreForURL
 
 
 class Date(models.Model):
@@ -31,12 +31,16 @@ class Period(models.Model):
     )
     name_jp = models.CharField(max_length=100, blank=True)
     slug = models.SlugField(max_length=100, blank=True)
-    excerpt = models.TextField(max_length=200, blank=True)
-    excerpt_jp = models.TextField(max_length=200, blank=True)
     article = models.OneToOneField(
         Article, on_delete=models.SET_NULL, null=True, blank=True
     )
-    genres = models.ManyToManyField(Genre, blank=True, related_name="period_genres")
+    genre_for_url = models.ForeignKey(
+        GenreForURL,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name="period_genre_for_url",
+    )
     tags = models.ManyToManyField(Tag, blank=True, related_name="period_tags")
     date = models.ManyToManyField(Date, blank=True, related_name="period_dates")
 
