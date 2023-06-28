@@ -4,8 +4,8 @@ from .models import Movie, MovieDirector, MovieRating, MovieActor, MovieReview
 
 class MovieAdmin(admin.ModelAdmin):
     # filter_horizontal = ("tag", "genre")
-    display_fields = "title"
-    prepopulated_fields = {"title": ("title",)}
+    display_fields = "name"
+    prepopulated_fields = {"slug": ("name",)}
 
 
 class MovieDirectorAdmin(admin.ModelAdmin):

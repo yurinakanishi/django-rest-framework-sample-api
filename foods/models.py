@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.conf import settings
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
-from general.models import Article, Tag, GenreForURL
+from general.models import Article, Tag, GenreForURL, Language
 from locations.models import Location
 
 
@@ -12,14 +12,10 @@ class CookingMethod(models.Model):
         ("stew", "Stew"),
         ("deep-fried", "Deep fried"),
     ]
-    METHOD_CHOICES_JP = [
-        ("stew", "シチュー"),
-        ("deep-fried", "揚げ物"),
-    ]
 
     name = models.CharField(max_length=200, choices=METHOD_CHOICES)
-    name_jp = models.CharField(max_length=200, choices=METHOD_CHOICES_JP, blank=True)
-    slug = models.SlugField(max_length=200)
+    slug = models.SlugField(max_length=200, unique=True)
+    language = models.ForeignKey(Language, on_delete=models.CASCADE)
     article = models.OneToOneField(
         Article, on_delete=models.CASCADE, blank=True, null=True
     )
@@ -48,20 +44,9 @@ class Ingredient(models.Model):
         ("beans", "Beans"),
     ]
 
-    TYPE_CHOICES_JP = [
-        ("fruits", "果物"),
-        ("vegetables", "野菜"),
-        ("meats", "肉"),
-        ("dairy_products", "乳製品"),
-        ("grains", "穀物"),
-        ("eggs", "卵"),
-        ("fish", "魚"),
-        ("beans", "豆"),
-    ]
-
     name = models.CharField(max_length=200, choices=TYPE_CHOICES)
-    name_jp = models.CharField(max_length=200, choices=TYPE_CHOICES_JP, blank=True)
-    slug = models.SlugField(max_length=200)
+    slug = models.SlugField(max_length=200, unique=True)
+    language = models.ForeignKey(Language, on_delete=models.CASCADE)
     location = models.ForeignKey(
         Location, on_delete=models.CASCADE, blank=True, null=True
     )
@@ -83,8 +68,8 @@ class Ingredient(models.Model):
 
 class Food(models.Model):
     name = models.CharField(max_length=100)
-    name_jp = models.CharField(max_length=100, blank=True)
-    slug = models.SlugField(max_length=100)
+    slug = models.SlugField(max_length=100, unique=True)
+    language = models.ForeignKey(Language, on_delete=models.CASCADE)
     ingredients = models.ManyToManyField(
         Ingredient, blank=True, related_name="foods_ingredients"
     )

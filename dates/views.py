@@ -2,13 +2,13 @@ from django.shortcuts import render, get_object_or_404
 from rest_framework import viewsets, generics
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from general.models import Tag, Genre
+from general.models import Tag, GenreForURL
 from .models import Period
 from .serializers import (
     PeriodSerializer,
 )
 
-from api.permissions import IsAdminOrReadOnly
+from accounts.permissions import IsAdminOrReadOnly
 from rest_framework.permissions import IsAdminUser
 
 

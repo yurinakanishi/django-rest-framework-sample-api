@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from general.models import Article, Tag, GenreForURL
 from .serializers import CountrySerializer
-from api.permissions import IsAdminOrReadOnly, IsCreateUserOrReadOnly
+from accounts.permissions import IsAdminOrReadOnly, IsCreateUserOrReadOnly
 from rest_framework.permissions import (
     AllowAny,
     IsAdminUser,

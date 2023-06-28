@@ -3,17 +3,15 @@ from django.utils import timezone
 from django.conf import settings
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
-from general.models import Article, Tag, GenreForURL
+from general.models import Article, Tag, GenreForURL, Language
 from people.models import Person
 
 
 class MovieDirector(models.Model):
     name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=200, blank=True)
-    name_jp = models.CharField(max_length=100, blank=True)
     person = models.ForeignKey(Person, on_delete=models.SET_NULL, null=True)
-    excerpt = models.TextField(max_length=200, blank=True)
-    excerpt_jp = models.TextField(max_length=200, blank=True)
+    language = models.ForeignKey(Language, on_delete=models.CASCADE)
     article = models.OneToOneField(
         Article, on_delete=models.SET_NULL, blank=True, null=True
     )
@@ -35,11 +33,9 @@ class MovieDirector(models.Model):
 
 class MovieActor(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    name_jp = models.CharField(max_length=100, blank=True)
-    slug = models.SlugField(max_length=200, blank=True)
+    slug = models.SlugField(max_length=200, unique=True)
+    language = models.ForeignKey(Language, on_delete=models.CASCADE)
     person = models.ForeignKey(Person, on_delete=models.SET_NULL, null=True, blank=True)
-    excerpt = models.TextField(max_length=200, blank=True)
-    excerpt_jp = models.TextField(max_length=200, blank=True)
     article = models.OneToOneField(
         Article, on_delete=models.SET_NULL, null=True, blank=True
     )
@@ -54,11 +50,9 @@ class MovieActor(models.Model):
 
 
 class Movie(models.Model):
-    title = models.CharField(max_length=100)
-    title_jp = models.CharField(max_length=100, blank=True)
-    slug = models.SlugField(max_length=100)
-    excerpt = models.TextField(max_length=200, blank=True)
-    excerpt_jp = models.TextField(max_length=200, blank=True)
+    name = models.CharField(max_length=100, unique=True)
+    slug = models.SlugField(max_length=100, unique=True)
+    language = models.ForeignKey(Language, on_delete=models.CASCADE)
     release_date = models.DateField(null=True, blank=True)
     director = models.ForeignKey(
         MovieDirector,
@@ -89,12 +83,13 @@ class Movie(models.Model):
     tags = models.ManyToManyField(Tag, blank=True, related_name="movie_tags")
 
     def __str__(self):
-        return self.title
+        return self.name
 
 
 class MovieRating(models.Model):
     movie_name = models.CharField(max_length=100, unique=True)
-    slug = models.SlugField(max_length=100, blank=True)
+    slug = models.SlugField(max_length=100, unique=True)
+    language = models.ForeignKey(Language, on_delete=models.CASCADE)
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -124,10 +119,8 @@ class MovieRating(models.Model):
 
 class MovieReview(models.Model):
     name = models.CharField(max_length=100, blank=True)
-    name_jp = models.CharField(max_length=100, blank=True)
-    slug = models.SlugField(max_length=100, blank=True)
-    excerpt = models.TextField(max_length=200, blank=True)
-    excerpt_jp = models.TextField(max_length=200, blank=True)
+    slug = models.SlugField(max_length=100, unique=True)
+    language = models.ForeignKey(Language, on_delete=models.CASCADE)
     article = models.OneToOneField(
         Article,
         on_delete=models.CASCADE,

@@ -1,8 +1,6 @@
 from django.db import models
-from django.utils.text import slugify
-from django.urls import reverse
 from ckeditor_uploader.fields import RichTextUploadingField
-from general.models import Article, Tag, GenreForURL
+from general.models import Article, Tag, GenreForURL, Language
 
 
 class Date(models.Model):
@@ -29,8 +27,8 @@ class Period(models.Model):
         max_length=100,
         choices=PERIOD_CHOICES,
     )
-    name_jp = models.CharField(max_length=100, blank=True)
-    slug = models.SlugField(max_length=100, blank=True)
+    slug = models.SlugField(max_length=100, unique=True)
+    language = models.ForeignKey(Language, on_delete=models.CASCADE)
     article = models.OneToOneField(
         Article, on_delete=models.SET_NULL, null=True, blank=True
     )

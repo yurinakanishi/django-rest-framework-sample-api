@@ -1,5 +1,5 @@
 from django.db import models
-from general.models import Article, Tag, GenreForURL
+from general.models import Article, Tag, GenreForURL, Language
 from locations.models import Location
 from dates.models import Date, Period
 from people.models import Person
@@ -7,16 +7,14 @@ from people.models import Person
 
 class Museum(models.Model):
     name = models.CharField(max_length=100)
-    name_jp = models.CharField(max_length=100, blank=True)
-    slug = models.SlugField(max_length=100)
+    slug = models.SlugField(max_length=100, unique=True)
+    language = models.ForeignKey(Language, on_delete=models.CASCADE)
     location = models.ForeignKey(
         Location, on_delete=models.CASCADE, blank=True, null=True
     )
     article = models.OneToOneField(
         Article, on_delete=models.CASCADE, blank=True, null=True
     )
-    excerpt = models.TextField(max_length=200, blank=True)
-    excerpt_jp = models.TextField(max_length=200, blank=True)
     genre_for_url = models.ForeignKey(
         GenreForURL,
         blank=True,
@@ -32,11 +30,9 @@ class Museum(models.Model):
 
 class Artist(models.Model):
     name = models.CharField(max_length=100)
-    name_jp = models.CharField(max_length=100, blank=True)
     person = models.ForeignKey(Person, on_delete=models.CASCADE, blank=True, null=True)
-    slug = models.SlugField(max_length=100)
-    excerpt = models.TextField(max_length=200, blank=True)
-    excerpt_jp = models.TextField(max_length=200, blank=True)
+    slug = models.SlugField(max_length=100, unique=True)
+    language = models.ForeignKey(Language, on_delete=models.CASCADE)
     article = models.OneToOneField(
         Article, on_delete=models.CASCADE, blank=True, null=True
     )
@@ -60,15 +56,9 @@ class PaintingMethod(models.Model):
         ("watercolor-painting", "Watercolor Painting"),
     ]
 
-    METHODS_CHOICES_JP = [
-        ("oil-painting", "油絵"),
-        ("pastel-painting", "パステル画"),
-        ("watercolor-painting", "水彩画"),
-    ]
-
     name = models.CharField(max_length=200, choices=METHODS_CHOICES)
-    name_jp = models.CharField(max_length=200, choices=METHODS_CHOICES_JP, blank=True)
-    slug = models.SlugField(max_length=200)
+    slug = models.SlugField(max_length=200, unique=True)
+    language = models.ForeignKey(Language, on_delete=models.CASCADE)
     period = models.ForeignKey(Period, on_delete=models.CASCADE, blank=True, null=True)
     location = models.ForeignKey(
         Location, on_delete=models.CASCADE, blank=True, null=True
@@ -104,25 +94,9 @@ class PaintingStyle(models.Model):
         ("indian-style", "Indian Style"),
     ]
 
-    STYLES_CHOICES_JP = [
-        ("modernism", "モダニズム"),
-        ("impressionism", "印象派"),
-        ("abstract-styles", "抽象派"),
-        ("realism", "リアリズム"),
-        ("photorealism", "フォトリアリズム"),
-        ("surrealism", "シュルレアリズム"),
-        ("expressionism", "表現主義"),
-        ("cubism", "キュビズム"),
-        ("chinese-style", "中国スタイル"),
-        ("japanese-style", "日本スタイル"),
-        ("indian-style", "インドスタイル"),
-    ]
-
     name = models.CharField(max_length=200, choices=STYLES_CHOICES)
-    name_jp = models.CharField(max_length=200, choices=STYLES_CHOICES_JP, blank=True)
-    slug = models.SlugField(max_length=100, unique=True, blank=True)
-    excerpt = models.TextField(max_length=200, blank=True)
-    excerpt_jp = models.TextField(max_length=200, blank=True)
+    slug = models.SlugField(max_length=100, unique=True)
+    language = models.ForeignKey(Language, on_delete=models.CASCADE)
     period = models.ForeignKey(Period, on_delete=models.CASCADE, blank=True, null=True)
     location = models.ForeignKey(
         Location, on_delete=models.CASCADE, blank=True, null=True
@@ -144,11 +118,9 @@ class PaintingStyle(models.Model):
 
 
 class Art(models.Model):
-    title = models.CharField(max_length=100)
-    title_jp = models.CharField(max_length=100, blank=True)
-    slug = models.SlugField(max_length=100)
-    excerpt = models.TextField(max_length=200, blank=True)
-    excerpt_jp = models.TextField(max_length=200, blank=True)
+    name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=100, unique=True)
+    language = models.ForeignKey(Language, on_delete=models.CASCADE)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE, blank=True, null=True)
     year_made = models.ForeignKey(Date, on_delete=models.CASCADE, blank=True, null=True)
     museum = models.ForeignKey(Museum, on_delete=models.SET_NULL, null=True, blank=True)
@@ -182,4 +154,4 @@ class Art(models.Model):
     )
 
     def __str__(self):
-        return self.title
+        return self.name

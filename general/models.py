@@ -6,9 +6,8 @@ from django.contrib.auth.models import User
 
 
 class Tag(models.Model):
-    name = models.CharField(max_length=100, unique=True)
-    slug = models.SlugField(max_length=100)
-    name_ja = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100)
+    slug = models.SlugField(max_length=100, unique=True)
 
     def __str__(self):
         return self.name
@@ -39,12 +38,9 @@ class GenreForURL(models.Model):
 
 class Article(models.Model):
     excerpt = models.TextField(max_length=200, blank=True)
-    excerpt_jp = models.TextField(max_length=200, blank=True)
     kicker = models.CharField(max_length=100, blank=True)
     content = RichTextUploadingField(blank=True)
-    content_jp = RichTextUploadingField(blank=True)
     references = RichTextUploadingField(blank=True)
-    references_jp = RichTextUploadingField(blank=True)
     rating = models.FloatField(default=0.0)
     rating_count = models.IntegerField(blank=True, null=True)
     published_date = models.DateTimeField(default=timezone.now, blank=True)
@@ -55,3 +51,11 @@ class Article(models.Model):
 
     class Meta:
         ordering = ["-pk"]
+
+
+class Language(models.Model):
+    NAME_CHOICES = [
+        ("en", "english"),
+        ("jp", "japanese"),
+    ]
+    name = models.CharField(max_length=100, unique=True, choices=NAME_CHOICES)

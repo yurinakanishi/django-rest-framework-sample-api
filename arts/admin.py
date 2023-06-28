@@ -4,8 +4,8 @@ from .models import Art, Artist, PaintingMethod, PaintingStyle, Museum
 
 class ArtAdmin(admin.ModelAdmin):
     # filter_horizontal = ("tag", "genre")
-    display_fields = "title"
-    prepopulated_fields = {"slug": ("title",)}
+    display_fields = "name"
+    prepopulated_fields = {"slug": ("name",)}
 
 
 class ArtistAdmin(admin.ModelAdmin):

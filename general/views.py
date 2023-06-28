@@ -10,7 +10,7 @@ from .serializers import (
 )
 
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
-from api.permissions import IsAdminOrReadOnly, IsCreateUserOrReadOnly
+from accounts.permissions import IsAdminOrReadOnly, IsCreateUserOrReadOnly
 from rest_framework.decorators import api_view, permission_classes, renderer_classes
 from rest_framework import status
 

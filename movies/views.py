@@ -9,7 +9,7 @@ from .serializers import (
     MovieSerializer,
     MovieReviewSerializer,
 )
-from api.permissions import IsAdminOrReadOnly, IsCreateUserOrReadOnly
+from accounts.permissions import IsAdminOrReadOnly, IsCreateUserOrReadOnly
 from rest_framework.permissions import (
     IsAuthenticatedOrReadOnly,
     IsAdminUser,

@@ -4,7 +4,7 @@ from django.conf import settings
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
 from locations.models import Location
-from general.models import Article, Tag, GenreForURL
+from general.models import Article, Tag, GenreForURL, Language
 
 
 class Habitat(models.Model):
@@ -22,25 +22,9 @@ class Habitat(models.Model):
         ("tropical-rain-forest", "Tropical Rain Forest"),
     ]
 
-    HABITAT_CHOICES_JP = [
-        ("desert", "砂漠"),
-        ("forest", "森林"),
-        ("sandy-beach", "砂浜"),
-        ("deep-sea", "深海"),
-        ("savanna", "サバンナ"),
-        ("sea", "海"),
-        ("river", "川"),
-        ("rocky-shore", "岩場"),
-        ("lake", "湖"),
-        ("polar", "極地"),
-        ("tropical-rain-forest", "熱帯雨林"),
-    ]
-
     name = models.CharField(max_length=200, choices=HABITAT_CHOICES)
-    name_jp = models.CharField(max_length=200, choices=HABITAT_CHOICES_JP, blank=True)
-    slug = models.SlugField(max_length=200, blank=True)
-    excerpt = models.TextField(max_length=200, blank=True)
-    excerpt_jp = models.TextField(max_length=200, blank=True)
+    slug = models.SlugField(max_length=200, unique=True)
+    language = models.ForeignKey(Language, on_delete=models.CASCADE)
     climate = models.CharField(max_length=200, blank=True)
     article = models.OneToOneField(
         Article, on_delete=models.CASCADE, blank=True, null=True
@@ -70,22 +54,9 @@ class Species(models.Model):
         ("mollusk", "Mollusk"),
     ]
 
-    SPECIES_CHOICES_JP = [
-        ("mammal", "哺乳類"),
-        ("bird", "鳥類"),
-        ("reptile", "爬虫類"),
-        ("fish", "魚類"),
-        ("insect", "昆虫"),
-        ("amphibian", "両生類"),
-        ("crustacean", "甲殻類"),
-        ("mollusk", "軟体動物"),
-    ]
-
     name = models.CharField(max_length=200, choices=SPECIES_CHOICES)
-    name_jp = models.CharField(max_length=200, choices=SPECIES_CHOICES_JP, blank=True)
-    slug = models.SlugField(max_length=200, blank=True)
-    excerpt = models.TextField(max_length=200, blank=True)
-    excerpt_jp = models.TextField(max_length=200, blank=True)
+    slug = models.SlugField(max_length=200, unique=True)
+    language = models.ForeignKey(Language, on_delete=models.CASCADE)
     article = models.OneToOneField(
         Article, on_delete=models.CASCADE, blank=True, null=True
     )
@@ -104,13 +75,11 @@ class Species(models.Model):
 
 class LivingThings(models.Model):
     name = models.CharField(max_length=100)
-    name_jp = models.CharField(max_length=100, blank=True)
     slug = models.SlugField(max_length=100, unique=True)
+    language = models.ForeignKey(Language, on_delete=models.CASCADE)
     location = models.ManyToManyField(
         Location, blank=True, related_name="living_things_countries"
     )
-    excerpt = models.TextField(max_length=200, blank=True)
-    excerpt_jp = models.TextField(max_length=200, blank=True)
     habitat = models.ForeignKey(
         Habitat, on_delete=models.CASCADE, blank=True, null=True
     )

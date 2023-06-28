@@ -1,13 +1,11 @@
 from django.db import models
-from general.models import Article, Tag, GenreForURL
+from general.models import Article, Tag, GenreForURL, Language
 
 
 class Country(models.Model):
     name = models.CharField(max_length=100, unique=True)
-    name_jp = models.CharField(max_length=100, unique=True, blank=True)
-    slug = models.SlugField(max_length=100, blank=True)
-    excerpt = models.TextField(max_length=200, blank=True)
-    excerpt_jp = models.TextField(max_length=200, blank=True)
+    slug = models.SlugField(max_length=100, unique=True)
+    language = models.ForeignKey(Language, on_delete=models.CASCADE)
     capital_city = models.CharField(max_length=100, blank=True)
     population = models.IntegerField(blank=True, null=True)
     area_km2 = models.IntegerField(blank=True, null=True)
@@ -32,6 +30,7 @@ class Location(models.Model):
     country = models.ForeignKey(
         Country, on_delete=models.SET_NULL, blank=True, null=True
     )
+    language = models.ForeignKey(Language, on_delete=models.CASCADE)
     state = models.CharField(max_length=100, blank=True)
     city = models.CharField(max_length=100, blank=True)
     street_address = models.CharField(max_length=100, blank=True)

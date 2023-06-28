@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
-from general.models import Article, Tag, GenreForURL
+from general.models import Article, Tag, GenreForURL, Language
 from django.conf import settings
 
 # class TypeChoices(models.TextChoices):
@@ -15,8 +15,8 @@ from django.conf import settings
 
 class Knowledge(models.Model):
     name = models.CharField(max_length=100)
-    name_jp = models.CharField(max_length=100, blank=True)
     slug = models.SlugField(max_length=100, unique=True)
+    language = models.ForeignKey(Language, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag, blank=True, related_name="knowledge_tags")
     genre_for_url = models.ForeignKey(
         GenreForURL,
@@ -31,15 +31,7 @@ class Knowledge(models.Model):
         ("blog", "blog"),
     ]
 
-    TYPE_CHOICES_JP = [
-        ("knowledge", "知識"),
-        ("blog", "ブログ"),
-    ]
-
     type = models.CharField(max_length=20, choices=TYPE_CHOICES, default="knowledge")
-    type_jp = models.CharField(
-        max_length=20, choices=TYPE_CHOICES_JP, default="knowledge"
-    )
     notesite_url = models.URLField(max_length=200, null=True, blank=True)
     article = models.OneToOneField(
         Article,

@@ -8,7 +8,7 @@ from locations.serializers import CountrySerializer
 from locations.models import Country
 from .models import LivingThings, Species, Habitat
 
-from api.permissions import IsAdminOrReadOnly, IsCreateUserOrReadOnly
+from accounts.permissions import IsAdminOrReadOnly, IsCreateUserOrReadOnly
 from rest_framework.permissions import (
     AllowAny,
     IsAdminUser,

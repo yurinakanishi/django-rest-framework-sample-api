@@ -11,7 +11,7 @@ from .serializers import (
 from locations.serializers import CountrySerializer
 from .models import CookingMethod, Ingredient, Food
 from rest_framework.permissions import AllowAny, IsAdminUser, IsAdminUser
-from api.permissions import IsAdminOrReadOnly, IsCreateUserOrReadOnly
+from accounts.permissions import IsAdminOrReadOnly, IsCreateUserOrReadOnly
 
 
 class FoodEachList(generics.ListAPIView):
