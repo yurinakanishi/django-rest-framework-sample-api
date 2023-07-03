@@ -9,3 +9,4 @@ pillow
 djangorestframework-simplejwt
 drf-writable-nested
 django_extensions
+python-dateutil
