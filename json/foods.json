@@ -1,1 +1,258 @@
-[{"model": "foods.cookingmethod", "pk": 5, "fields": {"name": "stew", "slug": "stew", "language": 1, "article": null, "genre_for_url": 10, "tags": []}}, {"model": "foods.cookingmethod", "pk": 6, "fields": {"name": "deep-fried", "slug": "deep-fried", "language": 1, "article": null, "genre_for_url": 10, "tags": []}}, {"model": "foods.cookingmethod", "pk": 7, "fields": {"name": "シチュー", "slug": "stew-jp", "language": 2, "article": null, "genre_for_url": 10, "tags": []}}, {"model": "foods.cookingmethod", "pk": 8, "fields": {"name": "揚げ物", "slug": "deep-fried-jp", "language": 2, "article": null, "genre_for_url": 10, "tags": []}}, {"model": "foods.ingredient", "pk": 1, "fields": {"name": "fruits", "slug": "fruits", "language": 1, "location": null, "article": 123, "genre_for_url": 11, "tags": []}}, {"model": "foods.ingredient", "pk": 2, "fields": {"name": "vegetables", "slug": "vegetables", "language": 1, "location": null, "article": 130, "genre_for_url": 11, "tags": []}}, {"model": "foods.ingredient", "pk": 3, "fields": {"name": "meats", "slug": "meats", "language": 1, "location": null, "article": 135, "genre_for_url": 11, "tags": []}}, {"model": "foods.ingredient", "pk": 4, "fields": {"name": "dairy_products", "slug": "dairy-products", "language": 1, "location": null, "article": 128, "genre_for_url": 11, "tags": []}}, {"model": "foods.ingredient", "pk": 5, "fields": {"name": "grains", "slug": "grains", "language": 1, "location": null, "article": null, "genre_for_url": 11, "tags": []}}, {"model": "foods.ingredient", "pk": 6, "fields": {"name": "eggs", "slug": "eggs", "language": 1, "location": null, "article": 132, "genre_for_url": 11, "tags": []}}, {"model": "foods.ingredient", "pk": 7, "fields": {"name": "fish", "slug": "fish", "language": 1, "location": null, "article": 134, "genre_for_url": 11, "tags": []}}, {"model": "foods.ingredient", "pk": 8, "fields": {"name": "beans", "slug": "beans", "language": 1, "location": null, "article": 124, "genre_for_url": 11, "tags": []}}, {"model": "foods.ingredient", "pk": 9, "fields": {"name": "果物", "slug": "fruits-jp", "language": 2, "location": null, "article": 126, "genre_for_url": 11, "tags": []}}, {"model": "foods.ingredient", "pk": 10, "fields": {"name": "野菜", "slug": "vegetables-jp", "language": 2, "location": null, "article": 131, "genre_for_url": 11, "tags": []}}, {"model": "foods.ingredient", "pk": 11, "fields": {"name": "肉", "slug": "meats-jp", "language": 2, "location": null, "article": 136, "genre_for_url": 11, "tags": []}}, {"model": "foods.ingredient", "pk": 12, "fields": {"name": "乳製品", "slug": "dairy-products-jp", "language": 2, "location": null, "article": 127, "genre_for_url": 11, "tags": []}}, {"model": "foods.ingredient", "pk": 13, "fields": {"name": "穀物", "slug": "grains-jp", "language": 2, "location": null, "article": null, "genre_for_url": 11, "tags": []}}, {"model": "foods.ingredient", "pk": 14, "fields": {"name": "卵", "slug": "eggs-jp", "language": 2, "location": null, "article": 133, "genre_for_url": 11, "tags": []}}, {"model": "foods.ingredient", "pk": 15, "fields": {"name": "魚", "slug": "fish-jp", "language": 2, "location": null, "article": 129, "genre_for_url": 11, "tags": []}}, {"model": "foods.ingredient", "pk": 16, "fields": {"name": "豆", "slug": "beans-jp", "language": 2, "location": null, "article": 125, "genre_for_url": 11, "tags": []}}]
+[
+  {
+    "model": "foods.cookingmethod",
+    "pk": 5,
+    "fields": {
+      "name": "stew",
+      "slug": "stew",
+      "language": 1,
+      "article": 10003,
+      "genre_for_url": 10,
+      "tags": []
+    }
+  },
+  {
+    "model": "foods.cookingmethod",
+    "pk": 6,
+    "fields": {
+      "name": "deep-fried",
+      "slug": "deep-fried",
+      "language": 1,
+      "article": 10004,
+      "genre_for_url": 10,
+      "tags": []
+    }
+  },
+  {
+    "model": "foods.cookingmethod",
+    "pk": 7,
+    "fields": {
+      "name": "シチュー",
+      "slug": "stew-jp",
+      "language": 2,
+      "article": 10005,
+      "genre_for_url": 10,
+      "tags": []
+    }
+  },
+  {
+    "model": "foods.cookingmethod",
+    "pk": 8,
+    "fields": {
+      "name": "揚げ物",
+      "slug": "deep-fried-jp",
+      "language": 2,
+      "article": 10006,
+      "genre_for_url": 10,
+      "tags": []
+    }
+  },
+  {
+    "model": "foods.ingredient",
+    "pk": 1,
+    "fields": {
+      "name": "fruits",
+      "slug": "fruits",
+      "language": 1,
+      "location": null,
+      "article": 123,
+      "genre_for_url": 11,
+      "tags": []
+    }
+  },
+  {
+    "model": "foods.ingredient",
+    "pk": 2,
+    "fields": {
+      "name": "vegetables",
+      "slug": "vegetables",
+      "language": 1,
+      "location": null,
+      "article": 130,
+      "genre_for_url": 11,
+      "tags": []
+    }
+  },
+  {
+    "model": "foods.ingredient",
+    "pk": 3,
+    "fields": {
+      "name": "meats",
+      "slug": "meats",
+      "language": 1,
+      "location": null,
+      "article": 135,
+      "genre_for_url": 11,
+      "tags": []
+    }
+  },
+  {
+    "model": "foods.ingredient",
+    "pk": 4,
+    "fields": {
+      "name": "dairy_products",
+      "slug": "dairy-products",
+      "language": 1,
+      "location": null,
+      "article": 128,
+      "genre_for_url": 11,
+      "tags": []
+    }
+  },
+  {
+    "model": "foods.ingredient",
+    "pk": 5,
+    "fields": {
+      "name": "grains",
+      "slug": "grains",
+      "language": 1,
+      "location": null,
+      "article": 10008,
+      "genre_for_url": 11,
+      "tags": []
+    }
+  },
+  {
+    "model": "foods.ingredient",
+    "pk": 6,
+    "fields": {
+      "name": "eggs",
+      "slug": "eggs",
+      "language": 1,
+      "location": null,
+      "article": 132,
+      "genre_for_url": 11,
+      "tags": []
+    }
+  },
+  {
+    "model": "foods.ingredient",
+    "pk": 7,
+    "fields": {
+      "name": "fish",
+      "slug": "fish",
+      "language": 1,
+      "location": null,
+      "article": 134,
+      "genre_for_url": 11,
+      "tags": []
+    }
+  },
+  {
+    "model": "foods.ingredient",
+    "pk": 8,
+    "fields": {
+      "name": "beans",
+      "slug": "beans",
+      "language": 1,
+      "location": null,
+      "article": 124,
+      "genre_for_url": 11,
+      "tags": []
+    }
+  },
+  {
+    "model": "foods.ingredient",
+    "pk": 9,
+    "fields": {
+      "name": "果物",
+      "slug": "fruits-jp",
+      "language": 2,
+      "location": null,
+      "article": 126,
+      "genre_for_url": 11,
+      "tags": []
+    }
+  },
+  {
+    "model": "foods.ingredient",
+    "pk": 10,
+    "fields": {
+      "name": "野菜",
+      "slug": "vegetables-jp",
+      "language": 2,
+      "location": null,
+      "article": 131,
+      "genre_for_url": 11,
+      "tags": []
+    }
+  },
+  {
+    "model": "foods.ingredient",
+    "pk": 11,
+    "fields": {
+      "name": "肉",
+      "slug": "meats-jp",
+      "language": 2,
+      "location": null,
+      "article": 136,
+      "genre_for_url": 11,
+      "tags": []
+    }
+  },
+  {
+    "model": "foods.ingredient",
+    "pk": 12,
+    "fields": {
+      "name": "乳製品",
+      "slug": "dairy-products-jp",
+      "language": 2,
+      "location": null,
+      "article": 127,
+      "genre_for_url": 11,
+      "tags": []
+    }
+  },
+  {
+    "model": "foods.ingredient",
+    "pk": 13,
+    "fields": {
+      "name": "穀物",
+      "slug": "grains-jp",
+      "language": 2,
+      "location": null,
+      "article": 10007,
+      "genre_for_url": 11,
+      "tags": []
+    }
+  },
+  {
+    "model": "foods.ingredient",
+    "pk": 14,
+    "fields": {
+      "name": "卵",
+      "slug": "eggs-jp",
+      "language": 2,
+      "location": null,
+      "article": 133,
+      "genre_for_url": 11,
+      "tags": []
+    }
+  },
+  {
+    "model": "foods.ingredient",
+    "pk": 15,
+    "fields": {
+      "name": "魚",
+      "slug": "fish-jp",
+      "language": 2,
+      "location": null,
+      "article": 129,
+      "genre_for_url": 11,
+      "tags": []
+    }
+  },
+  {
+    "model": "foods.ingredient",
+    "pk": 16,
+    "fields": {
+      "name": "豆",
+      "slug": "beans-jp",
+      "language": 2,
+      "location": null,
+      "article": 125,
+      "genre_for_url": 11,
+      "tags": []
+    }
+  }
+]
