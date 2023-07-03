@@ -1,6 +1,5 @@
 from rest_framework import serializers
-from .models import Art, Museum, PaintingMethod, PaintingStyle, Artist
-from dates.models import Period
+from .models import Art, Museum, PaintingMethod, PaintingStyle, Artist, ArtsPeriod
 from general.serializers import TagSerializer, GenreSerializer, ArticleSerializer
 
 
@@ -41,6 +40,16 @@ class PaintingStyleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = PaintingStyle
+        fields = "__all__"
+
+
+class ArtsPeriodSerializer(serializers.ModelSerializer):
+    article = ArticleSerializer(read_only=False)
+    tags = TagSerializer(many=True, read_only=False)
+    genre_for_url = GenreSerializer(many=True, read_only=False)
+
+    class Meta:
+        model = ArtsPeriod
         fields = "__all__"
 
 

@@ -28,7 +28,7 @@ urlpatterns = [
         name="living-things-each-detail",
     ),
     path(
-        "each/<slug:slug>/create/",
+        "each/create/",
         LivingThingsEachCreate.as_view(),
         name="living-things-each-create",
     ),
@@ -43,7 +43,7 @@ urlpatterns = [
         name="living-things-habitat-detail",
     ),
     path(
-        "habitats/<slug:slug>/create/",
+        "habitats/create/",
         LivingThingsHabitatCreate.as_view(),
         name="living-things-habitat-create",
     ),
@@ -58,7 +58,7 @@ urlpatterns = [
         name="living-things-specie-detail",
     ),
     path(
-        "species/<slug:slug>/create/",
+        "species/create/",
         LivingThingsSpecieCreate.as_view(),
         name="living-things-specie-create",
     ),
@@ -73,7 +73,7 @@ urlpatterns = [
         name="living-things-country-detail",
     ),
     path(
-        "country/<slug:slug>/create/",
+        "country/create/",
         LivingThingsCountryCreate.as_view(),
         name="living-things-country-create",
     ),

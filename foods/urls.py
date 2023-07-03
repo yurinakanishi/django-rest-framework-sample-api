@@ -16,7 +16,7 @@ urlpatterns = [
     path("each", FoodEachList.as_view(), name="food-each-list"),
     path("each/<slug:slug>/", FoodEachDetail.as_view(), name="food-each-detail"),
     path(
-        "each/<slug:slug>/create",
+        "each/create",
         FoodEachCreate.as_view(),
         name="food-each-create",
     ),
@@ -27,7 +27,7 @@ urlpatterns = [
         name="food-ingredients-detail",
     ),
     path(
-        "ingredients/<slug:slug>/create",
+        "ingredients/create",
         FoodIngredientCreate.as_view(),
         name="food-ingredients-create",
     ),
@@ -38,7 +38,7 @@ urlpatterns = [
         name="food-cooking-detail",
     ),
     path(
-        "cooking-methods/<slug:slug>/create",
+        "cooking-methods/create",
         FoodCookingMethodCreate.as_view(),
         name="food-cooking-create",
     ),

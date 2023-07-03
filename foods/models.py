@@ -11,6 +11,8 @@ class CookingMethod(models.Model):
     METHOD_CHOICES = [
         ("stew", "Stew"),
         ("deep-fried", "Deep fried"),
+        ("シチュー", "Stew jp"),
+        ("揚げ物", "Deep fried jp"),
     ]
 
     name = models.CharField(max_length=200, choices=METHOD_CHOICES)
@@ -42,6 +44,14 @@ class Ingredient(models.Model):
         ("eggs", "Eggs"),
         ("fish", "Fish"),
         ("beans", "Beans"),
+        ("果物", "Fruits jp"),
+        ("野菜", "Vegetables jp"),
+        ("肉", "Meats jp"),
+        ("乳製品", "Dairy Products jp"),
+        ("穀物", "Grains jp"),
+        ("卵", "Eggs jp"),
+        ("魚", "Fish jp"),
+        ("豆", "Beans jp"),
     ]
 
     name = models.CharField(max_length=200, choices=TYPE_CHOICES)

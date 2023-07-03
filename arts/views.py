@@ -3,13 +3,14 @@ from rest_framework import viewsets, generics
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from general.models import Article, Tag, GenreForURL
-from .models import Art, Artist, Museum, PaintingMethod, PaintingStyle
+from .models import Art, Artist, Museum, PaintingMethod, PaintingStyle, ArtsPeriod
 from .serializers import (
     ArtSerializer,
     PaintingMethodSerializer,
     PaintingStyleSerializer,
     MuseumSerializer,
     ArtistSerializer,
+    ArtsPeriodSerializer,
 )
 from accounts.permissions import IsAdminOrReadOnly, IsCreateUserOrReadOnly
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
@@ -75,24 +76,24 @@ class PaintingStyleCreate(generics.CreateAPIView):
     permission_classes = [IsAdminUser]
 
 
-# class ArtsPeriodList(generics.ListAPIView):
-#     queryset = Article.objects.all()
-#     serializer_class = ArtPeriodSerializer
-#     permission_classes = [IsAdminOrReadOnly]
+class ArtsPeriodList(generics.ListAPIView):
+    queryset = Article.objects.all()
+    serializer_class = ArtsPeriodSerializer
+    permission_classes = [IsAdminOrReadOnly]
 
 
-# class ArtsPeriodDetail(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = Article.objects.all()
-#     serializer_class = ArtPeriodSerializer
-#     lookup_field = "slug"
-#     permission_classes = [IsAdminOrReadOnly]
+class ArtsPeriodDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Article.objects.all()
+    serializer_class = ArtsPeriodSerializer
+    lookup_field = "slug"
+    permission_classes = [IsAdminOrReadOnly]
 
 
-# class ArtsPeriodCreate(generics.CreateAPIView):
-#     queryset = Article.objects.all()
-#     serializer_class = ArtPeriodSerializer
-#     lookup_field = "slug"
-#     permission_classes = [IsAdminUser]
+class ArtsPeriodCreate(generics.CreateAPIView):
+    queryset = Article.objects.all()
+    serializer_class = ArtsPeriodSerializer
+    lookup_field = "slug"
+    permission_classes = [IsAdminUser]
 
 
 class ArtistList(generics.ListAPIView):

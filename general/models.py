@@ -19,16 +19,17 @@ class Tag(models.Model):
 class GenreForURL(models.Model):
     NAME_CHOICES = [
         ("knowledge", "knowledge"),
+        ("movies", "movies"),
         ("arts/each", "arts/each"),
-        ("arts/periods", "arts/periods"),
-        ("arts/painting-styles", "arts/painting-styles"),
         ("arts/painting-methods", "arts/painting-methods"),
-        ("living-things_each", "living-things_each"),
-        ("living-things-habitats", "living-things-habitats"),
-        ("living-things-specie", "living-things-species"),
+        ("arts/painting-styles", "arts/painting-styles"),
+        ("arts/periods", "arts/periods"),
+        ("living-things/each", "living-things/each"),
+        ("living-things/species", "living-things/species"),
+        ("living-things/habitats", "living-things/habitats"),
         ("foods/cooking-methods", "foods/cooking-methods"),
         ("foods/ingredients", "foods/ingredients"),
-        ("movies", "movies"),
+        ("countries", "countries"),
     ]
     name = models.CharField(max_length=100, unique=True, choices=NAME_CHOICES)
 
@@ -46,8 +47,8 @@ class Article(models.Model):
     published_date = models.DateTimeField(default=timezone.now, blank=True)
     updated_date = models.DateTimeField(auto_now=True, blank=True)
 
-    def __str__(self):
-        return self.excerpt
+    # def __str__(self):
+    #     return self.excerpt
 
     class Meta:
         ordering = ["-pk"]
@@ -59,3 +60,6 @@ class Language(models.Model):
         ("jp", "japanese"),
     ]
     name = models.CharField(max_length=100, unique=True, choices=NAME_CHOICES)
+
+    def __str__(self):
+        return self.name

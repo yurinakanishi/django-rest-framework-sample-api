@@ -20,6 +20,17 @@ class Habitat(models.Model):
         ("lake", "Lake"),
         ("polar", "Polar"),
         ("tropical-rain-forest", "Tropical Rain Forest"),
+        ("砂漠", "Desert jp"),
+        ("森林", "Forest jp"),
+        ("砂浜", "Sandy Beach jp"),
+        ("深海", "Deep Sea jp"),
+        ("サバンナ", "Savanna jp"),
+        ("海", "Sea jp"),
+        ("川", "River jp"),
+        ("岩場", "Rocky Shore jp"),
+        ("湖", "Lake jp"),
+        ("極地", "Polar jp"),
+        ("熱帯雨林", "Tropical Rain Forest jp"),
     ]
 
     name = models.CharField(max_length=200, choices=HABITAT_CHOICES)
@@ -52,6 +63,14 @@ class Species(models.Model):
         ("amphibian", "Amphibian"),
         ("crustacean", "Crustacean"),
         ("mollusk", "Mollusk"),
+        ("哺乳類", "Mammal jp"),
+        ("鳥類", "Bird jp"),
+        ("爬虫類", "Reptile jp"),
+        ("魚類", "Fish jp"),
+        ("昆虫", "Insect jp"),
+        ("両生類", "Amphibian jp"),
+        ("甲殻類", "Crustacean jp"),
+        ("軟体動物", "Mollusk jp"),
     ]
 
     name = models.CharField(max_length=200, choices=SPECIES_CHOICES)
