@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.conf import settings
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
-from general.models import Article, Tag, GenreForURL, Language
+from general.models import Article, Tag, GenreForUrl, Language
 from people.models import Person
 
 
@@ -16,13 +16,16 @@ class MovieDirector(models.Model):
         Article, on_delete=models.SET_NULL, blank=True, null=True
     )
     genre = models.ForeignKey(
-        GenreForURL,
+        GenreForUrl,
         null=True,
         on_delete=models.CASCADE,
         related_name="movie_director_genre_for_url",
         blank=True,
     )
     tag = models.ManyToManyField(Tag, blank=True, related_name="movie_director_tags")
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True
+    )
 
     def __str__(self):
         return self.name
@@ -40,7 +43,7 @@ class MovieActor(models.Model):
         Article, on_delete=models.SET_NULL, null=True, blank=True
     )
     genre = models.ForeignKey(
-        GenreForURL,
+        GenreForUrl,
         blank=True,
         null=True,
         on_delete=models.CASCADE,
@@ -49,59 +52,18 @@ class MovieActor(models.Model):
     tag = models.ManyToManyField(Tag, blank=True, related_name="movie_actor_tags")
 
 
-class Movie(models.Model):
-    name = models.CharField(max_length=100, unique=True)
-    slug = models.SlugField(max_length=100, unique=True)
-    language = models.ForeignKey(Language, on_delete=models.CASCADE)
-    release_date = models.DateField(null=True, blank=True)
-    director = models.ForeignKey(
-        MovieDirector,
-        on_delete=models.SET_NULL,
-        related_name="directed_movies",
-        blank=True,
-        null=True,
-    )
-    actors = models.ManyToManyField(Person, blank=True, related_name="movie_actors")
-    runtime = models.IntegerField(
-        help_text="Duration in minutes", blank=True, null=True
-    )
-    poster = models.ImageField(upload_to="posters/", null=True, blank=True)
-    back_drop = models.ImageField(upload_to="back_drops/", null=True, blank=True)
-    over_view = models.TextField(blank=True)
-    media_type = models.CharField(max_length=100, default="movie", blank=True)
-    themoviedb_id = models.CharField(max_length=100, blank=True)
-    article = models.OneToOneField(
-        Article, on_delete=models.SET_NULL, null=True, blank=True
-    )
-    genre_for_url = models.ForeignKey(
-        GenreForURL,
-        blank=True,
-        null=True,
-        on_delete=models.CASCADE,
-        related_name="movie_genre_for_url",
-    )
-    tags = models.ManyToManyField(Tag, blank=True, related_name="movie_tags")
-
-    def __str__(self):
-        return self.name
-
-
 class MovieRating(models.Model):
-    movie_name = models.CharField(max_length=100, unique=True)
-    slug = models.SlugField(max_length=100, unique=True)
-    language = models.ForeignKey(Language, on_delete=models.CASCADE)
-    author = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        blank=True,
-        null=True,
-        related_name="movie_rating_user",
-    )
     RATING_CHOICES = (
+        (0, "0"),
+        (0.5, "0.5"),
         (1, "1"),
+        (1.5, "1.5"),
         (2, "2"),
+        (2.5, "2.5"),
         (3, "3"),
+        (3.5, "3.5"),
         (4, "4"),
+        (4.5, "4.5"),
         (5, "5"),
     )
     story = models.PositiveSmallIntegerField(blank=True, choices=RATING_CHOICES)
@@ -117,45 +79,63 @@ class MovieRating(models.Model):
     )
 
 
-class MovieReview(models.Model):
-    name = models.CharField(max_length=100, blank=True)
+class Movie(models.Model):
+    name = models.CharField(max_length=100, unique=True)
     slug = models.SlugField(max_length=100, unique=True)
     language = models.ForeignKey(Language, on_delete=models.CASCADE)
+    TYPE_CHOICES = (
+        ("movie", "movie"),
+        ("tv", "tv"),
+    )
+    type = models.CharField(max_length=100, choices=TYPE_CHOICES)
+    release_date = models.DateField(null=True, blank=True)
+    director = models.ForeignKey(
+        MovieDirector,
+        on_delete=models.SET_NULL,
+        related_name="directed_movies",
+        blank=True,
+        null=True,
+    )
+    actors = models.ManyToManyField(Person, blank=True, related_name="movie_actors")
+    runtime = models.IntegerField(
+        help_text="Duration in minutes", blank=True, null=True
+    )
+    poster = models.ImageField(upload_to="posters/", null=True, blank=True)
+    back_drop = models.ImageField(upload_to="back_drops/", null=True, blank=True)
+    over_view = models.TextField(blank=True)
+    themoviedb_id = models.CharField(max_length=100, blank=True)
+    article = models.OneToOneField(
+        Article, on_delete=models.SET_NULL, null=True, blank=True
+    )
     article = models.OneToOneField(
         Article,
         on_delete=models.CASCADE,
         blank=True,
         null=True,
-        related_name="movie_review_articles",
+        related_name="movie_article",
     )
-    movie = models.ForeignKey(
-        Movie,
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         blank=True,
         null=True,
-        related_name="movie_review_movie",
+        related_name="movie_rating_user",
     )
-    tags = models.ManyToManyField(Tag, blank=True, related_name="movie_review_tags")
-    genre_for_url = models.ForeignKey(
-        GenreForURL,
-        blank=True,
-        null=True,
-        on_delete=models.CASCADE,
-        related_name="movie_review_genre_for_url",
-    )
-    kicker = models.CharField(max_length=100, blank=True)
-    rating = models.OneToOneField(
+    movie_rating = models.OneToOneField(
         MovieRating,
         on_delete=models.CASCADE,
         blank=True,
         null=True,
         related_name="movie_ratings",
     )
-    author = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True
+    genre_for_url = models.ForeignKey(
+        GenreForUrl,
+        blank=True,
+        null=True,
+        on_delete=models.CASCADE,
+        related_name="movie_genre_for_url",
     )
-    published_date = models.DateTimeField(default=timezone.now, blank=True)
-    updated_date = models.DateTimeField(auto_now=True, blank=True)
+    tags = models.ManyToManyField(Tag, blank=True, related_name="movie_tags")
 
     def __str__(self):
-        return f"Review for {self.movie} by {self.user}"
+        return self.name

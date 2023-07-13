@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from rest_framework import viewsets, generics
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from general.models import Tag, GenreForURL
+from general.models import Tag, GenreForUrl
 from .models import Period
 from .serializers import (
     PeriodSerializer,

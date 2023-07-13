@@ -1,5 +1,5 @@
 from knowledge.models import Knowledge
-from general.models import Language, Tag, GenreForURL, Article
+from general.models import Language, Tag, GenreForUrl, Article
 from arts.models import Art, Artist, Museum, PaintingMethod, PaintingStyle, ArtsPeriod
 from living_things.models import LivingThings, Habitat, Species
 from foods.models import Food, CookingMethod, Ingredient
@@ -8,14 +8,17 @@ from django.contrib.auth.models import User
 import json
 from accounts.models import UserAccount
 from locations.models import Country, Location
+from movies.models import Movie, MovieRating
 
 
 def run():
     for choice in Language.NAME_CHOICES:
         Language.objects.create(name=choice[0])
 
-    for choice in GenreForURL.NAME_CHOICES:
-        GenreForURL.objects.create(name=choice[0])
+    for i, choice in enumerate(GenreForUrl.NAME_CHOICES):
+        GenreForUrl.objects.create(
+            name=choice[0], name_jp=GenreForUrl.NAME_JP_CHOICES[i][0]
+        )
 
     with open("json/general.json") as f:
         general_data = json.load(f)
@@ -39,6 +42,14 @@ def run():
 
     with open("json/living_things.json") as f:
         living_things_data = json.load(f)
+
+    with open("json/movies.json") as ff:
+        movies_data = json.load(ff)
+    movie_rating_dict = {
+        item["pk"]: item
+        for item in movies_data
+        if item.get("model") == "movies.movierating"
+    }
 
     # prefetch common objects
     author = UserAccount.objects.get(pk=1)
@@ -67,9 +78,13 @@ def run():
     articles_for_foods_ingredient_list = []
     articles_for_foods_cooking_methods_list = []
 
+    articles_for_movies_list = []
+    rating_for_movies_list = []
+    movies_list = []
+
     # For Knowledge
     # ====================================================================================================
-    for a in reversed(knowledge_data):
+    for a in knowledge_data:
         pk_in_json = a["fields"].get("article")
         article_json = article_dict.get(pk_in_json)
 
@@ -90,9 +105,9 @@ def run():
             Knowledge(
                 name=a["fields"].get("name"),
                 slug=a["fields"].get("slug"),
-                type="knowledge",
+                type=a["fields"].get("type"),
                 author=author,
-                genre_for_url=GenreForURL.objects.get(name="knowledge"),
+                genre_for_url=GenreForUrl.objects.get(name="knowledge"),
                 language=language,
                 notesite_url=a["fields"].get("notesite_url"),
             )
@@ -110,7 +125,7 @@ def run():
     # For Country
     # ====================================================================================================
 
-    for a in reversed(countries_data):
+    for a in countries_data:
         pk_in_json = a["fields"].get("article")
         article_json = article_dict.get(pk_in_json)
         if a["fields"].get("language") == 1:
@@ -130,7 +145,7 @@ def run():
             Country(
                 name=a["fields"].get("name"),
                 slug=a["fields"].get("slug"),
-                genre_for_url=GenreForURL.objects.get(name="countries"),
+                genre_for_url=GenreForUrl.objects.get(name="countries"),
                 language=language,
             )
         )
@@ -150,11 +165,11 @@ def run():
         item for item in arts_data if item.get("model") == "arts.paintingmethod"
     ]
     print(arts_methods_data)
-    for a in reversed(arts_methods_data):
+    for a in arts_methods_data:
         print(a)
         pk_in_json = a["fields"].get("article")
         article_json = article_dict.get(pk_in_json)
-        if a["fields"].get("language") == "en":
+        if a["fields"].get("language") == 1:
             language = language_en
         else:
             language = language_jp
@@ -171,7 +186,7 @@ def run():
             PaintingMethod(
                 name=a["fields"].get("name"),
                 slug=a["fields"].get("slug"),
-                genre_for_url=GenreForURL.objects.get(name="arts/painting-methods"),
+                genre_for_url=GenreForUrl.objects.get(name="arts/painting-methods"),
                 language=language,
             )
         )
@@ -192,10 +207,10 @@ def run():
     arts_styles_data = [
         item for item in arts_data if item.get("model") == "arts.paintingstyle"
     ]
-    for a in reversed(arts_styles_data):
+    for a in arts_styles_data:
         pk_in_json = a["fields"].get("article")
         article_json = article_dict.get(pk_in_json)
-        if a["fields"].get("language") == "en":
+        if a["fields"].get("language") == 1:
             language = language_en
         else:
             language = language_jp
@@ -212,7 +227,7 @@ def run():
             PaintingStyle(
                 name=a["fields"].get("name"),
                 slug=a["fields"].get("slug"),
-                genre_for_url=GenreForURL.objects.get(name="arts/painting-styles"),
+                genre_for_url=GenreForUrl.objects.get(name="arts/painting-styles"),
                 language=language,
             )
         )
@@ -233,10 +248,10 @@ def run():
     arts_periods_data = [
         item for item in arts_data if item.get("model") == "arts.artsperiod"
     ]
-    for a in reversed(arts_periods_data):
+    for a in arts_periods_data:
         pk_in_json = a["fields"].get("article")
         article_json = article_dict.get(pk_in_json)
-        if a["fields"].get("language") == "en":
+        if a["fields"].get("language") == 1:
             language = language_en
         else:
             language = language_jp
@@ -253,7 +268,7 @@ def run():
             ArtsPeriod(
                 name=a["fields"].get("name"),
                 slug=a["fields"].get("slug"),
-                genre_for_url=GenreForURL.objects.get(name="arts/periods"),
+                genre_for_url=GenreForUrl.objects.get(name="arts/periods"),
                 language=language,
             )
         )
@@ -276,7 +291,7 @@ def run():
     for a in living_things_each_data:
         pk_in_json = a["fields"].get("article")
         article_json = article_dict.get(pk_in_json)
-        if a["fields"].get("language") == "en":
+        if a["fields"].get("language") == 1:
             language = language_en
         else:
             language = language_jp
@@ -293,7 +308,7 @@ def run():
             LivingThings(
                 name=a["fields"].get("name"),
                 slug=a["fields"].get("slug"),
-                genre_for_url=GenreForURL.objects.get(name="living-things/each"),
+                genre_for_url=GenreForUrl.objects.get(name="living-things/each"),
                 language=language,
             )
         )
@@ -320,7 +335,7 @@ def run():
         pk_in_json = a["fields"].get("article")
         print(pk_in_json)
         article_json = article_dict.get(pk_in_json)
-        if a["fields"].get("language") == "en":
+        if a["fields"].get("language") == 1:
             language = language_en
         else:
             language = language_jp
@@ -337,7 +352,7 @@ def run():
             Habitat(
                 name=a["fields"].get("name"),
                 slug=a["fields"].get("slug"),
-                genre_for_url=GenreForURL.objects.get(name="living-things/habitats"),
+                genre_for_url=GenreForUrl.objects.get(name="living-things/habitats"),
                 language=language,
             )
         )
@@ -363,7 +378,7 @@ def run():
     for a in species_data:
         pk_in_json = a["fields"].get("article")
         article_json = article_dict.get(pk_in_json)
-        if a["fields"].get("language") == "en":
+        if a["fields"].get("language") == 1:
             language = language_en
         else:
             language = language_jp
@@ -380,7 +395,7 @@ def run():
             Species(
                 name=a["fields"].get("name"),
                 slug=a["fields"].get("slug"),
-                genre_for_url=GenreForURL.objects.get(name="living-things/species"),
+                genre_for_url=GenreForUrl.objects.get(name="living-things/species"),
                 language=language,
             )
         )
@@ -403,7 +418,7 @@ def run():
     for a in foods_cooking_method_data:
         pk_in_json = a["fields"].get("article")
         article_json = article_dict.get(pk_in_json)
-        if a["fields"].get("language") == "en":
+        if a["fields"].get("language") == 1:
             language = language_en
         else:
             language = language_jp
@@ -420,7 +435,7 @@ def run():
             CookingMethod(
                 name=a["fields"].get("name"),
                 slug=a["fields"].get("slug"),
-                genre_for_url=GenreForURL.objects.get(name="foods/cooking-methods"),
+                genre_for_url=GenreForUrl.objects.get(name="foods/cooking-methods"),
                 language=language,
             )
         )
@@ -443,7 +458,7 @@ def run():
     for a in foods_ingredients_data:
         pk_in_json = a["fields"].get("article")
         article_json = article_dict.get(pk_in_json)
-        if a["fields"].get("language") == "en":
+        if a["fields"].get("language") == 1:
             language = language_en
         else:
             language = language_jp
@@ -460,7 +475,7 @@ def run():
             Ingredient(
                 name=a["fields"].get("name"),
                 slug=a["fields"].get("slug"),
-                genre_for_url=GenreForURL.objects.get(name="foods/ingredients"),
+                genre_for_url=GenreForUrl.objects.get(name="foods/ingredients"),
                 language=language,
             )
         )
@@ -475,3 +490,70 @@ def run():
         ingredient.article = article
 
     Ingredient.objects.bulk_create(foods_ingredient_list)
+
+    # ====================================================================================================
+    movies_movies_data = [
+        item for item in movies_data if item.get("model") == "movies.movie"
+    ]
+
+    for a in movies_movies_data:
+        pk_in_json = a["fields"].get("article")
+        article_json = article_dict.get(pk_in_json)
+        rating_pk_in_json = a["fields"].get("movie_rating")
+        rating_json = movie_rating_dict.get(rating_pk_in_json)
+        if a["fields"].get("language") == 1:
+            language = language_en
+        else:
+            language = language_jp
+
+        articles_for_movies_list.append(
+            Article(
+                content=article_json["fields"].get("content"),
+                kicker=article_json["fields"].get("kicker"),
+                excerpt=article_json["fields"].get("excerpt"),
+            )
+        )
+
+        rating_for_movies_list.append(
+            MovieRating(
+                story=rating_json["fields"].get("story"),
+                social_effect=rating_json["fields"].get("social_effect"),
+                business_successful=rating_json["fields"].get("business_successful"),
+                innovative=rating_json["fields"].get("innovative"),
+                music=rating_json["fields"].get("music"),
+                images=rating_json["fields"].get("images"),
+                rating_average=(
+                    rating_json["fields"].get("story")
+                    + rating_json["fields"].get("social_effect")
+                    + rating_json["fields"].get("business_successful")
+                    + rating_json["fields"].get("innovative")
+                    + rating_json["fields"].get("music")
+                    + rating_json["fields"].get("images")
+                )
+                / 6,
+            )
+        )
+
+        movies_list.append(
+            Movie(
+                name=a["fields"].get("name"),
+                slug=a["fields"].get("slug"),
+                type=a["fields"].get("type"),
+                author=author,
+                genre_for_url=GenreForUrl.objects.get(name="movies"),
+                language=language,
+                themoviedb_id=a["fields"].get("themoviedb_id"),
+            )
+        )
+
+    articles_for_movies_list = Article.objects.bulk_create(articles_for_movies_list)
+
+    rating_for_movies_list = MovieRating.objects.bulk_create(rating_for_movies_list)
+
+    for article, movie in zip(articles_for_movies_list, movies_list):
+        movie.article = article
+
+    for rating, movie in zip(rating_for_movies_list, movies_list):
+        movie.movie_rating = rating
+
+    Movie.objects.bulk_create(movies_list)

@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
-from general.models import Article, Tag, GenreForURL, Language
+from general.models import Article, Tag, GenreForUrl, Language
 from django.conf import settings
 
 # class TypeChoices(models.TextChoices):
@@ -19,7 +19,7 @@ class Knowledge(models.Model):
     language = models.ForeignKey(Language, on_delete=models.CASCADE)
     tags = models.ManyToManyField(Tag, blank=True, related_name="knowledge_tags")
     genre_for_url = models.ForeignKey(
-        GenreForURL,
+        GenreForUrl,
         blank=True,
         null=True,
         on_delete=models.CASCADE,

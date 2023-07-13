@@ -11,7 +11,7 @@ User = get_user_model()
 
 
 class Registration(APIView):
-    permission_classes = (AllowAny,)  #
+    permission_classes = (AllowAny,)
 
     def post(self, request):
         try:
@@ -40,12 +40,17 @@ class Registration(APIView):
 
 class UserInfo(APIView):
     def get(self, request):
-        try:
-            users = request.user
-            user = UserSerializer(users)
-            return Response({"user": user.data}, status=status.HTTP_200_OK)
-        except Exception as e:
+        if request.user.is_authenticated:
+            try:
+                user = UserSerializer(request.user)
+                return Response(user.data, status=status.HTTP_200_OK)
+            except Exception as e:
+                return Response(
+                    {"error": f"Something went wrong: {str(e)}"},
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                )
+        else:
             return Response(
-                {"error": f"Something went wrong: {str(e)}"},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                {"error": "You must be authenticated to access this endpoint."},
+                status=status.HTTP_401_UNAUTHORIZED,
             )

@@ -4,7 +4,7 @@ from django.conf import settings
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
 from locations.models import Location
-from general.models import Article, Tag, GenreForURL, Language
+from general.models import Article, Tag, GenreForUrl, Language
 
 
 class Habitat(models.Model):
@@ -41,7 +41,7 @@ class Habitat(models.Model):
         Article, on_delete=models.CASCADE, blank=True, null=True
     )
     genre_for_url = models.ForeignKey(
-        GenreForURL,
+        GenreForUrl,
         on_delete=models.CASCADE,
         blank=True,
         null=True,
@@ -81,7 +81,7 @@ class Species(models.Model):
     )
     tags = models.ManyToManyField(Tag, blank=True, related_name="species_tags")
     genre_for_url = models.ForeignKey(
-        GenreForURL,
+        GenreForUrl,
         on_delete=models.CASCADE,
         blank=True,
         null=True,
@@ -109,7 +109,7 @@ class LivingThings(models.Model):
         Article, on_delete=models.CASCADE, blank=True, null=True
     )
     genre_for_url = models.ForeignKey(
-        GenreForURL,
+        GenreForUrl,
         on_delete=models.CASCADE,
         blank=True,
         null=True,

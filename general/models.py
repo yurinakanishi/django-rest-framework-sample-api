@@ -16,7 +16,7 @@ class Tag(models.Model):
         ordering = ["name"]
 
 
-class GenreForURL(models.Model):
+class GenreForUrl(models.Model):
     NAME_CHOICES = [
         ("knowledge", "knowledge"),
         ("movies", "movies"),
@@ -32,6 +32,23 @@ class GenreForURL(models.Model):
         ("countries", "countries"),
     ]
     name = models.CharField(max_length=100, unique=True, choices=NAME_CHOICES)
+
+    NAME_JP_CHOICES = [
+        ("知識", "知識"),
+        ("映画", "映画"),
+        ("芸術/作品", "芸術/作品"),
+        ("芸術/絵画手法", "芸術/絵画手法"),
+        ("芸術/絵画スタイル", "芸術/絵画スタイル"),
+        ("芸術/時代", "芸術/時代"),
+        ("生き物/生き物", "生き物/生き物"),
+        ("生き物/種族", "生き物/種族"),
+        ("生き物/生息地", "生き物/生息地"),
+        # ("食べ物/食べ物", "食べ物/食べ物"),
+        ("食べ物/調理法", "食べ物/調理法"),
+        ("食べ物/材料", "食べ物/材料"),
+        ("国", "国"),
+    ]
+    name_jp = models.CharField(max_length=100, unique=True, choices=NAME_JP_CHOICES)
 
     def __str__(self):
         return self.name

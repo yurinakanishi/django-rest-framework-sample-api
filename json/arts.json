@@ -3,12 +3,12 @@
     "model": "arts.paintingmethod",
     "pk": 1,
     "fields": {
-      "name": "oil-painting",
-      "slug": "oil-painting",
-      "language": 1,
+      "name": "水彩画",
+      "slug": "watercolor-painting-jp",
+      "language": 2,
       "period": null,
       "location": null,
-      "article": 77,
+      "article": 655,
       "genre_for_url": 4,
       "tags": []
     }
@@ -17,12 +17,12 @@
     "model": "arts.paintingmethod",
     "pk": 2,
     "fields": {
-      "name": "pastel-painting",
-      "slug": "pastel-painting",
-      "language": 1,
+      "name": "パステル画",
+      "slug": "pastel-painting-jp",
+      "language": 2,
       "period": null,
       "location": null,
-      "article": 78,
+      "article": 656,
       "genre_for_url": 4,
       "tags": []
     }
@@ -31,12 +31,12 @@
     "model": "arts.paintingmethod",
     "pk": 3,
     "fields": {
-      "name": "watercolor-painting",
-      "slug": "watercolor-painting",
-      "language": 1,
+      "name": "油絵",
+      "slug": "oil-painting-jp",
+      "language": 2,
       "period": null,
       "location": null,
-      "article": 79,
+      "article": 657,
       "genre_for_url": 4,
       "tags": []
     }
@@ -45,12 +45,12 @@
     "model": "arts.paintingmethod",
     "pk": 4,
     "fields": {
-      "name": "油絵",
-      "slug": "oil-painting-jp",
-      "language": 2,
+      "name": "watercolor-painting",
+      "slug": "watercolor-painting",
+      "language": 1,
       "period": null,
       "location": null,
-      "article": 80,
+      "article": 658,
       "genre_for_url": 4,
       "tags": []
     }
@@ -59,12 +59,12 @@
     "model": "arts.paintingmethod",
     "pk": 5,
     "fields": {
-      "name": "水彩画",
-      "slug": "pastel-painting-jp",
-      "language": 2,
+      "name": "pastel-painting",
+      "slug": "pastel-painting",
+      "language": 1,
       "period": null,
       "location": null,
-      "article": 81,
+      "article": 659,
       "genre_for_url": 4,
       "tags": []
     }
@@ -73,12 +73,12 @@
     "model": "arts.paintingmethod",
     "pk": 6,
     "fields": {
-      "name": "水彩画",
-      "slug": "watercolor-painting-jp",
-      "language": 2,
+      "name": "oil-painting",
+      "slug": "oil-painting",
+      "language": 1,
       "period": null,
       "location": null,
-      "article": 82,
+      "article": 660,
       "genre_for_url": 4,
       "tags": []
     }
@@ -87,12 +87,12 @@
     "model": "arts.paintingstyle",
     "pk": 1,
     "fields": {
-      "name": "abstract-styles",
-      "slug": "abstract-styles",
-      "language": 1,
+      "name": "シュールレアリスム",
+      "slug": "surrealism-jp",
+      "language": 2,
       "period": null,
       "location": null,
-      "article": 83,
+      "article": 661,
       "genre_for_url": 5,
       "tags": []
     }
@@ -101,12 +101,12 @@
     "model": "arts.paintingstyle",
     "pk": 2,
     "fields": {
-      "name": "抽象派",
-      "slug": "abstract-styles-jp",
-      "language": 2,
+      "name": "surrealism",
+      "slug": "surrealism",
+      "language": 1,
       "period": null,
       "location": null,
-      "article": 84,
+      "article": 662,
       "genre_for_url": 5,
       "tags": []
     }
@@ -115,12 +115,12 @@
     "model": "arts.paintingstyle",
     "pk": 3,
     "fields": {
-      "name": "chinese-style",
-      "slug": "chinese-style",
-      "language": 1,
+      "name": "写実主義",
+      "slug": "realism-jp",
+      "language": 2,
       "period": null,
       "location": null,
-      "article": 85,
+      "article": 663,
       "genre_for_url": 5,
       "tags": []
     }
@@ -129,12 +129,12 @@
     "model": "arts.paintingstyle",
     "pk": 4,
     "fields": {
-      "name": "中国画",
-      "slug": "chinese-style-jp",
-      "language": 2,
+      "name": "realism",
+      "slug": "realism",
+      "language": 1,
       "period": null,
       "location": null,
-      "article": 86,
+      "article": 664,
       "genre_for_url": 5,
       "tags": []
     }
@@ -143,12 +143,12 @@
     "model": "arts.paintingstyle",
     "pk": 5,
     "fields": {
-      "name": "cubism",
-      "slug": "cubism",
-      "language": 1,
+      "name": "フォトリアリズム",
+      "slug": "photorealism-jp",
+      "language": 2,
       "period": null,
       "location": null,
-      "article": 87,
+      "article": 665,
       "genre_for_url": 5,
       "tags": []
     }
@@ -157,12 +157,12 @@
     "model": "arts.paintingstyle",
     "pk": 6,
     "fields": {
-      "name": "キュビズム",
-      "slug": "cubism-jp",
-      "language": 2,
+      "name": "photorealism",
+      "slug": "photorealism",
+      "language": 1,
       "period": null,
       "location": null,
-      "article": 88,
+      "article": 666,
       "genre_for_url": 5,
       "tags": []
     }
@@ -171,12 +171,12 @@
     "model": "arts.paintingstyle",
     "pk": 7,
     "fields": {
-      "name": "expressionism",
-      "slug": "expressionism",
-      "language": 1,
+      "name": "モダニズム",
+      "slug": "modernism-jp",
+      "language": 2,
       "period": null,
       "location": null,
-      "article": 89,
+      "article": 667,
       "genre_for_url": 5,
       "tags": []
     }
@@ -185,12 +185,12 @@
     "model": "arts.paintingstyle",
     "pk": 8,
     "fields": {
-      "name": "表現主義",
-      "slug": "expressionism-jp",
-      "language": 2,
+      "name": "modernism",
+      "slug": "modernism",
+      "language": 1,
       "period": null,
       "location": null,
-      "article": 90,
+      "article": 668,
       "genre_for_url": 5,
       "tags": []
     }
@@ -199,12 +199,12 @@
     "model": "arts.paintingstyle",
     "pk": 9,
     "fields": {
-      "name": "impressionism",
-      "slug": "impressionism",
-      "language": 1,
+      "name": "日本画",
+      "slug": "japanese-style-jp",
+      "language": 2,
       "period": null,
       "location": null,
-      "article": 91,
+      "article": 669,
       "genre_for_url": 5,
       "tags": []
     }
@@ -213,12 +213,12 @@
     "model": "arts.paintingstyle",
     "pk": 10,
     "fields": {
-      "name": "印象派",
-      "slug": "impressionism-jp",
-      "language": 2,
+      "name": "japanese-style",
+      "slug": "japanese-style",
+      "language": 1,
       "period": null,
       "location": null,
-      "article": 92,
+      "article": 670,
       "genre_for_url": 5,
       "tags": []
     }
@@ -227,12 +227,12 @@
     "model": "arts.paintingstyle",
     "pk": 11,
     "fields": {
-      "name": "indian-style",
-      "slug": "indian-style",
-      "language": 1,
+      "name": "インド画",
+      "slug": "indian-style-jp",
+      "language": 2,
       "period": null,
       "location": null,
-      "article": 93,
+      "article": 671,
       "genre_for_url": 5,
       "tags": []
     }
@@ -241,12 +241,12 @@
     "model": "arts.paintingstyle",
     "pk": 12,
     "fields": {
-      "name": "インド画",
-      "slug": "indian-style-jp",
-      "language": 2,
+      "name": "indian-style",
+      "slug": "indian-style",
+      "language": 1,
       "period": null,
       "location": null,
-      "article": 94,
+      "article": 672,
       "genre_for_url": 5,
       "tags": []
     }
@@ -255,12 +255,12 @@
     "model": "arts.paintingstyle",
     "pk": 13,
     "fields": {
-      "name": "japanese-style",
-      "slug": "japanese-style",
+      "name": "印象派",
+      "slug": "impressionism-jp",
       "language": 2,
       "period": null,
       "location": null,
-      "article": 95,
+      "article": 673,
       "genre_for_url": 5,
       "tags": []
     }
@@ -269,12 +269,12 @@
     "model": "arts.paintingstyle",
     "pk": 14,
     "fields": {
-      "name": "日本画",
-      "slug": "japanese-style-jp",
-      "language": 2,
+      "name": "impressionism",
+      "slug": "impressionism",
+      "language": 1,
       "period": null,
       "location": null,
-      "article": 96,
+      "article": 674,
       "genre_for_url": 5,
       "tags": []
     }
@@ -283,12 +283,12 @@
     "model": "arts.paintingstyle",
     "pk": 15,
     "fields": {
-      "name": "modernism",
-      "slug": "modernism",
-      "language": 1,
+      "name": "表現主義",
+      "slug": "expressionism-jp",
+      "language": 2,
       "period": null,
       "location": null,
-      "article": 97,
+      "article": 675,
       "genre_for_url": 5,
       "tags": []
     }
@@ -297,12 +297,12 @@
     "model": "arts.paintingstyle",
     "pk": 16,
     "fields": {
-      "name": "モダニズム",
-      "slug": "modernism-jp",
-      "language": 2,
+      "name": "expressionism",
+      "slug": "expressionism",
+      "language": 1,
       "period": null,
       "location": null,
-      "article": 98,
+      "article": 676,
       "genre_for_url": 5,
       "tags": []
     }
@@ -311,12 +311,12 @@
     "model": "arts.paintingstyle",
     "pk": 17,
     "fields": {
-      "name": "photorealism",
-      "slug": "photorealism",
-      "language": 1,
+      "name": "キュビズム",
+      "slug": "cubism-jp",
+      "language": 2,
       "period": null,
       "location": null,
-      "article": 99,
+      "article": 677,
       "genre_for_url": 5,
       "tags": []
     }
@@ -325,12 +325,12 @@
     "model": "arts.paintingstyle",
     "pk": 18,
     "fields": {
-      "name": "フォトリアリズム",
-      "slug": "photorealism-jp",
-      "language": 2,
+      "name": "cubism",
+      "slug": "cubism",
+      "language": 1,
       "period": null,
       "location": null,
-      "article": 100,
+      "article": 678,
       "genre_for_url": 5,
       "tags": []
     }
@@ -339,12 +339,12 @@
     "model": "arts.paintingstyle",
     "pk": 19,
     "fields": {
-      "name": "realism",
-      "slug": "realism",
-      "language": 1,
+      "name": "中国画",
+      "slug": "chinese-style-jp",
+      "language": 2,
       "period": null,
       "location": null,
-      "article": 101,
+      "article": 679,
       "genre_for_url": 5,
       "tags": []
     }
@@ -353,12 +353,12 @@
     "model": "arts.paintingstyle",
     "pk": 20,
     "fields": {
-      "name": "写実主義",
-      "slug": "realism-jp",
-      "language": 2,
+      "name": "chinese-style",
+      "slug": "chinese-style",
+      "language": 1,
       "period": null,
       "location": null,
-      "article": 102,
+      "article": 680,
       "genre_for_url": 5,
       "tags": []
     }
@@ -367,12 +367,12 @@
     "model": "arts.paintingstyle",
     "pk": 21,
     "fields": {
-      "name": "surrealism",
-      "slug": "surrealism",
-      "language": 1,
+      "name": "抽象派",
+      "slug": "abstract-styles-jp",
+      "language": 2,
       "period": null,
       "location": null,
-      "article": 103,
+      "article": 681,
       "genre_for_url": 5,
       "tags": []
     }
@@ -381,12 +381,12 @@
     "model": "arts.paintingstyle",
     "pk": 22,
     "fields": {
-      "name": "シュールレアリスム",
-      "slug": "surrealism-jp",
-      "language": 2,
+      "name": "abstract-styles",
+      "slug": "abstract-styles",
+      "language": 1,
       "period": null,
       "location": null,
-      "article": 104,
+      "article": 682,
       "genre_for_url": 5,
       "tags": []
     }
@@ -395,11 +395,11 @@
     "model": "arts.artsperiod",
     "pk": 1,
     "fields": {
-      "name": "ancient_times",
-      "slug": "ancient_times",
-      "language": 1,
+      "name": "2000年代",
+      "slug": "2000s-jp",
+      "language": 2,
       "period": null,
-      "article": 105,
+      "article": 683,
       "genre_for_url": 6,
       "tags": []
     }
@@ -408,11 +408,11 @@
     "model": "arts.artsperiod",
     "pk": 2,
     "fields": {
-      "name": "古代",
-      "slug": "ancient_times-jp",
-      "language": 2,
+      "name": "2000s",
+      "slug": "2000s",
+      "language": 1,
       "period": null,
-      "article": 106,
+      "article": 684,
       "genre_for_url": 6,
       "tags": []
     }
@@ -421,11 +421,11 @@
     "model": "arts.artsperiod",
     "pk": 3,
     "fields": {
-      "name": "500s_1300s",
-      "slug": "500s-1300s",
-      "language": 1,
+      "name": "1900年代",
+      "slug": "1900s-jp",
+      "language": 2,
       "period": null,
-      "article": 107,
+      "article": 685,
       "genre_for_url": 6,
       "tags": []
     }
@@ -434,11 +434,11 @@
     "model": "arts.artsperiod",
     "pk": 4,
     "fields": {
-      "name": "500年代-1300年代",
-      "slug": "500s-1300s-jp",
-      "language": 2,
+      "name": "1900s",
+      "slug": "1900s",
+      "language": 1,
       "period": null,
-      "article": 108,
+      "article": 686,
       "genre_for_url": 6,
       "tags": []
     }
@@ -447,11 +447,11 @@
     "model": "arts.artsperiod",
     "pk": 5,
     "fields": {
-      "name": "1400s",
-      "slug": "1400s",
-      "language": 1,
+      "name": "1800年代",
+      "slug": "1800s-jp",
+      "language": 2,
       "period": null,
-      "article": 109,
+      "article": 687,
       "genre_for_url": 6,
       "tags": []
     }
@@ -460,11 +460,11 @@
     "model": "arts.artsperiod",
     "pk": 6,
     "fields": {
-      "name": "1400年代",
-      "slug": "1400s-jp",
-      "language": 2,
+      "name": "1800s",
+      "slug": "1800s",
+      "language": 1,
       "period": null,
-      "article": 110,
+      "article": 688,
       "genre_for_url": 6,
       "tags": []
     }
@@ -473,11 +473,11 @@
     "model": "arts.artsperiod",
     "pk": 7,
     "fields": {
-      "name": "1500s",
-      "slug": "1500s",
-      "language": 1,
+      "name": "1700年代",
+      "slug": "1700",
+      "language": 2,
       "period": null,
-      "article": 111,
+      "article": 689,
       "genre_for_url": 6,
       "tags": []
     }
@@ -486,11 +486,11 @@
     "model": "arts.artsperiod",
     "pk": 8,
     "fields": {
-      "name": "1500年代",
-      "slug": "1500s-jp",
-      "language": 2,
+      "name": "1700s",
+      "slug": "1700s",
+      "language": 1,
       "period": null,
-      "article": 112,
+      "article": 690,
       "genre_for_url": 6,
       "tags": []
     }
@@ -499,11 +499,11 @@
     "model": "arts.artsperiod",
     "pk": 9,
     "fields": {
-      "name": "1600s",
-      "slug": "1600s",
-      "language": 1,
+      "name": "1600年代",
+      "slug": "1600s-jp",
+      "language": 2,
       "period": null,
-      "article": 113,
+      "article": 691,
       "genre_for_url": 6,
       "tags": []
     }
@@ -512,11 +512,11 @@
     "model": "arts.artsperiod",
     "pk": 10,
     "fields": {
-      "name": "1600年代",
-      "slug": "1600s-jp",
-      "language": 2,
+      "name": "1600s",
+      "slug": "1600s",
+      "language": 1,
       "period": null,
-      "article": 114,
+      "article": 692,
       "genre_for_url": 6,
       "tags": []
     }
@@ -525,11 +525,11 @@
     "model": "arts.artsperiod",
     "pk": 11,
     "fields": {
-      "name": "1700s",
-      "slug": "1700s",
-      "language": 1,
+      "name": "1500年代",
+      "slug": "1500s-jp",
+      "language": 2,
       "period": null,
-      "article": 115,
+      "article": 693,
       "genre_for_url": 6,
       "tags": []
     }
@@ -538,11 +538,11 @@
     "model": "arts.artsperiod",
     "pk": 12,
     "fields": {
-      "name": "1700年代",
-      "slug": "1700",
-      "language": 2,
+      "name": "1500s",
+      "slug": "1500s",
+      "language": 1,
       "period": null,
-      "article": 116,
+      "article": 694,
       "genre_for_url": 6,
       "tags": []
     }
@@ -551,11 +551,11 @@
     "model": "arts.artsperiod",
     "pk": 13,
     "fields": {
-      "name": "1800s",
-      "slug": "1800s",
-      "language": 1,
+      "name": "1400年代",
+      "slug": "1400s-jp",
+      "language": 2,
       "period": null,
-      "article": 117,
+      "article": 695,
       "genre_for_url": 6,
       "tags": []
     }
@@ -564,11 +564,11 @@
     "model": "arts.artsperiod",
     "pk": 14,
     "fields": {
-      "name": "1800年代",
-      "slug": "1800s-jp",
-      "language": 2,
+      "name": "1400s",
+      "slug": "1400s",
+      "language": 1,
       "period": null,
-      "article": 118,
+      "article": 696,
       "genre_for_url": 6,
       "tags": []
     }
@@ -577,11 +577,11 @@
     "model": "arts.artsperiod",
     "pk": 15,
     "fields": {
-      "name": "1900s",
-      "slug": "1900s",
-      "language": 1,
+      "name": "500年代-1300年代",
+      "slug": "500s-1300s-jp",
+      "language": 2,
       "period": null,
-      "article": 119,
+      "article": 697,
       "genre_for_url": 6,
       "tags": []
     }
@@ -590,11 +590,11 @@
     "model": "arts.artsperiod",
     "pk": 16,
     "fields": {
-      "name": "1900年代",
-      "slug": "1900s-jp",
-      "language": 2,
+      "name": "500s_1300s",
+      "slug": "500s-1300s",
+      "language": 1,
       "period": null,
-      "article": 120,
+      "article": 698,
       "genre_for_url": 6,
       "tags": []
     }
@@ -603,11 +603,11 @@
     "model": "arts.artsperiod",
     "pk": 17,
     "fields": {
-      "name": "2000s",
-      "slug": "2000s",
-      "language": 1,
+      "name": "古代",
+      "slug": "ancient-times-jp",
+      "language": 2,
       "period": null,
-      "article": 121,
+      "article": 699,
       "genre_for_url": 6,
       "tags": []
     }
@@ -616,11 +616,11 @@
     "model": "arts.artsperiod",
     "pk": 18,
     "fields": {
-      "name": "2000年代",
-      "slug": "2000s-jp",
-      "language": 2,
+      "name": "ancient_times",
+      "slug": "ancient-times",
+      "language": 1,
       "period": null,
-      "article": 122,
+      "article": 700,
       "genre_for_url": 6,
       "tags": []
     }

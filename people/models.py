@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.conf import settings
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.auth.models import User
-from general.models import Article, Tag, GenreForURL, Language
+from general.models import Article, Tag, GenreForUrl, Language
 from locations.models import Location
 
 
@@ -20,7 +20,7 @@ class Person(models.Model):
         Article, on_delete=models.SET_NULL, null=True, blank=True
     )
     genre_for_url = models.ForeignKey(
-        GenreForURL,
+        GenreForUrl,
         null=True,
         on_delete=models.CASCADE,
         blank=True,

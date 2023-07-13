@@ -1,5 +1,5 @@
 from django.db import models
-from general.models import Article, Tag, GenreForURL, Language
+from general.models import Article, Tag, GenreForUrl, Language
 
 
 class Country(models.Model):
@@ -14,7 +14,7 @@ class Country(models.Model):
         Article, on_delete=models.CASCADE, blank=True, null=True
     )
     genre_for_url = models.ForeignKey(
-        GenreForURL,
+        GenreForUrl,
         on_delete=models.SET_NULL,
         blank=True,
         null=True,

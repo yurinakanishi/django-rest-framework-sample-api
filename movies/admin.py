@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Movie, MovieDirector, MovieRating, MovieActor, MovieReview
+from .models import Movie, MovieDirector, MovieRating, MovieActor
 
 
 class MovieAdmin(admin.ModelAdmin):
@@ -15,17 +15,10 @@ class MovieDirectorAdmin(admin.ModelAdmin):
 
 
 class MovieRatingAdmin(admin.ModelAdmin):
-    display_fields = "movie_name"
-    prepopulated_fields = {"slug": ("movie_name",)}
+    pass
 
 
 class MovieActorAdmin(admin.ModelAdmin):
-    # filter_horizontal = ("tag", "genre")
-    display_fields = "name"
-    prepopulated_fields = {"slug": ("name",)}
-
-
-class MovieReviewAdmin(admin.ModelAdmin):
     # filter_horizontal = ("tag", "genre")
     display_fields = "name"
     prepopulated_fields = {"slug": ("name",)}
@@ -35,4 +28,3 @@ admin.site.register(Movie, MovieAdmin)
 admin.site.register(MovieDirector, MovieDirectorAdmin)
 admin.site.register(MovieRating, MovieRatingAdmin)
 admin.site.register(MovieActor, MovieActorAdmin)
-admin.site.register(MovieReview, MovieReviewAdmin)

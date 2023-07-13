@@ -1,6 +1,6 @@
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
-from general.models import Article, Tag, GenreForURL, Language
+from general.models import Article, Tag, GenreForUrl, Language
 
 
 class Date(models.Model):
@@ -42,7 +42,7 @@ class Period(models.Model):
         Article, on_delete=models.SET_NULL, null=True, blank=True
     )
     genre_for_url = models.ForeignKey(
-        GenreForURL,
+        GenreForUrl,
         blank=True,
         null=True,
         on_delete=models.CASCADE,

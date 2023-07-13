@@ -17,5 +17,8 @@ class IsCreateUserOrReadOnly(permissions.BasePermission):
             # SAFE_METHODS = ('GET', 'HEAD', 'OPTIONS')
             return True
         else:
-            return obj.review_user == request.user or request.user.is_staff
+            print("ggg", obj.author)
+            print("ggg", request.user.is_staff)
+            print("ggg", request)
+            return obj.author == request.user or request.user.is_staff
             # check if the user created the review or not

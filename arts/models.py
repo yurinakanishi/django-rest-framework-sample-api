@@ -1,5 +1,5 @@
 from django.db import models
-from general.models import Article, Tag, GenreForURL, Language
+from general.models import Article, Tag, GenreForUrl, Language
 from locations.models import Location
 from dates.models import Date, Period
 from people.models import Person
@@ -16,7 +16,7 @@ class Museum(models.Model):
         Article, on_delete=models.CASCADE, blank=True, null=True
     )
     genre_for_url = models.ForeignKey(
-        GenreForURL,
+        GenreForUrl,
         blank=True,
         null=True,
         on_delete=models.CASCADE,
@@ -37,7 +37,7 @@ class Artist(models.Model):
         Article, on_delete=models.CASCADE, blank=True, null=True
     )
     genre_for_url = models.ForeignKey(
-        GenreForURL,
+        GenreForUrl,
         blank=True,
         null=True,
         on_delete=models.CASCADE,
@@ -70,7 +70,7 @@ class PaintingMethod(models.Model):
         Article, on_delete=models.CASCADE, blank=True, null=True
     )
     genre_for_url = models.ForeignKey(
-        GenreForURL,
+        GenreForUrl,
         blank=True,
         null=True,
         on_delete=models.CASCADE,
@@ -119,7 +119,7 @@ class PaintingStyle(models.Model):
         Article, on_delete=models.CASCADE, blank=True, null=True
     )
     genre_for_url = models.ForeignKey(
-        GenreForURL,
+        GenreForUrl,
         blank=True,
         null=True,
         on_delete=models.CASCADE,
@@ -161,7 +161,7 @@ class ArtsPeriod(models.Model):
         Article, on_delete=models.CASCADE, blank=True, null=True
     )
     genre_for_url = models.ForeignKey(
-        GenreForURL,
+        GenreForUrl,
         blank=True,
         null=True,
         on_delete=models.CASCADE,
@@ -187,7 +187,7 @@ class Art(models.Model):
         Article, on_delete=models.CASCADE, blank=True, null=True
     )
     genre_for_url = models.ForeignKey(
-        GenreForURL,
+        GenreForUrl,
         blank=True,
         null=True,
         on_delete=models.CASCADE,

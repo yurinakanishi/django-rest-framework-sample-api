@@ -1,25 +1,13 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from movies.views import (
-    MovieList,
-    MovieDetail,
-    MovieCreate,
-    MovieReviewCreate,
-    MovieReviewList,
-    MovieReviewDetail,
-)
+from movies.views import MovieList, MovieDetail, MovieCreate, MovieUpdate, MovieDestroy
 
 urlpatterns = [
-    path("", MovieList.as_view(), name="movie-list"),
-    path("<slug:slug>/", MovieDetail.as_view(), name="movie-detail"),
-    path("<slug:slug>/create", MovieCreate.as_view(), name="movie-review-create"),
-    path("review", MovieReviewList.as_view(), name="movie-list"),
-    path(
-        "review/<slug:slug>/", MovieReviewDetail.as_view(), name="movie-review-detail"
-    ),
-    path(
-        "review/<slug:slug>/create",
-        MovieReviewCreate.as_view(),
-        name="movie-review-create",
-    ),
+    # Movie URLs
+    path("movies/", MovieList.as_view(), name="movie-list"),
+    path("jp/movies/", MovieList.as_view(), name="jp-movie-list"),
+    path("movies/create/", MovieCreate.as_view(), name="movie-create"),
+    path("movies/<slug:slug>/", MovieDetail.as_view(), name="movie-detail"),
+    path("movies/<slug:slug>/update/", MovieUpdate.as_view(), name="movie-update"),
+    path("movies/<slug:slug>/destroy/", MovieDestroy.as_view(), name="movie-destroy"),
 ]

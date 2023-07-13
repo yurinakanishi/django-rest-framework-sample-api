@@ -1,48 +1,48 @@
 [
   {
     "model": "foods.cookingmethod",
-    "pk": 5,
+    "pk": 1,
     "fields": {
       "name": "stew",
       "slug": "stew",
       "language": 1,
-      "article": 10003,
+      "article": 755,
       "genre_for_url": 10,
       "tags": []
     }
   },
   {
     "model": "foods.cookingmethod",
-    "pk": 6,
+    "pk": 2,
     "fields": {
       "name": "deep-fried",
       "slug": "deep-fried",
       "language": 1,
-      "article": 10004,
+      "article": 756,
       "genre_for_url": 10,
       "tags": []
     }
   },
   {
     "model": "foods.cookingmethod",
-    "pk": 7,
+    "pk": 3,
     "fields": {
       "name": "シチュー",
       "slug": "stew-jp",
       "language": 2,
-      "article": 10005,
+      "article": 757,
       "genre_for_url": 10,
       "tags": []
     }
   },
   {
     "model": "foods.cookingmethod",
-    "pk": 8,
+    "pk": 4,
     "fields": {
       "name": "揚げ物",
       "slug": "deep-fried-jp",
       "language": 2,
-      "article": 10006,
+      "article": 758,
       "genre_for_url": 10,
       "tags": []
     }
@@ -55,7 +55,7 @@
       "slug": "fruits",
       "language": 1,
       "location": null,
-      "article": 123,
+      "article": 759,
       "genre_for_url": 11,
       "tags": []
     }
@@ -68,7 +68,7 @@
       "slug": "vegetables",
       "language": 1,
       "location": null,
-      "article": 130,
+      "article": 760,
       "genre_for_url": 11,
       "tags": []
     }
@@ -81,7 +81,7 @@
       "slug": "meats",
       "language": 1,
       "location": null,
-      "article": 135,
+      "article": 761,
       "genre_for_url": 11,
       "tags": []
     }
@@ -94,7 +94,7 @@
       "slug": "dairy-products",
       "language": 1,
       "location": null,
-      "article": 128,
+      "article": 762,
       "genre_for_url": 11,
       "tags": []
     }
@@ -107,7 +107,7 @@
       "slug": "grains",
       "language": 1,
       "location": null,
-      "article": 10008,
+      "article": 763,
       "genre_for_url": 11,
       "tags": []
     }
@@ -120,7 +120,7 @@
       "slug": "eggs",
       "language": 1,
       "location": null,
-      "article": 132,
+      "article": 764,
       "genre_for_url": 11,
       "tags": []
     }
@@ -133,7 +133,7 @@
       "slug": "fish",
       "language": 1,
       "location": null,
-      "article": 134,
+      "article": 765,
       "genre_for_url": 11,
       "tags": []
     }
@@ -146,7 +146,7 @@
       "slug": "beans",
       "language": 1,
       "location": null,
-      "article": 124,
+      "article": 766,
       "genre_for_url": 11,
       "tags": []
     }
@@ -159,7 +159,7 @@
       "slug": "fruits-jp",
       "language": 2,
       "location": null,
-      "article": 126,
+      "article": 767,
       "genre_for_url": 11,
       "tags": []
     }
@@ -172,7 +172,7 @@
       "slug": "vegetables-jp",
       "language": 2,
       "location": null,
-      "article": 131,
+      "article": 768,
       "genre_for_url": 11,
       "tags": []
     }
@@ -185,7 +185,7 @@
       "slug": "meats-jp",
       "language": 2,
       "location": null,
-      "article": 136,
+      "article": 769,
       "genre_for_url": 11,
       "tags": []
     }
@@ -198,7 +198,7 @@
       "slug": "dairy-products-jp",
       "language": 2,
       "location": null,
-      "article": 127,
+      "article": 770,
       "genre_for_url": 11,
       "tags": []
     }
@@ -211,7 +211,7 @@
       "slug": "grains-jp",
       "language": 2,
       "location": null,
-      "article": 10007,
+      "article": 771,
       "genre_for_url": 11,
       "tags": []
     }
@@ -224,7 +224,7 @@
       "slug": "eggs-jp",
       "language": 2,
       "location": null,
-      "article": 133,
+      "article": 772,
       "genre_for_url": 11,
       "tags": []
     }
@@ -237,7 +237,7 @@
       "slug": "fish-jp",
       "language": 2,
       "location": null,
-      "article": 129,
+      "article": 773,
       "genre_for_url": 11,
       "tags": []
     }
@@ -250,7 +250,7 @@
       "slug": "beans-jp",
       "language": 2,
       "location": null,
-      "article": 125,
+      "article": 774,
       "genre_for_url": 11,
       "tags": []
     }

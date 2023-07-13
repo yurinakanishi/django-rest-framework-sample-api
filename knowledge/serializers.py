@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import Knowledge
-from general.serializers import TagSerializer, GenreSerializer, ArticleSerializer
-from general.models import Tag, GenreForURL, Article
+from general.serializers import TagSerializer, GenreForUrlSerializer, ArticleSerializer
+from general.models import Tag, GenreForUrl, Article
 from drf_writable_nested import WritableNestedModelSerializer
 
 
@@ -9,7 +9,7 @@ class KnowledgeSerializerForCreateUpdate(serializers.ModelSerializer):
     article = ArticleSerializer()
     tags = serializers.PrimaryKeyRelatedField(many=True, queryset=Tag.objects.all())
     genre_for_url = serializers.PrimaryKeyRelatedField(
-        queryset=GenreForURL.objects.all()
+        queryset=GenreForUrl.objects.all()
     )
 
     class Meta:
@@ -17,22 +17,15 @@ class KnowledgeSerializerForCreateUpdate(serializers.ModelSerializer):
         fields = "__all__"
 
     def create(self, validated_data):
-        print("validated_data", validated_data)
         article_data = validated_data.pop("article")
         tags_data = validated_data.pop("tags", [])
         genre_for_url_data = validated_data.pop("genre_for_url")
-        # print("article_data", article_data)
-        # print("validated_data", validated_data)
-        # print("tags_data", tags_data)
-        # print("genre_for_url_data", genre_for_url_data)
-        knowledge = Knowledge.objects.create(**validated_data)
-        print("knowledge", knowledge)
-        # genre_for_url = GenreForURL.objects.create(**genre_for_url_data)
-        Article.objects.create(knowledge_article=knowledge, **article_data)
-        knowledge.tags.set(tags_data)
-        knowledge.genre_for_url = genre_for_url_data
-        knowledge.save()
-        return knowledge
+        instance = Knowledge.objects.create(**validated_data)
+        Article.objects.create(instance_article=instance, **article_data)
+        instance.tags.set(tags_data)
+        instance.genre_for_url = genre_for_url_data
+        instance.save()
+        return instance
 
     def update(self, instance, validated_data):
         article_data = validated_data.pop("article")
@@ -56,7 +49,17 @@ class KnowledgeSerializerForCreateUpdate(serializers.ModelSerializer):
 class KnowledgeSerializerForGet(serializers.ModelSerializer):
     article = ArticleSerializer()
     tags = TagSerializer(many=True)
-    genre_for_url = GenreSerializer()
+    genre_for_url = GenreForUrlSerializer()
+
+    class Meta:
+        model = Knowledge
+        fields = "__all__"
+
+
+class KnowledgeSerializerForDestroy(serializers.ModelSerializer):
+    article = ArticleSerializer()
+    tags = TagSerializer(many=True)
+    genre_for_url = GenreForUrlSerializer()
 
     class Meta:
         model = Knowledge
