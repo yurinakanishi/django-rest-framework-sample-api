@@ -4,10 +4,10 @@ from movies.views import MovieList, MovieDetail, MovieCreate, MovieUpdate, Movie
 
 urlpatterns = [
     # Movie URLs
-    path("movies/", MovieList.as_view(), name="movie-list"),
-    path("jp/movies/", MovieList.as_view(), name="jp-movie-list"),
-    path("movies/create/", MovieCreate.as_view(), name="movie-create"),
-    path("movies/<slug:slug>/", MovieDetail.as_view(), name="movie-detail"),
-    path("movies/<slug:slug>/update/", MovieUpdate.as_view(), name="movie-update"),
-    path("movies/<slug:slug>/destroy/", MovieDestroy.as_view(), name="movie-destroy"),
+    path("", MovieList.as_view(), name="movie-list"),
+    path("jp/", MovieList.as_view(), name="jp-movie-list"),
+    path("create/", MovieCreate.as_view(), name="movie-create"),
+    path("<slug:slug>/", MovieDetail.as_view(), name="movie-detail"),
+    path("<slug:slug>/update/", MovieUpdate.as_view(), name="movie-update"),
+    path("<slug:slug>/destroy/", MovieDestroy.as_view(), name="movie-destroy"),
 ]
