@@ -60,6 +60,13 @@ class CountrySerializerForGet(serializers.ModelSerializer):
         model = Country
         fields = "__all__"
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        slug = representation.get("slug", "")
+        if slug.endswith("-jp"):
+            representation["slug"] = slug[:-3]
+        return representation
+
 
 class CountrySerializerForDestroy(serializers.ModelSerializer):
     article = ArticleSerializer()

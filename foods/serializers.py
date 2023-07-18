@@ -54,6 +54,13 @@ class FoodSerializerForGet(serializers.ModelSerializer):
         model = Food
         fields = "__all__"
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        slug = representation.get("slug", "")
+        if slug.endswith("-jp"):
+            representation["slug"] = slug[:-3]
+        return representation
+
 
 class FoodSerializerForDestroy(serializers.ModelSerializer):
     article = ArticleSerializer()
@@ -115,6 +122,13 @@ class CookingMethodSerializerForGet(serializers.ModelSerializer):
         model = CookingMethod
         fields = "__all__"
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        slug = representation.get("slug", "")
+        if slug.endswith("-jp"):
+            representation["slug"] = slug[:-3]
+        return representation
+
 
 class CookingMethodSerializerForDestroy(serializers.ModelSerializer):
     article = ArticleSerializer()
@@ -175,6 +189,13 @@ class IngredientsSerializerForGet(serializers.ModelSerializer):
     class Meta:
         model = Ingredient
         fields = "__all__"
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        slug = representation.get("slug", "")
+        if slug.endswith("-jp"):
+            representation["slug"] = slug[:-3]
+        return representation
 
 
 class IngredientsSerializerForDestroy(serializers.ModelSerializer):

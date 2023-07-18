@@ -54,6 +54,13 @@ class MovieRatingSerializerForGet(serializers.ModelSerializer):
         model = MovieRating
         fields = "__all__"
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        slug = representation.get("slug", "")
+        if slug.endswith("-jp"):
+            representation["slug"] = slug[:-3]
+        return representation
+
 
 class MovieRatingSerializerForDestroy(serializers.ModelSerializer):
     article = ArticleSerializer()
@@ -115,6 +122,13 @@ class MovieSerializerForGet(serializers.ModelSerializer):
         model = Movie
         fields = "__all__"
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        slug = representation.get("slug", "")
+        if slug.endswith("-jp"):
+            representation["slug"] = slug[:-3]
+        return representation
+
 
 class MovieSerializerForDestroy(serializers.ModelSerializer):
     article = ArticleSerializer()
@@ -175,6 +189,13 @@ class MovieActorSerializerForGet(serializers.ModelSerializer):
     class Meta:
         model = MovieActor
         fields = "__all__"
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        slug = representation.get("slug", "")
+        if slug.endswith("-jp"):
+            representation["slug"] = slug[:-3]
+        return representation
 
 
 class MovieActorSerializerForDestroy(serializers.ModelSerializer):

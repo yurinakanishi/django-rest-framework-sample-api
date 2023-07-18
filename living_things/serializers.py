@@ -54,6 +54,13 @@ class LivingThingsSerializerForGet(serializers.ModelSerializer):
         model = LivingThings
         fields = "__all__"
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        slug = representation.get("slug", "")
+        if slug.endswith("-jp"):
+            representation["slug"] = slug[:-3]
+        return representation
+
 
 class LivingThingsSerializerForDestroy(serializers.ModelSerializer):
     article = ArticleSerializer()
@@ -117,6 +124,13 @@ class HabitatSerializerForGet(serializers.ModelSerializer):
         model = Habitat
         fields = "__all__"
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        slug = representation.get("slug", "")
+        if slug.endswith("-jp"):
+            representation["slug"] = slug[:-3]
+        return representation
+
 
 class HabitatSerializerForDestroy(serializers.ModelSerializer):
     article = ArticleSerializer()
@@ -179,6 +193,13 @@ class SpeciesSerializerForGet(serializers.ModelSerializer):
     class Meta:
         model = Species
         fields = "__all__"
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        slug = representation.get("slug", "")
+        if slug.endswith("-jp"):
+            representation["slug"] = slug[:-3]
+        return representation
 
 
 class SpeciesSerializerForDestroy(serializers.ModelSerializer):

@@ -54,6 +54,13 @@ class ArtSerializerForGet(serializers.ModelSerializer):
         model = Art
         fields = "__all__"
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        slug = representation.get("slug", "")
+        if slug.endswith("-jp"):
+            representation["slug"] = slug[:-3]
+        return representation
+
 
 class ArtSerializerForDestroy(serializers.ModelSerializer):
     article = ArticleSerializer()
@@ -115,6 +122,13 @@ class PaintingMethodSerializerForGet(serializers.ModelSerializer):
     class Meta:
         model = PaintingMethod
         fields = "__all__"
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        slug = representation.get("slug", "")
+        if slug.endswith("-jp"):
+            representation["slug"] = slug[:-3]
+        return representation
 
 
 class PaintingMethodSerializerForDestroy(serializers.ModelSerializer):
@@ -178,6 +192,13 @@ class PaintingStyleSerializerForGet(serializers.ModelSerializer):
         model = PaintingStyle
         fields = "__all__"
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        slug = representation.get("slug", "")
+        if slug.endswith("-jp"):
+            representation["slug"] = slug[:-3]
+        return representation
+
 
 class PaintingStyleSerializerForDestroy(serializers.ModelSerializer):
     article = ArticleSerializer()
@@ -239,6 +260,13 @@ class ArtsPeriodSerializerForGet(serializers.ModelSerializer):
     class Meta:
         model = ArtsPeriod
         fields = "__all__"
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        slug = representation.get("slug", "")
+        if slug.endswith("-jp"):
+            representation["slug"] = slug[:-3]
+        return representation
 
 
 class ArtsPeriodSerializerForDestroy(serializers.ModelSerializer):
@@ -302,6 +330,13 @@ class ArtistSerializerForGet(serializers.ModelSerializer):
         model = Artist
         fields = "__all__"
 
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        slug = representation.get("slug", "")
+        if slug.endswith("-jp"):
+            representation["slug"] = slug[:-3]
+        return representation
+
 
 class ArtistSerializerForDestroy(serializers.ModelSerializer):
     article = ArticleSerializer()
@@ -363,6 +398,13 @@ class MuseumSerializerForGet(serializers.ModelSerializer):
     class Meta:
         model = Museum
         fields = "__all__"
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        slug = representation.get("slug", "")
+        if slug.endswith("-jp"):
+            representation["slug"] = slug[:-3]
+        return representation
 
 
 class MuseumSerializerForDestroy(serializers.ModelSerializer):
