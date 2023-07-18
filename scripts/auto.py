@@ -12,13 +12,13 @@ from movies.models import Movie, MovieRating
 
 
 def run():
-    # for choice in Language.NAME_CHOICES:
-    #     Language.objects.create(name=choice[0])
+    for choice in Language.NAME_CHOICES:
+        Language.objects.create(name=choice[0])
 
-    # for i, choice in enumerate(GenreForUrl.NAME_CHOICES):
-    #     GenreForUrl.objects.create(
-    #         name=choice[0], name_jp=GenreForUrl.NAME_JP_CHOICES[i][0]
-    #     )
+    for i, choice in enumerate(GenreForUrl.NAME_CHOICES):
+        GenreForUrl.objects.create(
+            name=choice[0], name_jp=GenreForUrl.NAME_JP_CHOICES[i][0]
+        )
 
     with open("json/general.json") as f:
         general_data = json.load(f)
@@ -84,82 +84,82 @@ def run():
     rating_for_movies_list = []
     movies_list = []
 
-    # # For Knowledge
-    # # ====================================================================================================
-    # for a in knowledge_data:
-    #     pk_in_json = a["fields"].get("article")
-    #     article_json = article_dict.get(pk_in_json)
+    # For Knowledge
+    # ====================================================================================================
+    for a in knowledge_data:
+        pk_in_json = a["fields"].get("article")
+        article_json = article_dict.get(pk_in_json)
 
-    #     if a["fields"].get("language") == 1:
-    #         language = language_en
-    #     else:
-    #         language = language_jp
+        if a["fields"].get("language") == 1:
+            language = language_en
+        else:
+            language = language_jp
 
-    #     articles_for_knowledge_list.append(
-    #         Article(
-    #             content=article_json["fields"].get("content"),
-    #             kicker=article_json["fields"].get("kicker"),
-    #             excerpt=article_json["fields"].get("excerpt"),
-    #         )
-    #     )
+        articles_for_knowledge_list.append(
+            Article(
+                content=article_json["fields"].get("content"),
+                kicker=article_json["fields"].get("kicker"),
+                excerpt=article_json["fields"].get("excerpt"),
+            )
+        )
 
-    #     knowledge_list.append(
-    #         Knowledge(
-    #             name=a["fields"].get("name"),
-    #             slug=a["fields"].get("slug"),
-    #             type=a["fields"].get("type"),
-    #             author=author,
-    #             genre_for_url=GenreForUrl.objects.get(name="knowledge"),
-    #             language=language,
-    #             notesite_url=a["fields"].get("notesite_url"),
-    #         )
-    #     )
+        knowledge_list.append(
+            Knowledge(
+                name=a["fields"].get("name"),
+                slug=a["fields"].get("slug"),
+                type=a["fields"].get("type"),
+                author=author,
+                genre_for_url=GenreForUrl.objects.get(name="knowledge"),
+                language=language,
+                notesite_url=a["fields"].get("notesite_url"),
+            )
+        )
 
-    # articles_for_knowledge_list = Article.objects.bulk_create(
-    #     articles_for_knowledge_list
-    # )
+    articles_for_knowledge_list = Article.objects.bulk_create(
+        articles_for_knowledge_list
+    )
 
-    # for article, knowledge in zip(articles_for_knowledge_list, knowledge_list):
-    #     knowledge.article = article
+    for article, knowledge in zip(articles_for_knowledge_list, knowledge_list):
+        knowledge.article = article
 
-    # Knowledge.objects.bulk_create(knowledge_list)
+    Knowledge.objects.bulk_create(knowledge_list)
 
-    # # For Country
-    # # ====================================================================================================
+    # For Country
+    # ====================================================================================================
 
-    # for a in countries_data:
-    #     pk_in_json = a["fields"].get("article")
-    #     article_json = article_dict.get(pk_in_json)
-    #     if a["fields"].get("language") == 1:
-    #         language = language_en
-    #     else:
-    #         language = language_jp
+    for a in countries_data:
+        pk_in_json = a["fields"].get("article")
+        article_json = article_dict.get(pk_in_json)
+        if a["fields"].get("language") == 1:
+            language = language_en
+        else:
+            language = language_jp
 
-    #     articles_for_countries_list.append(
-    #         Article(
-    #             content=article_json["fields"].get("content"),
-    #             kicker=article_json["fields"].get("kicker"),
-    #             excerpt=article_json["fields"].get("excerpt"),
-    #         )
-    #     )
+        articles_for_countries_list.append(
+            Article(
+                content=article_json["fields"].get("content"),
+                kicker=article_json["fields"].get("kicker"),
+                excerpt=article_json["fields"].get("excerpt"),
+            )
+        )
 
-    #     countries_list.append(
-    #         Country(
-    #             name=a["fields"].get("name"),
-    #             slug=a["fields"].get("slug"),
-    #             genre_for_url=GenreForUrl.objects.get(name="countries"),
-    #             language=language,
-    #         )
-    #     )
+        countries_list.append(
+            Country(
+                name=a["fields"].get("name"),
+                slug=a["fields"].get("slug"),
+                genre_for_url=GenreForUrl.objects.get(name="countries"),
+                language=language,
+            )
+        )
 
-    # articles_for_countries_list = Article.objects.bulk_create(
-    #     articles_for_countries_list
-    # )
+    articles_for_countries_list = Article.objects.bulk_create(
+        articles_for_countries_list
+    )
 
-    # for article, country in zip(articles_for_countries_list, countries_list):
-    #     country.article = article
+    for article, country in zip(articles_for_countries_list, countries_list):
+        country.article = article
 
-    # Country.objects.bulk_create(countries_list)
+    Country.objects.bulk_create(countries_list)
 
     # For Arts Arts
     # ====================================================================================================
@@ -198,401 +198,401 @@ def run():
 
     Art.objects.bulk_create(arts_each_list)
 
-    # # For Arts PaintingMethods
-    # # ====================================================================================================
-    # arts_methods_data = [
-    #     item for item in arts_data if item.get("model") == "arts.paintingmethod"
-    # ]
-    # print(arts_methods_data)
-    # for a in arts_methods_data:
-    #     print(a)
-    #     pk_in_json = a["fields"].get("article")
-    #     article_json = article_dict.get(pk_in_json)
-    #     if a["fields"].get("language") == 1:
-    #         language = language_en
-    #     else:
-    #         language = language_jp
+    # For Arts PaintingMethods
+    # ====================================================================================================
+    arts_methods_data = [
+        item for item in arts_data if item.get("model") == "arts.paintingmethod"
+    ]
+    print(arts_methods_data)
+    for a in arts_methods_data:
+        print(a)
+        pk_in_json = a["fields"].get("article")
+        article_json = article_dict.get(pk_in_json)
+        if a["fields"].get("language") == 1:
+            language = language_en
+        else:
+            language = language_jp
 
-    #     articles_for_arts_painting_methods_list.append(
-    #         Article(
-    #             content=article_json["fields"].get("content"),
-    #             kicker=article_json["fields"].get("kicker"),
-    #             excerpt=article_json["fields"].get("excerpt"),
-    #         )
-    #     )
+        articles_for_arts_painting_methods_list.append(
+            Article(
+                content=article_json["fields"].get("content"),
+                kicker=article_json["fields"].get("kicker"),
+                excerpt=article_json["fields"].get("excerpt"),
+            )
+        )
 
-    #     arts_painting_methods_list.append(
-    #         PaintingMethod(
-    #             name=a["fields"].get("name"),
-    #             slug=a["fields"].get("slug"),
-    #             genre_for_url=GenreForUrl.objects.get(name="arts/painting-methods"),
-    #             language=language,
-    #         )
-    #     )
+        arts_painting_methods_list.append(
+            PaintingMethod(
+                name=a["fields"].get("name"),
+                slug=a["fields"].get("slug"),
+                genre_for_url=GenreForUrl.objects.get(name="arts/painting-methods"),
+                language=language,
+            )
+        )
 
-    # articles_for_arts_painting_methods_list = Article.objects.bulk_create(
-    #     articles_for_arts_painting_methods_list
-    # )
+    articles_for_arts_painting_methods_list = Article.objects.bulk_create(
+        articles_for_arts_painting_methods_list
+    )
 
-    # for article, painting_methods in zip(
-    #     articles_for_arts_painting_methods_list, arts_painting_methods_list
-    # ):
-    #     painting_methods.article = article
+    for article, painting_methods in zip(
+        articles_for_arts_painting_methods_list, arts_painting_methods_list
+    ):
+        painting_methods.article = article
 
-    # PaintingMethod.objects.bulk_create(arts_painting_methods_list)
+    PaintingMethod.objects.bulk_create(arts_painting_methods_list)
 
-    # # For Arts PaintingStyle
-    # # ====================================================================================================
-    # arts_styles_data = [
-    #     item for item in arts_data if item.get("model") == "arts.paintingstyle"
-    # ]
-    # for a in arts_styles_data:
-    #     pk_in_json = a["fields"].get("article")
-    #     article_json = article_dict.get(pk_in_json)
-    #     if a["fields"].get("language") == 1:
-    #         language = language_en
-    #     else:
-    #         language = language_jp
+    # For Arts PaintingStyle
+    # ====================================================================================================
+    arts_styles_data = [
+        item for item in arts_data if item.get("model") == "arts.paintingstyle"
+    ]
+    for a in arts_styles_data:
+        pk_in_json = a["fields"].get("article")
+        article_json = article_dict.get(pk_in_json)
+        if a["fields"].get("language") == 1:
+            language = language_en
+        else:
+            language = language_jp
 
-    #     articles_for_arts_painting_style_list.append(
-    #         Article(
-    #             content=article_json["fields"].get("content"),
-    #             kicker=article_json["fields"].get("kicker"),
-    #             excerpt=article_json["fields"].get("excerpt"),
-    #         )
-    #     )
+        articles_for_arts_painting_style_list.append(
+            Article(
+                content=article_json["fields"].get("content"),
+                kicker=article_json["fields"].get("kicker"),
+                excerpt=article_json["fields"].get("excerpt"),
+            )
+        )
 
-    #     arts_painting_style_list.append(
-    #         PaintingStyle(
-    #             name=a["fields"].get("name"),
-    #             slug=a["fields"].get("slug"),
-    #             genre_for_url=GenreForUrl.objects.get(name="arts/painting-styles"),
-    #             language=language,
-    #         )
-    #     )
+        arts_painting_style_list.append(
+            PaintingStyle(
+                name=a["fields"].get("name"),
+                slug=a["fields"].get("slug"),
+                genre_for_url=GenreForUrl.objects.get(name="arts/painting-styles"),
+                language=language,
+            )
+        )
 
-    # articles_for_arts_painting_style_list = Article.objects.bulk_create(
-    #     articles_for_arts_painting_style_list
-    # )
+    articles_for_arts_painting_style_list = Article.objects.bulk_create(
+        articles_for_arts_painting_style_list
+    )
 
-    # for article, painting_style in zip(
-    #     articles_for_arts_painting_style_list, arts_painting_style_list
-    # ):
-    #     painting_style.article = article
+    for article, painting_style in zip(
+        articles_for_arts_painting_style_list, arts_painting_style_list
+    ):
+        painting_style.article = article
 
-    # PaintingStyle.objects.bulk_create(arts_painting_style_list)
+    PaintingStyle.objects.bulk_create(arts_painting_style_list)
 
-    # # For Arts Periods
-    # # ====================================================================================================
-    # arts_periods_data = [
-    #     item for item in arts_data if item.get("model") == "arts.artsperiod"
-    # ]
-    # for a in arts_periods_data:
-    #     pk_in_json = a["fields"].get("article")
-    #     article_json = article_dict.get(pk_in_json)
-    #     if a["fields"].get("language") == 1:
-    #         language = language_en
-    #     else:
-    #         language = language_jp
+    # For Arts Periods
+    # ====================================================================================================
+    arts_periods_data = [
+        item for item in arts_data if item.get("model") == "arts.artsperiod"
+    ]
+    for a in arts_periods_data:
+        pk_in_json = a["fields"].get("article")
+        article_json = article_dict.get(pk_in_json)
+        if a["fields"].get("language") == 1:
+            language = language_en
+        else:
+            language = language_jp
 
-    #     articles_for_arts_periods_list.append(
-    #         Article(
-    #             content=article_json["fields"].get("content"),
-    #             kicker=article_json["fields"].get("kicker"),
-    #             excerpt=article_json["fields"].get("excerpt"),
-    #         )
-    #     )
+        articles_for_arts_periods_list.append(
+            Article(
+                content=article_json["fields"].get("content"),
+                kicker=article_json["fields"].get("kicker"),
+                excerpt=article_json["fields"].get("excerpt"),
+            )
+        )
 
-    #     arts_periods_list.append(
-    #         ArtsPeriod(
-    #             name=a["fields"].get("name"),
-    #             slug=a["fields"].get("slug"),
-    #             genre_for_url=GenreForUrl.objects.get(name="arts/periods"),
-    #             language=language,
-    #         )
-    #     )
+        arts_periods_list.append(
+            ArtsPeriod(
+                name=a["fields"].get("name"),
+                slug=a["fields"].get("slug"),
+                genre_for_url=GenreForUrl.objects.get(name="arts/periods"),
+                language=language,
+            )
+        )
 
-    # articles_for_arts_periods_list = Article.objects.bulk_create(
-    #     articles_for_arts_periods_list
-    # )
-    # for article, arts_period in zip(articles_for_arts_periods_list, arts_periods_list):
-    #     arts_period.article = article
+    articles_for_arts_periods_list = Article.objects.bulk_create(
+        articles_for_arts_periods_list
+    )
+    for article, arts_period in zip(articles_for_arts_periods_list, arts_periods_list):
+        arts_period.article = article
 
-    # ArtsPeriod.objects.bulk_create(arts_periods_list)
+    ArtsPeriod.objects.bulk_create(arts_periods_list)
 
-    # # For LivingThings Each
-    # # ====================================================================================================
-    # living_things_each_data = [
-    #     item
-    #     for item in living_things_data
-    #     if item.get("model") == "living_things.livingthings"
-    # ]
-    # for a in living_things_each_data:
-    #     pk_in_json = a["fields"].get("article")
-    #     article_json = article_dict.get(pk_in_json)
-    #     if a["fields"].get("language") == 1:
-    #         language = language_en
-    #     else:
-    #         language = language_jp
+    # For LivingThings Each
+    # ====================================================================================================
+    living_things_each_data = [
+        item
+        for item in living_things_data
+        if item.get("model") == "living_things.livingthings"
+    ]
+    for a in living_things_each_data:
+        pk_in_json = a["fields"].get("article")
+        article_json = article_dict.get(pk_in_json)
+        if a["fields"].get("language") == 1:
+            language = language_en
+        else:
+            language = language_jp
 
-    #     articles_for_living_things_each_list.append(
-    #         Article(
-    #             content=article_json["fields"].get("content"),
-    #             kicker=article_json["fields"].get("kicker"),
-    #             excerpt=article_json["fields"].get("excerpt"),
-    #         )
-    #     )
+        articles_for_living_things_each_list.append(
+            Article(
+                content=article_json["fields"].get("content"),
+                kicker=article_json["fields"].get("kicker"),
+                excerpt=article_json["fields"].get("excerpt"),
+            )
+        )
 
-    #     living_things_each_list.append(
-    #         LivingThings(
-    #             name=a["fields"].get("name"),
-    #             slug=a["fields"].get("slug"),
-    #             genre_for_url=GenreForUrl.objects.get(name="living-things/each"),
-    #             language=language,
-    #         )
-    #     )
+        living_things_each_list.append(
+            LivingThings(
+                name=a["fields"].get("name"),
+                slug=a["fields"].get("slug"),
+                genre_for_url=GenreForUrl.objects.get(name="living-things/each"),
+                language=language,
+            )
+        )
 
-    # articles_for_living_things_each_list = Article.objects.bulk_create(
-    #     articles_for_living_things_each_list
-    # )
+    articles_for_living_things_each_list = Article.objects.bulk_create(
+        articles_for_living_things_each_list
+    )
 
-    # for article, living_thing in zip(
-    #     articles_for_living_things_each_list, living_things_each_list
-    # ):
-    #     living_thing.article = article
+    for article, living_thing in zip(
+        articles_for_living_things_each_list, living_things_each_list
+    ):
+        living_thing.article = article
 
-    # LivingThings.objects.bulk_create(living_things_each_list)
+    LivingThings.objects.bulk_create(living_things_each_list)
 
-    # # For Habitat
-    # # ====================================================================================================
-    # habitats_data = [
-    #     item
-    #     for item in living_things_data
-    #     if item.get("model") == "living_things.habitat"
-    # ]
-    # for a in habitats_data:
-    #     pk_in_json = a["fields"].get("article")
-    #     print(pk_in_json)
-    #     article_json = article_dict.get(pk_in_json)
-    #     if a["fields"].get("language") == 1:
-    #         language = language_en
-    #     else:
-    #         language = language_jp
+    # For Habitat
+    # ====================================================================================================
+    habitats_data = [
+        item
+        for item in living_things_data
+        if item.get("model") == "living_things.habitat"
+    ]
+    for a in habitats_data:
+        pk_in_json = a["fields"].get("article")
+        print(pk_in_json)
+        article_json = article_dict.get(pk_in_json)
+        if a["fields"].get("language") == 1:
+            language = language_en
+        else:
+            language = language_jp
 
-    #     articles_for_living_things_habitat_list.append(
-    #         Article(
-    #             content=article_json["fields"].get("content"),
-    #             kicker=article_json["fields"].get("kicker"),
-    #             excerpt=article_json["fields"].get("excerpt"),
-    #         )
-    #     )
+        articles_for_living_things_habitat_list.append(
+            Article(
+                content=article_json["fields"].get("content"),
+                kicker=article_json["fields"].get("kicker"),
+                excerpt=article_json["fields"].get("excerpt"),
+            )
+        )
 
-    #     living_things_habitat_list.append(
-    #         Habitat(
-    #             name=a["fields"].get("name"),
-    #             slug=a["fields"].get("slug"),
-    #             genre_for_url=GenreForUrl.objects.get(name="living-things/habitats"),
-    #             language=language,
-    #         )
-    #     )
+        living_things_habitat_list.append(
+            Habitat(
+                name=a["fields"].get("name"),
+                slug=a["fields"].get("slug"),
+                genre_for_url=GenreForUrl.objects.get(name="living-things/habitats"),
+                language=language,
+            )
+        )
 
-    # articles_for_living_things_habitat_list = Article.objects.bulk_create(
-    #     articles_for_living_things_habitat_list
-    # )
+    articles_for_living_things_habitat_list = Article.objects.bulk_create(
+        articles_for_living_things_habitat_list
+    )
 
-    # for article, habitat in zip(
-    #     articles_for_living_things_habitat_list, living_things_habitat_list
-    # ):
-    #     habitat.article = article
+    for article, habitat in zip(
+        articles_for_living_things_habitat_list, living_things_habitat_list
+    ):
+        habitat.article = article
 
-    # Habitat.objects.bulk_create(living_things_habitat_list)
+    Habitat.objects.bulk_create(living_things_habitat_list)
 
-    # # For Species
-    # # ====================================================================================================
-    # species_data = [
-    #     item
-    #     for item in living_things_data
-    #     if item.get("model") == "living_things.species"
-    # ]
-    # for a in species_data:
-    #     pk_in_json = a["fields"].get("article")
-    #     article_json = article_dict.get(pk_in_json)
-    #     if a["fields"].get("language") == 1:
-    #         language = language_en
-    #     else:
-    #         language = language_jp
+    # For Species
+    # ====================================================================================================
+    species_data = [
+        item
+        for item in living_things_data
+        if item.get("model") == "living_things.species"
+    ]
+    for a in species_data:
+        pk_in_json = a["fields"].get("article")
+        article_json = article_dict.get(pk_in_json)
+        if a["fields"].get("language") == 1:
+            language = language_en
+        else:
+            language = language_jp
 
-    #     articles_for_living_things_species_list.append(
-    #         Article(
-    #             content=article_json["fields"].get("content"),
-    #             kicker=article_json["fields"].get("kicker"),
-    #             excerpt=article_json["fields"].get("excerpt"),
-    #         )
-    #     )
+        articles_for_living_things_species_list.append(
+            Article(
+                content=article_json["fields"].get("content"),
+                kicker=article_json["fields"].get("kicker"),
+                excerpt=article_json["fields"].get("excerpt"),
+            )
+        )
 
-    #     living_things_species_list.append(
-    #         Species(
-    #             name=a["fields"].get("name"),
-    #             slug=a["fields"].get("slug"),
-    #             genre_for_url=GenreForUrl.objects.get(name="living-things/species"),
-    #             language=language,
-    #         )
-    #     )
+        living_things_species_list.append(
+            Species(
+                name=a["fields"].get("name"),
+                slug=a["fields"].get("slug"),
+                genre_for_url=GenreForUrl.objects.get(name="living-things/species"),
+                language=language,
+            )
+        )
 
-    # articles_for_living_things_species_list = Article.objects.bulk_create(
-    #     articles_for_living_things_species_list
-    # )
+    articles_for_living_things_species_list = Article.objects.bulk_create(
+        articles_for_living_things_species_list
+    )
 
-    # for article, spec in zip(
-    #     articles_for_living_things_species_list, living_things_species_list
-    # ):
-    #     spec.article = article
+    for article, spec in zip(
+        articles_for_living_things_species_list, living_things_species_list
+    ):
+        spec.article = article
 
-    # Species.objects.bulk_create(living_things_species_list)
-    # # For CookingMethod
-    # # ====================================================================================================
-    # foods_cooking_method_data = [
-    #     item for item in foods_data if item.get("model") == "foods.cookingmethod"
-    # ]
-    # for a in foods_cooking_method_data:
-    #     pk_in_json = a["fields"].get("article")
-    #     article_json = article_dict.get(pk_in_json)
-    #     if a["fields"].get("language") == 1:
-    #         language = language_en
-    #     else:
-    #         language = language_jp
+    Species.objects.bulk_create(living_things_species_list)
+    # For CookingMethod
+    # ====================================================================================================
+    foods_cooking_method_data = [
+        item for item in foods_data if item.get("model") == "foods.cookingmethod"
+    ]
+    for a in foods_cooking_method_data:
+        pk_in_json = a["fields"].get("article")
+        article_json = article_dict.get(pk_in_json)
+        if a["fields"].get("language") == 1:
+            language = language_en
+        else:
+            language = language_jp
 
-    #     articles_for_foods_cooking_methods_list.append(
-    #         Article(
-    #             content=article_json["fields"].get("content"),
-    #             kicker=article_json["fields"].get("kicker"),
-    #             excerpt=article_json["fields"].get("excerpt"),
-    #         )
-    #     )
+        articles_for_foods_cooking_methods_list.append(
+            Article(
+                content=article_json["fields"].get("content"),
+                kicker=article_json["fields"].get("kicker"),
+                excerpt=article_json["fields"].get("excerpt"),
+            )
+        )
 
-    #     foods_cooking_methods_list.append(
-    #         CookingMethod(
-    #             name=a["fields"].get("name"),
-    #             slug=a["fields"].get("slug"),
-    #             genre_for_url=GenreForUrl.objects.get(name="foods/cooking-methods"),
-    #             language=language,
-    #         )
-    #     )
+        foods_cooking_methods_list.append(
+            CookingMethod(
+                name=a["fields"].get("name"),
+                slug=a["fields"].get("slug"),
+                genre_for_url=GenreForUrl.objects.get(name="foods/cooking-methods"),
+                language=language,
+            )
+        )
 
-    # articles_for_foods_cooking_methods_list = Article.objects.bulk_create(
-    #     articles_for_foods_cooking_methods_list
-    # )
+    articles_for_foods_cooking_methods_list = Article.objects.bulk_create(
+        articles_for_foods_cooking_methods_list
+    )
 
-    # for article, a in zip(
-    #     articles_for_foods_cooking_methods_list, foods_cooking_methods_list
-    # ):
-    #     a.article = article
+    for article, a in zip(
+        articles_for_foods_cooking_methods_list, foods_cooking_methods_list
+    ):
+        a.article = article
 
-    # CookingMethod.objects.bulk_create(foods_cooking_methods_list)
-    # # For Ingredient
-    # # ====================================================================================================
-    # foods_ingredients_data = [
-    #     item for item in foods_data if item.get("model") == "foods.ingredient"
-    # ]
-    # for a in foods_ingredients_data:
-    #     pk_in_json = a["fields"].get("article")
-    #     article_json = article_dict.get(pk_in_json)
-    #     if a["fields"].get("language") == 1:
-    #         language = language_en
-    #     else:
-    #         language = language_jp
+    CookingMethod.objects.bulk_create(foods_cooking_methods_list)
+    # For Ingredient
+    # ====================================================================================================
+    foods_ingredients_data = [
+        item for item in foods_data if item.get("model") == "foods.ingredient"
+    ]
+    for a in foods_ingredients_data:
+        pk_in_json = a["fields"].get("article")
+        article_json = article_dict.get(pk_in_json)
+        if a["fields"].get("language") == 1:
+            language = language_en
+        else:
+            language = language_jp
 
-    #     articles_for_foods_ingredient_list.append(
-    #         Article(
-    #             content=article_json["fields"].get("content"),
-    #             kicker=article_json["fields"].get("kicker"),
-    #             excerpt=article_json["fields"].get("excerpt"),
-    #         )
-    #     )
+        articles_for_foods_ingredient_list.append(
+            Article(
+                content=article_json["fields"].get("content"),
+                kicker=article_json["fields"].get("kicker"),
+                excerpt=article_json["fields"].get("excerpt"),
+            )
+        )
 
-    #     foods_ingredient_list.append(
-    #         Ingredient(
-    #             name=a["fields"].get("name"),
-    #             slug=a["fields"].get("slug"),
-    #             genre_for_url=GenreForUrl.objects.get(name="foods/ingredients"),
-    #             language=language,
-    #         )
-    #     )
+        foods_ingredient_list.append(
+            Ingredient(
+                name=a["fields"].get("name"),
+                slug=a["fields"].get("slug"),
+                genre_for_url=GenreForUrl.objects.get(name="foods/ingredients"),
+                language=language,
+            )
+        )
 
-    # articles_for_foods_ingredient_list = Article.objects.bulk_create(
-    #     articles_for_foods_ingredient_list
-    # )
+    articles_for_foods_ingredient_list = Article.objects.bulk_create(
+        articles_for_foods_ingredient_list
+    )
 
-    # for article, ingredient in zip(
-    #     articles_for_foods_ingredient_list, foods_ingredient_list
-    # ):
-    #     ingredient.article = article
+    for article, ingredient in zip(
+        articles_for_foods_ingredient_list, foods_ingredient_list
+    ):
+        ingredient.article = article
 
-    # Ingredient.objects.bulk_create(foods_ingredient_list)
+    Ingredient.objects.bulk_create(foods_ingredient_list)
 
-    # # ====================================================================================================
-    # movies_movies_data = [
-    #     item for item in movies_data if item.get("model") == "movies.movie"
-    # ]
+    # ====================================================================================================
+    movies_movies_data = [
+        item for item in movies_data if item.get("model") == "movies.movie"
+    ]
 
-    # for a in movies_movies_data:
-    #     pk_in_json = a["fields"].get("article")
-    #     article_json = article_dict.get(pk_in_json)
-    #     rating_pk_in_json = a["fields"].get("movie_rating")
-    #     rating_json = movie_rating_dict.get(rating_pk_in_json)
-    #     if a["fields"].get("language") == 1:
-    #         language = language_en
-    #     else:
-    #         language = language_jp
+    for a in movies_movies_data:
+        pk_in_json = a["fields"].get("article")
+        article_json = article_dict.get(pk_in_json)
+        rating_pk_in_json = a["fields"].get("movie_rating")
+        rating_json = movie_rating_dict.get(rating_pk_in_json)
+        if a["fields"].get("language") == 1:
+            language = language_en
+        else:
+            language = language_jp
 
-    #     articles_for_movies_list.append(
-    #         Article(
-    #             content=article_json["fields"].get("content"),
-    #             kicker=article_json["fields"].get("kicker"),
-    #             excerpt=article_json["fields"].get("excerpt"),
-    #         )
-    #     )
+        articles_for_movies_list.append(
+            Article(
+                content=article_json["fields"].get("content"),
+                kicker=article_json["fields"].get("kicker"),
+                excerpt=article_json["fields"].get("excerpt"),
+            )
+        )
 
-    #     rating_for_movies_list.append(
-    #         MovieRating(
-    #             story=rating_json["fields"].get("story"),
-    #             social_effect=rating_json["fields"].get("social_effect"),
-    #             business_successful=rating_json["fields"].get("business_successful"),
-    #             innovative=rating_json["fields"].get("innovative"),
-    #             music=rating_json["fields"].get("music"),
-    #             images=rating_json["fields"].get("images"),
-    #             rating_average=(
-    #                 rating_json["fields"].get("story")
-    #                 + rating_json["fields"].get("social_effect")
-    #                 + rating_json["fields"].get("business_successful")
-    #                 + rating_json["fields"].get("innovative")
-    #                 + rating_json["fields"].get("music")
-    #                 + rating_json["fields"].get("images")
-    #             )
-    #             / 6,
-    #         )
-    #     )
+        rating_for_movies_list.append(
+            MovieRating(
+                story=rating_json["fields"].get("story"),
+                social_effect=rating_json["fields"].get("social_effect"),
+                business_successful=rating_json["fields"].get("business_successful"),
+                innovative=rating_json["fields"].get("innovative"),
+                music=rating_json["fields"].get("music"),
+                images=rating_json["fields"].get("images"),
+                rating_average=(
+                    rating_json["fields"].get("story")
+                    + rating_json["fields"].get("social_effect")
+                    + rating_json["fields"].get("business_successful")
+                    + rating_json["fields"].get("innovative")
+                    + rating_json["fields"].get("music")
+                    + rating_json["fields"].get("images")
+                )
+                / 6,
+            )
+        )
 
-    #     movies_list.append(
-    #         Movie(
-    #             name=a["fields"].get("name"),
-    #             slug=a["fields"].get("slug"),
-    #             type=a["fields"].get("type"),
-    #             author=author,
-    #             genre_for_url=GenreForUrl.objects.get(name="movies"),
-    #             language=language,
-    #             themoviedb_id=a["fields"].get("themoviedb_id"),
-    #         )
-    #     )
+        movies_list.append(
+            Movie(
+                name=a["fields"].get("name"),
+                slug=a["fields"].get("slug"),
+                type=a["fields"].get("type"),
+                author=author,
+                genre_for_url=GenreForUrl.objects.get(name="movies"),
+                language=language,
+                themoviedb_id=a["fields"].get("themoviedb_id"),
+            )
+        )
 
-    # articles_for_movies_list = Article.objects.bulk_create(articles_for_movies_list)
+    articles_for_movies_list = Article.objects.bulk_create(articles_for_movies_list)
 
-    # rating_for_movies_list = MovieRating.objects.bulk_create(rating_for_movies_list)
+    rating_for_movies_list = MovieRating.objects.bulk_create(rating_for_movies_list)
 
-    # for article, movie in zip(articles_for_movies_list, movies_list):
-    #     movie.article = article
+    for article, movie in zip(articles_for_movies_list, movies_list):
+        movie.article = article
 
-    # for rating, movie in zip(rating_for_movies_list, movies_list):
-    #     movie.movie_rating = rating
+    for rating, movie in zip(rating_for_movies_list, movies_list):
+        movie.movie_rating = rating
 
-    # Movie.objects.bulk_create(movies_list)
+    Movie.objects.bulk_create(movies_list)
