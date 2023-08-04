@@ -21,7 +21,7 @@ class KnowledgeSerializerForCreateUpdate(serializers.ModelSerializer):
         tags_data = validated_data.pop("tags", [])
         genre_for_url_data = validated_data.pop("genre_for_url")
         instance = Knowledge.objects.create(**validated_data)
-        Article.objects.create(instance_article=instance, **article_data)
+        Article.objects.create(knowledge_article=instance, **article_data)
         instance.tags.set(tags_data)
         instance.genre_for_url = genre_for_url_data
         instance.save()

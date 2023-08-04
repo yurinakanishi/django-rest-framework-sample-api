@@ -59,7 +59,7 @@ class KnowledgeDetailUpdate(generics.RetrieveUpdateAPIView):
 class KnowledgeCreate(generics.CreateAPIView):
     queryset = Knowledge.objects.all()
     serializer_class = KnowledgeSerializerForCreateUpdate
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
 
 
 class KnowledgeDetailDestroy(generics.DestroyAPIView):

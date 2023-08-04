@@ -37,3 +37,6 @@ static/
 
 # Setting #
 aw_project/settings.py
+
+# Docker #
+data/
