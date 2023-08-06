@@ -2,7 +2,6 @@ from rest_framework import serializers
 from .models import Knowledge
 from general.serializers import TagSerializer, GenreForUrlSerializer, ArticleSerializer
 from general.models import Tag, GenreForUrl, Article
-from drf_writable_nested import WritableNestedModelSerializer
 
 
 class KnowledgeSerializerForCreateUpdate(serializers.ModelSerializer):

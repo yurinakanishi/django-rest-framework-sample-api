@@ -18,11 +18,6 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
-    TokenRefreshView,
-    TokenVerifyView,
-)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -37,10 +32,7 @@ urlpatterns = [
     path("movies/", include("movies.urls")),
     path("locations/", include("locations.urls")),
     path("people/", include("people.urls")),
-    path("api/login/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
-    path("api/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
-    path("api/verify/", TokenVerifyView.as_view(), name="token_verify"),
-    path("api/auth/", include("accounts.urls")),
+    path("auth/", include("accounts.urls")),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "ckeditor_uploader",
     "corsheaders",
     "rest_framework",
+    "rest_framework.authtoken",
     "general",
     "movies",
     "arts",

@@ -13,9 +13,9 @@ from knowledge.views import (
 )
 
 urlpatterns = [
-    path("", KnowledgeListWithPagination.as_view(), name="knowledge-list-jp"),
+    path("", KnowledgeListWithPagination.as_view(), name="knowledge-list"),
     path("jp/", KnowledgeListWithPaginationJp.as_view(), name="knowledge-list-jp"),
-    path("all/", KnowledgeList.as_view(), name="knowledge-list-all-jp"),
+    path("all/", KnowledgeList.as_view(), name="knowledge-list-all"),
     path("jp/all/", KnowledgeListJp.as_view(), name="knowledge-list-all-jp"),
     path(
         "create/",

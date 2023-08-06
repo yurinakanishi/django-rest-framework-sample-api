@@ -3,7 +3,7 @@ from .models import Article, Tag, GenreForUrl, Language
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    pass
+    display_fields = "excerpt"
 
 
 class TagAdmin(admin.ModelAdmin):

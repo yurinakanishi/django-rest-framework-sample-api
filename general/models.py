@@ -64,8 +64,8 @@ class Article(models.Model):
     published_date = models.DateTimeField(default=timezone.now, blank=True)
     updated_date = models.DateTimeField(auto_now=True, blank=True)
 
-    # def __str__(self):
-    #     return self.excerpt
+    def __str__(self):
+        return self.excerpt
 
     class Meta:
         ordering = ["-pk"]
