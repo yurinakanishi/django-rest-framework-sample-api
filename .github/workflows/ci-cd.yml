@@ -1,4 +1,4 @@
-name: Django CI
+name: CI/CD Pipeline
 
 on:
   push:
@@ -56,5 +56,18 @@ jobs:
     # Push to GHCR
     - name: Push to GitHub Container Registry
       run: |
-        docker images
-        docker ps -a
+        docker tag augmented-world-backend-api_nginx:latest ghcr.io/yurite6174/augmented-world-backend-api_nginx:latest
+        docker tag augmented-world-backend-api_web:latest ghcr.io/yurite6174/augmented-world-backend-api_web:latest
+        docker tag postgres:latest ghcr.io/yurite6174/postgres:latest
+        docker push ghcr.io/yurite6174/backend-nginx:latest
+        docker push ghcr.io/yurite6174/backend-web:latest
+        docker push ghcr.io/yurite6174/postgres:latest
+
+    - name: Deploy an App Engine app
+      id: deploy-app
+      uses: google-github-actions/deploy-appengine@v1
+      with:
+        project_id: ${{ secrets.GCE_PROJECT }}
+        deliverables: app.yaml
+        credentials: ${{ secrets.GCE_SA_KEY }}
+
