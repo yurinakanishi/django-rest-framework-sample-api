@@ -16,7 +16,7 @@ This is the server-side repository for the web application "Augmented World". Th
 - PostgreSQL
 - Google Cloud
 - Docker
-- GitHub Actions for CI/CD (in progress)
+- GitHub Actions for CI/CD
 
 ## Database
 
@@ -30,13 +30,13 @@ The project uses PostgreSQL as the primary database.
 
   Database table relation
 
-## Testing (in progress)
+## Testing
 
-Unit tests and integration tests are included in the 'tests' directory. To run the tests, use the following command:
+Unit tests and integration tests are included in the 'tests' directory of each app directory. 
 
-## CI/CD (in progress)
+## CI/CD
 
-GitHub Actions are used for continuous integration and deployment. Refer to .github/workflows/main.yml for the workflow configuration. On every push to the repository, the actions will be triggered, ensuring that the application builds correctly and all the tests pass.
+GitHub Actions are used for continuous integration and deployment. Refer to .github/workflows/ci_cd.yml for the workflow configuration.
 
 ## Frontend
 
