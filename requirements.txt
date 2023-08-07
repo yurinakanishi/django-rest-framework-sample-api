@@ -8,3 +8,4 @@ psycopg2-binary==2.9.6
 djangorestframework-simplejwt==5.2.2
 django_extensions==3.2.3
 python-dateutil==2.8.2
+pillow==9.5.0
