@@ -56,9 +56,5 @@ jobs:
     # Push to GHCR
     - name: Push to GitHub Container Registry
       run: |
-        docker tag backend-nginx:latest ghcr.io/yurite6174/backend-nginx:latest
-        docker tag backend-web:latest ghcr.io/yurite6174/backend-web:latest
-        docker tag postgres:latest ghcr.io/yurite6174/postgres:latest
-        docker push ghcr.io/yurite6174/backend-nginx:latest
-        docker push ghcr.io/yurite6174/backend-web:latest
-        docker push ghcr.io/yurite6174/postgres:latest
+        docker images
+        docker ps -a
