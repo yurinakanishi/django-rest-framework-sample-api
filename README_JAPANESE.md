@@ -14,19 +14,19 @@
 - PostgreSQL
 - Google Cloud
 - Docker
-- GitHub Actions for CI/CD (作成中)
+- GitHub Actions for CI/CD
 
 ## データベース
 
 データベースは、PostgreSQL を使用しています。
 
-## テスト (作成中)
+## テスト 
 
-単体テストと統合テストは'tests'ディレクトリに含まれています。
+単体テストと統合テストコードは各 app folder の'tests'ディレクトリ内にあります。
 
-## CI/CD (作成中)
+## CI/CD
 
-GitHub Actions は継続的な統合とデプロイのために使用されます。ワークフローの設定については.github/workflows/main.yml を参照してください。リポジトリにプッシュするたびに、アクションがトリガーされ、アプリケーションが正しくビルドされ、すべてのテストがパスすることを確認します。
+GitHub Actions を継続的な統合とデプロイのために使用しています。ワークフローの設定については.github/workflows/ci_cd.yml を参照してください。
 
 ## フロントエンド
 
