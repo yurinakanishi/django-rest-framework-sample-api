@@ -7,7 +7,7 @@ from .base import *
 DATABASES = {
     "default": {
         "ENGINE": getenv("POSTGRES_ENGINE"),
-        "NAME": getenv("POSTGRES_NAME"),
+        "NAME": getenv("POSTGRES_DB"),
         "USER": getenv("POSTGRES_USER"),
         "PASSWORD": getenv("POSTGRES_PASSWORD"),
         "HOST": "db",

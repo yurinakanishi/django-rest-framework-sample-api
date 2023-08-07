@@ -35,7 +35,7 @@ jobs:
 
     - name: Create .env file from GitHub Secrets
       run: |
-       echo DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }} >> .env
+       echo "DJANGO_SECRET_KEY=${{ DJANGO_SECRET_KEY }}" >> .env
        echo DJANGO_SETTINGS_MODULE=${{ secrets.DJANGO_SETTINGS_MODULE_PROD_DOCKER_POSTGRES }} >> .env
        echo DJANGO_SUPERUSER_PASSWORD=${{ secrets.DJANGO_SUPERUSER_PASSWORD }} >> .env
        echo DJANGO_SUPERUSER_NAME=${{ secrets.DJANGO_SUPERUSER_NAME }} >> .env
@@ -45,6 +45,8 @@ jobs:
        echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> .env
        echo POSTGRES_PORT=${{ secrets.POSTGRES_PORT }} >> .env
        echo POSTGRES_DB=${{ secrets.POSTGRES_DB }} >> .env
+      env:
+       DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
 
     - name: Docker Compose Up
       run: |
