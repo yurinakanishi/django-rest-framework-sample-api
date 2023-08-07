@@ -139,7 +139,13 @@ CORS_ALLOWED_ORIGIN_REGEXES = [
     "https://www.augmentedworld.dev",
 ]
 
-# STATIC_ROOT = os.path.join(BASE_DIR, "static
+# STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
+CKEDITOR_IMAGE_BACKEND = "pillow"
 
 CKEDITOR_CONFIGS = {
     "default": {
