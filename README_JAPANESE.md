@@ -2,9 +2,7 @@
 
 ## 概要
 
-ウェブアプリケーション「Augmented World」のサーバーサイドリポジトリです。Django REST Framework（DRF）アプリケーションです。
-
-使用されるテックスタックには、Python、Django、Django REST Framework、データベースのための PostgreSQL、ホスティングとストレージのための Google Cloud、コンテナ化のための Docker となります。
+Web アプリケーション「Augmented World」のサーバーサイドリポジトリです。
 
 ## テックスタック
 
@@ -20,7 +18,7 @@
 
 データベースは、PostgreSQL を使用しています。
 
-## テスト 
+## テスト
 
 単体テストと統合テストコードは各 app folder の'tests'ディレクトリ内にあります。
 
@@ -30,10 +28,10 @@ GitHub Actions を継続的な統合とデプロイのために使用してい�
 
 ## フロントエンド
 
-このアプリケーションのフロントエンドのコードベースは、次のリポジトリで公開しております: https://github.com/yurite6174/augmented-world-website. React/Next.js をベースとした Web アプリケーションです。
+この Web アプリケーションのフロントエンドのコードベースは、次のリポジトリで公開しております: https://github.com/yurite6174/augmented-world-website. React/Next.js をベースとしています。
 
 ## ライセンス
 
 このプロジェクトは MIT ライセンスのもとでライセンスされています - 詳細は LICENSE ファイルをご覧ください。
 
-追加の質問やコメントがある場合は、このリポジトリで issue を開いてください。
+追加の質問やコメントがある場合は、このリポジトリの issue からコメントをお願いします。。

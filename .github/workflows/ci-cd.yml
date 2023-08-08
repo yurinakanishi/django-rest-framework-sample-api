@@ -2,72 +2,82 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
-  build:
+  test_build_and_deploy:
+    permissions:
+      contents: "read"
+      id-token: "write"
 
     runs-on: ubuntu-latest
     env:
       DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
       DJANGO_SETTINGS_MODULE: ${{ secrets.DJANGO_SETTINGS_MODULE_DEV_SQLITE }}
-      
+
     strategy:
       max-parallel: 4
       matrix:
         python-version: [3.11]
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
-      with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install Dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    - name: Run Tests
-      run: |
-        python manage.py test
+      - uses: actions/checkout@v3
 
-    - name: Create .env file from GitHub Secrets
-      run: |
-       echo "DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}" >> .env
-       echo DJANGO_SETTINGS_MODULE=${{ secrets.DJANGO_SETTINGS_MODULE_PROD_DOCKER_POSTGRES }} >> .env
-       echo DJANGO_SUPERUSER_PASSWORD=${{ secrets.DJANGO_SUPERUSER_PASSWORD }} >> .env
-       echo DJANGO_SUPERUSER_NAME=${{ secrets.DJANGO_SUPERUSER_NAME }} >> .env
-       echo DJANGO_SUPERUSER_EMAIL=${{ secrets.DJANGO_SUPERUSER_EMAIL }} >> .env
-       echo POSTGRES_ENGIN=${{ secrets.POSTGRES_ENGIN }} >> .env
-       echo POSTGRES_USER=${{ secrets.POSTGRES_USER }} >> .env
-       echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> .env
-       echo POSTGRES_PORT=${{ secrets.POSTGRES_PORT }} >> .env
-       echo POSTGRES_DB=${{ secrets.POSTGRES_DB }} >> .env
+      # - name: Set up Python ${{ matrix.python-version }}
+      #   uses: actions/setup-python@v3
+      #   with:
+      #     python-version: ${{ matrix.python-version }}
 
-    - name: Docker Compose Up
-      run: |
-       docker-compose up -d
+      # - name: Install Dependencies
+      #   run: |
+      #     python -m pip install --upgrade pip
+      #     pip install -r requirements.txt
 
-    - name: Login to GitHub Container Registry
-      run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u yurite6174 --password-stdin
+      # - name: Run Tests
+      #   run: |
+      #     python manage.py test
 
-    # Push to GHCR
-    - name: Push to GitHub Container Registry
-      run: |
-        docker tag augmented-world-backend-api_nginx:latest ghcr.io/yurite6174/augmented-world-backend-api_nginx:latest
-        docker tag augmented-world-backend-api_web:latest ghcr.io/yurite6174/augmented-world-backend-api_web:latest
-        docker tag postgres:latest ghcr.io/yurite6174/postgres:latest
-        docker push ghcr.io/yurite6174/backend-nginx:latest
-        docker push ghcr.io/yurite6174/backend-web:latest
-        docker push ghcr.io/yurite6174/postgres:latest
+      # - name: Create .env file from GitHub Secrets
+      #   run: |
+      #     echo "DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}" >> .env
+      #     echo DJANGO_SETTINGS_MODULE=${{ secrets.DJANGO_SETTINGS_MODULE_PROD_DOCKER_POSTGRES }} >> .env
+      #     echo DJANGO_SUPERUSER_PASSWORD=${{ secrets.DJANGO_SUPERUSER_PASSWORD }} >> .env
+      #     echo DJANGO_SUPERUSER_NAME=${{ secrets.DJANGO_SUPERUSER_NAME }} >> .env
+      #     echo DJANGO_SUPERUSER_EMAIL=${{ secrets.DJANGO_SUPERUSER_EMAIL }} >> .env
+      #     echo POSTGRES_ENGIN=${{ secrets.POSTGRES_ENGIN }} >> .env
+      #     echo POSTGRES_USER=${{ secrets.POSTGRES_USER }} >> .env
+      #     echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> .env
+      #     echo POSTGRES_PORT=${{ secrets.POSTGRES_PORT }} >> .env
+      #     echo POSTGRES_DB=${{ secrets.POSTGRES_DB }} >> .env
 
-    - name: Deploy an App Engine app
-      id: deploy-app
-      uses: google-github-actions/deploy-appengine@v1
-      with:
-        project_id: ${{ secrets.GCE_PROJECT }}
-        deliverables: app.yaml
-        credentials: ${{ secrets.GCE_SA_KEY }}
+      # - name: Docker Compose Up
+      #   run: |
+      #     docker-compose up -d
 
+      # - name: Login to GitHub Container Registry
+      #   run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u yurite6174 --password-stdin
+
+      # - name: Push to GitHub Container Registry
+      #   run: |
+      #     docker tag augmented-world-backend-api_nginx:latest ghcr.io/yurite6174/augmented-world-backend-api_nginx:latest
+      #     docker tag augmented-world-backend-api_web:latest ghcr.io/yurite6174/augmented-world-backend-api_web:latest
+      #     docker tag postgres:latest ghcr.io/yurite6174/postgres:latest
+      #     docker push ghcr.io/yurite6174/augmented-world-backend-api_nginx:latest
+      #     docker push ghcr.io/yurite6174/augmented-world-backend-api_web:latest
+      #     docker push ghcr.io/yurite6174/postgres:latest
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh/
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          echo "${{ secrets.SSH_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+
+      - name: Deploy to GCP VM
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.SSH_URL }} "docker pull ghcr.io/yurite6174/augmented-world-backend-api_nginx:latest && docker pull ghcr.io/yurite6174/augmented-world-backend-api_web:latest && docker pull ghcr.io/yurite6174/postgres:latest && docker compose up -d"
