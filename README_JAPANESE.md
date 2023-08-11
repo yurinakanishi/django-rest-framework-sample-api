@@ -24,7 +24,7 @@ Web アプリケーション「Augmented World」のサーバーサイドリポ�
 
 ## CI/CD
 
-GitHub Actions を継続的な統合とデプロイのために使用しています。ワークフローの設定については.github/workflows/ci_cd.yml を参照してください。
+GitHub Actions を CI/CD (継続的な統合/デプロイ) のために使用しています。ワークフローの設定については.github/workflows/ci_cd.yml を参照してください。
 
 ## フロントエンド
 

@@ -25,15 +25,36 @@ services:
       - "8000:8000"
     depends_on:
       - db
-  # Nginx
 
-  nginx:
-    container_name: nginx
-    build: ./nginx
+  # Nginx
+  # nginx:
+  #   container_name: nginx
+  #   build: ./nginx
+  #   ports:
+  #     - 80:80
+  #   depends_on:
+  #     - web
+
+  https-portal:
+    image: steveltn/https-portal:1
     ports:
       - 80:80
+      - 443:443
+    links:
+      - web
+    restart: always
+    environment:
+      DOMAINS: "tirmell.com -> http://web:8000"
+      STAGE: "local" # Don't use production until staging works
+      #FORCE_RENEW: 'true'
+      CLIENT_MAX_BODY_SIZE: 10M
+    container_name: https-portal
+    volumes:
+      - ./ssl_certs:/var/lib/https-portal
     depends_on:
       - web
+
 volumes:
   postgres-data:
     driver: local
+  ssl_certs:

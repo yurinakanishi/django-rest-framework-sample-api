@@ -32,7 +32,7 @@ The project uses PostgreSQL as the primary database.
 
 ## Testing
 
-Unit tests and integration tests are included in the 'tests' directory of each app directory. 
+Unit tests and integration tests are included in the 'tests' directory of each app directory.
 
 ## CI/CD
 

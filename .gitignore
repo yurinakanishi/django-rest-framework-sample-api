@@ -41,3 +41,5 @@ aw_project/settings.py
 # Docker #
 data/
 app/
+
+ssl_certs

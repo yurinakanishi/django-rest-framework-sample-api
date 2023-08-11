@@ -1,17 +1,12 @@
 name: CI/CD Pipeline
 
 on:
+  workflow_dispatch:
   push:
-    branches: ["main"]
-  pull_request:
     branches: ["main"]
 
 jobs:
-  test_build_and_deploy:
-    permissions:
-      contents: "read"
-      id-token: "write"
-
+  test:
     runs-on: ubuntu-latest
     env:
       DJANGO_SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
@@ -25,59 +20,71 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      # - name: Set up Python ${{ matrix.python-version }}
-      #   uses: actions/setup-python@v3
-      #   with:
-      #     python-version: ${{ matrix.python-version }}
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v3
+        with:
+          python-version: ${{ matrix.python-version }}
 
-      # - name: Install Dependencies
-      #   run: |
-      #     python -m pip install --upgrade pip
-      #     pip install -r requirements.txt
-
-      # - name: Run Tests
-      #   run: |
-      #     python manage.py test
-
-      # - name: Create .env file from GitHub Secrets
-      #   run: |
-      #     echo "DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}" >> .env
-      #     echo DJANGO_SETTINGS_MODULE=${{ secrets.DJANGO_SETTINGS_MODULE_PROD_DOCKER_POSTGRES }} >> .env
-      #     echo DJANGO_SUPERUSER_PASSWORD=${{ secrets.DJANGO_SUPERUSER_PASSWORD }} >> .env
-      #     echo DJANGO_SUPERUSER_NAME=${{ secrets.DJANGO_SUPERUSER_NAME }} >> .env
-      #     echo DJANGO_SUPERUSER_EMAIL=${{ secrets.DJANGO_SUPERUSER_EMAIL }} >> .env
-      #     echo POSTGRES_ENGIN=${{ secrets.POSTGRES_ENGIN }} >> .env
-      #     echo POSTGRES_USER=${{ secrets.POSTGRES_USER }} >> .env
-      #     echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> .env
-      #     echo POSTGRES_PORT=${{ secrets.POSTGRES_PORT }} >> .env
-      #     echo POSTGRES_DB=${{ secrets.POSTGRES_DB }} >> .env
-
-      # - name: Docker Compose Up
-      #   run: |
-      #     docker-compose up -d
-
-      # - name: Login to GitHub Container Registry
-      #   run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u yurite6174 --password-stdin
-
-      # - name: Push to GitHub Container Registry
-      #   run: |
-      #     docker tag augmented-world-backend-api_nginx:latest ghcr.io/yurite6174/augmented-world-backend-api_nginx:latest
-      #     docker tag augmented-world-backend-api_web:latest ghcr.io/yurite6174/augmented-world-backend-api_web:latest
-      #     docker tag postgres:latest ghcr.io/yurite6174/postgres:latest
-      #     docker push ghcr.io/yurite6174/augmented-world-backend-api_nginx:latest
-      #     docker push ghcr.io/yurite6174/augmented-world-backend-api_web:latest
-      #     docker push ghcr.io/yurite6174/postgres:latest
-
-      - name: Setup SSH
+      - name: Install Dependencies
         run: |
-          mkdir -p ~/.ssh/
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          echo "${{ secrets.SSH_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-      - name: Deploy to GCP VM
+      - name: Run Tests
         run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.SSH_URL }} "docker pull ghcr.io/yurite6174/augmented-world-backend-api_nginx:latest && docker pull ghcr.io/yurite6174/augmented-world-backend-api_web:latest && docker pull ghcr.io/yurite6174/postgres:latest && docker compose up -d"
+          python manage.py test
+
+  build_and_push:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create .env file from GitHub Secrets
+        run: |
+          echo "DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}" >> .env
+          echo DJANGO_SETTINGS_MODULE=${{ secrets.DJANGO_SETTINGS_MODULE_PROD_DOCKER_POSTGRES }} >> .env
+          echo DJANGO_SUPERUSER_PASSWORD=${{ secrets.DJANGO_SUPERUSER_PASSWORD }} >> .env
+          echo DJANGO_SUPERUSER_NAME=${{ secrets.DJANGO_SUPERUSER_NAME }} >> .env
+          echo DJANGO_SUPERUSER_EMAIL=${{ secrets.DJANGO_SUPERUSER_EMAIL }} >> .env
+          echo POSTGRES_ENGIN=${{ secrets.POSTGRES_ENGINE }} >> .env
+          echo POSTGRES_USER=${{ secrets.POSTGRES_USER }} >> .env
+          echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> .env
+          echo POSTGRES_PORT=${{ secrets.POSTGRES_PORT }} >> .env
+          echo POSTGRES_DB=${{ secrets.POSTGRES_DB }} >> .env
+
+      - name: Docker Compose Up
+        run: |
+          docker-compose up -d
+
+      - name: Login to GitHub Container Registry
+        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u yurite6174 --password-stdin
+
+      - name: Push to GitHub Container Registry
+        run: |
+          docker tag augmented-world-backend-api_nginx:latest ghcr.io/yurite6174/augmented-world-backend-api_nginx:latest
+          docker tag augmented-world-backend-api_web:latest ghcr.io/yurite6174/augmented-world-backend-api_web:latest
+          docker tag postgres:latest ghcr.io/yurite6174/postgres:latest
+          docker push ghcr.io/yurite6174/augmented-world-backend-api_nginx:latest
+          docker push ghcr.io/yurite6174/augmented-world-backend-api_web:latest
+          docker push ghcr.io/yurite6174/postgres:latest
+
+  deploy:
+    needs: build_and_push
+    permissions:
+      contents: "read"
+      id-token: "write"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Authenticate to Google Cloud
+        id: "auth"
+        uses: "google-github-actions/auth@v1"
+        with:
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.SERVICE_ACCOUNT }}
+
+      - name: "Set up Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v1"
+        with:
+          version: ">= 363.0.0"
+
+      - name: "Use gcloud CLI"
+        run: 'gcloud compute ssh ${{secrets.GOOGLE_CLOUD_USER_NAME_IN_VM}}@${{secrets.GOOGLE_CLOUD_VM_INSTANCE_NAME}} --zone=${{secrets.GOOGLE_CLOUD_VM_INSTANCE_ZONE}} --command="mkdir aa"'
