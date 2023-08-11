@@ -55,16 +55,17 @@ jobs:
       - name: Docker Compose Up
         run: |
           docker-compose up -d
+          docker images
 
       - name: Login to GitHub Container Registry
         run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u yurite6174 --password-stdin
 
       - name: Push to GitHub Container Registry
         run: |
-          docker tag augmented-world-backend-api_https-portal:latest ghcr.io/yurite6174/augmented-world-backend-api_https-portal:latest
+          docker tag augmented-world-backend-api_steveltn/https-portal:latest ghcr.io/yurite6174/augmented-world-backend-api_steveltn/https-portal:latest
           docker tag augmented-world-backend-api_web:latest ghcr.io/yurite6174/augmented-world-backend-api_web:latest
           docker tag postgres:latest ghcr.io/yurite6174/postgres:latest
-          docker push ghcr.io/yurite6174/augmented-world-backend-api_https-portal:latest
+          docker push ghcr.io/yurite6174/augmented-world-backend-api_steveltn/https-portal:latest
           docker push ghcr.io/yurite6174/augmented-world-backend-api_web:latest
           docker push ghcr.io/yurite6174/postgres:latest
 
