@@ -61,7 +61,7 @@ jobs:
 
       - name: Push to GitHub Container Registry
         run: |
-          docker tag augmented-world-backend-api_nginx:latest ghcr.io/yurite6174/augmented-world-backend-api_https-portal:latest
+          docker tag augmented-world-backend-api_https-portal:latest ghcr.io/yurite6174/augmented-world-backend-api_https-portal:latest
           docker tag augmented-world-backend-api_web:latest ghcr.io/yurite6174/augmented-world-backend-api_web:latest
           docker tag postgres:latest ghcr.io/yurite6174/postgres:latest
           docker push ghcr.io/yurite6174/augmented-world-backend-api_https-portal:latest
@@ -88,5 +88,5 @@ jobs:
         with:
           version: ">= 363.0.0"
 
-      - name: "Use gcloud CLI"
+      - name: "Use gcloud CLI to deploy"
         run: 'gcloud compute ssh ${{secrets.GOOGLE_CLOUD_USER_NAME_IN_VM}}@${{secrets.GOOGLE_CLOUD_VM_INSTANCE_NAME}} --zone=${{secrets.GOOGLE_CLOUD_VM_INSTANCE_ZONE}} --command="mkdir aa"'
