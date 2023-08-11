@@ -62,10 +62,10 @@ jobs:
 
       - name: Push to GitHub Container Registry
         run: |
-          docker tag augmented-world-backend-api_steveltn/https-portal:1 ghcr.io/yurite6174/augmented-world-backend-api_steveltn/https-portal:latest
+          docker tag steveltn/https-portal:1 ghcr.io/yurite6174/steveltn/https-portal:1
           docker tag augmented-world-backend-api_web:latest ghcr.io/yurite6174/augmented-world-backend-api_web:latest
           docker tag postgres:latest ghcr.io/yurite6174/postgres:latest
-          docker push ghcr.io/yurite6174/augmented-world-backend-api_steveltn/https-portal:latest
+          docker push ghcr.io/yurite6174/steveltn/https-portal:1
           docker push ghcr.io/yurite6174/augmented-world-backend-api_web:latest
           docker push ghcr.io/yurite6174/postgres:latest
 
