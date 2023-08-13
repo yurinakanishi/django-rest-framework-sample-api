@@ -43,3 +43,5 @@ data/
 app/
 
 ssl_certs
+
+my.secrets
