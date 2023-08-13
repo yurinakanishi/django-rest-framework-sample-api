@@ -89,5 +89,6 @@ jobs:
 
       - name: "Use gcloud CLI to deploy"
         run: |
+          gcloud config set account ${{secrets.GOOGLE_CLOUD_ACCOUNT}}
           gcloud config set project ${{secrets.GOOGLE_CLOUD_PROJECT_ID}}
           gcloud compute ssh ${{secrets.GOOGLE_CLOUD_USER_NAME_IN_VM}}@${{secrets.GOOGLE_CLOUD_VM_INSTANCE_NAME}} --zone=${{secrets.GOOGLE_CLOUD_VM_INSTANCE_ZONE}} --command="mkdir aa"
