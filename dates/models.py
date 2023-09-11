@@ -1,6 +1,7 @@
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 from general.models import Article, Tag, GenreForUrl, Language
+from django.conf import settings
 
 
 class Date(models.Model):
@@ -50,6 +51,10 @@ class Period(models.Model):
     )
     tags = models.ManyToManyField(Tag, blank=True, related_name="period_tags")
     date = models.ManyToManyField(Date, blank=True, related_name="period_dates")
+
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1
+    )
 
     def __str__(self):
         return self.name

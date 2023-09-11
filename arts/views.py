@@ -23,21 +23,28 @@ from .serializers import (
     ArtistSerializerForCreateUpdate,
     ArtistSerializerForDestroy,
     ArtistSerializerForGet,
+    ArtSearchSerializer,
 )
 from accounts.permissions import IsAdminOrReadOnly, IsCreateUserOrReadOnly
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAdminUser
 
 
+class ArtSearchList(generics.ListAPIView):
+    serializer_class = ArtSearchSerializer
+    permission_classes = [IsAdminOrReadOnly]
+
+    def get_language_queryset(self):
+        lang = self.request.GET.get("lang", "en")
+        return Art.objects.filter(language__name=lang)
+
+
 class ArtEachList(generics.ListAPIView):
-    queryset = Art.objects.filter(language__name="en")
     serializer_class = ArtSerializerForGet
     permission_classes = [IsAdminOrReadOnly]
 
-
-class ArtEachListJp(generics.ListAPIView):
-    queryset = Art.objects.filter(language__name="jp")
-    serializer_class = ArtSerializerForGet
-    permission_classes = [IsAdminOrReadOnly]
+    def get_queryset(self):
+        lang = self.kwargs.get("lang", "en")
+        return Art.objects.filter(language__name=lang)
 
 
 class ArtEachDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -72,15 +79,12 @@ class ArtEachDestroy(generics.DestroyAPIView):
 
 
 class PaintingMethodList(generics.ListAPIView):
-    queryset = PaintingMethod.objects.filter(language__name="en")
     serializer_class = PaintingMethodSerializerForGet
     permission_classes = [IsAdminOrReadOnly]
 
-
-class PaintingMethodListJp(generics.ListAPIView):
-    queryset = PaintingMethod.objects.filter(language__name="jp")
-    serializer_class = PaintingMethodSerializerForGet
-    permission_classes = [IsAdminOrReadOnly]
+    def get_queryset(self):
+        lang = self.kwargs.get("lang", "en")
+        return PaintingMethod.objects.filter(language__name=lang)
 
 
 class PaintingMethodDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -113,15 +117,12 @@ class PaintingMethodDestroy(generics.DestroyAPIView):
 
 # ====================================================================================================
 class PaintingStyleList(generics.ListAPIView):
-    queryset = PaintingStyle.objects.filter(language__name="en")
     serializer_class = PaintingStyleSerializerForGet
     permission_classes = [IsAdminOrReadOnly]
 
-
-class PaintingStyleListJp(generics.ListAPIView):
-    queryset = PaintingStyle.objects.filter(language__name="jp")
-    serializer_class = PaintingStyleSerializerForGet
-    permission_classes = [IsAdminOrReadOnly]
+    def get_queryset(self):
+        lang = self.request.GET.get("lang", "en")
+        return PaintingStyle.objects.filter(language__name=lang)
 
 
 class PaintingStyleDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -156,15 +157,12 @@ class PaintingStyleDestroy(generics.DestroyAPIView):
 
 
 class ArtsPeriodList(generics.ListAPIView):
-    queryset = ArtsPeriod.objects.filter(language__name="en")
     serializer_class = ArtsPeriodSerializerForGet
     permission_classes = [IsAdminOrReadOnly]
 
-
-class ArtsPeriodListJp(generics.ListAPIView):
-    queryset = ArtsPeriod.objects.filter(language__name="jp")
-    serializer_class = ArtsPeriodSerializerForGet
-    permission_classes = [IsAdminOrReadOnly]
+    def get_queryset(self):
+        lang = self.request.GET.get("lang", "en")
+        return ArtsPeriod.objects.filter(language__name=lang)
 
 
 class ArtsPeriodDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -199,15 +197,12 @@ class ArtsPeriodDestroy(generics.DestroyAPIView):
 
 
 class ArtistList(generics.ListAPIView):
-    queryset = Artist.objects.filter(language__name="en")
     serializer_class = ArtistSerializerForGet
     permission_classes = [IsAdminOrReadOnly]
 
-
-class ArtistListJp(generics.ListAPIView):
-    queryset = Artist.objects.filter(language__name="jp")
-    serializer_class = ArtistSerializerForGet
-    permission_classes = [IsAdminOrReadOnly]
+    def get_queryset(self):
+        lang = self.request.GET.get("lang", "en")
+        return Artist.objects.filter(language__name=lang)
 
 
 class ArtistDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -240,15 +235,12 @@ class ArtistDestroy(generics.DestroyAPIView):
 
 # ====================================================================================================
 class MuseumList(generics.ListAPIView):
-    queryset = Museum.objects.filter(language__name="en")
     serializer_class = MuseumSerializerForGet
     permission_classes = [IsAdminOrReadOnly]
 
-
-class MuseumListJp(generics.ListAPIView):
-    queryset = Museum.objects.filter(language__name="jp")
-    serializer_class = MuseumSerializerForGet
-    permission_classes = [IsAdminOrReadOnly]
+    def get_queryset(self):
+        lang = self.request.GET.get("lang", "en")
+        return Museum.objects.filter(language__name=lang)
 
 
 class MuseumDetail(generics.RetrieveUpdateDestroyAPIView):

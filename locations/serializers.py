@@ -4,6 +4,12 @@ from general.serializers import TagSerializer, GenreForUrlSerializer, ArticleSer
 from general.models import Tag, GenreForUrl, Article
 
 
+class CountrySearchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Country
+        fields = ["name", "slug", "genre_for_url"]
+
+
 class CountrySerializer(serializers.ModelSerializer):
     class Meta:
         model = Country

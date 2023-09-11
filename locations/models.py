@@ -1,5 +1,6 @@
 from django.db import models
 from general.models import Article, Tag, GenreForUrl, Language
+from django.conf import settings
 
 
 class Country(models.Model):
@@ -21,6 +22,10 @@ class Country(models.Model):
         related_name="countries",
     )
     tags = models.ManyToManyField(Tag, blank=True, related_name="countries")
+
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1
+    )
 
     def __str__(self):
         return self.name

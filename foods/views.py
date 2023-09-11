@@ -13,6 +13,7 @@ from .serializers import (
     IngredientsSerializerForCreateUpdate,
     IngredientsSerializerForDestroy,
     IngredientsSerializerForGet,
+    FoodSearchSerializer,
 )
 from locations.serializers import CountrySerializer
 from .models import CookingMethod, Ingredient, Food
@@ -25,16 +26,22 @@ from rest_framework.permissions import (
 from accounts.permissions import IsAdminOrReadOnly, IsCreateUserOrReadOnly
 
 
+class FoodSearchList(generics.ListAPIView):
+    serializer_class = FoodSearchSerializer
+    permission_classes = [IsAdminOrReadOnly]
+
+    def get_language_queryset(self):
+        lang = self.request.GET.get("lang", "en")
+        return Food.objects.filter(language__name=lang)
+
+
 class FoodEachList(generics.ListAPIView):
-    queryset = Food.objects.filter(language__name="en")
     serializer_class = FoodSerializerForGet
     permission_classes = [IsAdminOrReadOnly]
 
-
-class FoodEachListJp(generics.ListAPIView):
-    queryset = Food.objects.filter(language__name="jp")
-    serializer_class = FoodSerializerForGet
-    permission_classes = [IsAdminOrReadOnly]
+    def get_queryset(self):
+        lang = self.request.GET.get("lang", "en")
+        return Food.objects.filter(language__name=lang)
 
 
 class FoodEachDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -87,15 +94,12 @@ class FoodEachDestroy(generics.DestroyAPIView):
 
 # ====================================================================================================
 class CookingMethodList(generics.ListAPIView):
-    queryset = CookingMethod.objects.filter(language__name="en")
     serializer_class = CookingMethodSerializerForGet
     permission_classes = [IsAdminOrReadOnly]
 
-
-class CookingMethodListJp(generics.ListAPIView):
-    queryset = CookingMethod.objects.filter(language__name="jp")
-    serializer_class = CookingMethodSerializerForGet
-    permission_classes = [IsAdminOrReadOnly]
+    def get_queryset(self):
+        lang = self.request.GET.get("lang", "en")
+        return CookingMethod.objects.filter(language__name=lang)
 
 
 class CookingMethodDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -128,15 +132,12 @@ class CookingMethodDestroy(generics.DestroyAPIView):
 
 # ====================================================================================================
 class IngredientList(generics.ListAPIView):
-    queryset = Ingredient.objects.filter(language__name="en")
     serializer_class = IngredientsSerializerForGet
     permission_classes = [IsAdminOrReadOnly]
 
-
-class IngredientListJp(generics.ListAPIView):
-    queryset = Ingredient.objects.filter(language__name="jp")
-    serializer_class = IngredientsSerializerForGet
-    permission_classes = [IsAdminOrReadOnly]
+    def get_queryset(self):
+        lang = self.request.GET.get("lang", "en")
+        return Ingredient.objects.filter(language__name=lang)
 
 
 class IngredientDetail(generics.RetrieveUpdateDestroyAPIView):

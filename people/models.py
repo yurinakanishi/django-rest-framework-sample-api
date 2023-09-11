@@ -29,6 +29,10 @@ class Person(models.Model):
     tags = models.ManyToManyField(Tag, blank=True, related_name="person_tags")
     occupation = models.CharField(max_length=100, blank=True)
 
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1
+    )
+
     class Meta:
         ordering = ["name"]
 

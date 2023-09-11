@@ -24,7 +24,7 @@ class MovieDirector(models.Model):
     )
     tag = models.ManyToManyField(Tag, blank=True, related_name="movie_director_tags")
     author = models.ForeignKey(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1
     )
 
     def __str__(self):
@@ -51,6 +51,10 @@ class MovieActor(models.Model):
     )
     tag = models.ManyToManyField(Tag, blank=True, related_name="movie_actor_tags")
 
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1
+    )
+
 
 class MovieRating(models.Model):
     RATING_CHOICES = (
@@ -76,6 +80,10 @@ class MovieRating(models.Model):
     music = models.PositiveSmallIntegerField(blank=True, choices=RATING_CHOICES)
     rating_average = models.PositiveSmallIntegerField(
         blank=True, choices=RATING_CHOICES
+    )
+
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1
     )
 
 
@@ -114,13 +122,7 @@ class Movie(models.Model):
         null=True,
         related_name="movie_article",
     )
-    author = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        blank=True,
-        null=True,
-        related_name="movie_rating_user",
-    )
+
     movie_rating = models.OneToOneField(
         MovieRating,
         on_delete=models.CASCADE,
@@ -136,6 +138,10 @@ class Movie(models.Model):
         related_name="movie_genre_for_url",
     )
     tags = models.ManyToManyField(Tag, blank=True, related_name="movie_tags")
+
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1
+    )
 
     def __str__(self):
         return self.name

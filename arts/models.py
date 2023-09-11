@@ -3,6 +3,7 @@ from general.models import Article, Tag, GenreForUrl, Language
 from locations.models import Location
 from dates.models import Date, Period
 from people.models import Person
+from django.conf import settings
 
 
 class Museum(models.Model):
@@ -24,6 +25,10 @@ class Museum(models.Model):
     )
     tags = models.ManyToManyField(Tag, blank=True, related_name="museums_tags")
 
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1
+    )
+
     def __str__(self):
         return self.name
 
@@ -44,6 +49,10 @@ class Artist(models.Model):
         related_name="artists_genre_for_url",
     )
     tags = models.ManyToManyField(Tag, blank=True, related_name="artists_tags")
+
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1
+    )
 
     def __str__(self):
         return self.name
@@ -77,6 +86,10 @@ class PaintingMethod(models.Model):
         related_name="painting_methods_genre_for_url",
     )
     tags = models.ManyToManyField(Tag, blank=True, related_name="painting_methods_tags")
+
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1
+    )
 
     def __str__(self):
         return self.name
@@ -127,6 +140,10 @@ class PaintingStyle(models.Model):
     )
     tags = models.ManyToManyField(Tag, blank=True, related_name="painting_styles_tags")
 
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1
+    )
+
     def __str__(self):
         return self.name
 
@@ -169,6 +186,10 @@ class ArtsPeriod(models.Model):
     )
     tags = models.ManyToManyField(Tag, blank=True, related_name="arts_period_tags")
 
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1
+    )
+
     def __str__(self):
         return self.name
 
@@ -207,6 +228,10 @@ class Art(models.Model):
         related_name="arts_styles",
         blank=True,
         null=True,
+    )
+
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1
     )
 
     def __str__(self):

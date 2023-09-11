@@ -45,6 +45,12 @@ class ArtSerializerForCreateUpdate(serializers.ModelSerializer):
         return instance
 
 
+class ArtSearchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Art
+        fields = ["name", "slug", "genre_for_url"]
+
+
 class ArtSerializerForGet(serializers.ModelSerializer):
     article = ArticleSerializer()
     tags = TagSerializer(many=True)

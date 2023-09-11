@@ -1,5 +1,5 @@
 from knowledge.models import Knowledge
-from general.models import Language, Tag, GenreForUrl, Article
+from general.models import Language, Tag, GenreForUrl, Article, Category
 from arts.models import Art, Artist, Museum, PaintingMethod, PaintingStyle, ArtsPeriod
 from living_things.models import LivingThings, Habitat, Species
 from foods.models import Food, CookingMethod, Ingredient
@@ -14,6 +14,9 @@ from movies.models import Movie, MovieRating
 def run():
     for choice in Language.NAME_CHOICES:
         Language.objects.create(name=choice[0])
+
+    for choice in Category.CATEGORY_CHOICES:
+        Category.objects.create(name=choice[0], slug=choice[1])
 
     for i, choice in enumerate(GenreForUrl.NAME_CHOICES):
         GenreForUrl.objects.create(
@@ -56,8 +59,10 @@ def run():
     language_en = Language.objects.get(pk=1)
     language_jp = Language.objects.get(pk=2)
 
-    knowledge_list = []
-    countries_list = []
+    knowledge_each_list = []
+    # knowledge_blogs_list = []
+    # knowledge_test_list = []
+    countries_each_list = []
     arts_each_list = []
     arts_painting_methods_list = []
     arts_painting_style_list = []
@@ -67,9 +72,11 @@ def run():
     living_things_species_list = []
     foods_ingredient_list = []
     foods_cooking_methods_list = []
+    movies_each_list = []
+    # movies_tvs_list = []
 
-    articles_for_knowledge_list = []
-    articles_for_countries_list = []
+    articles_for_knowledge_each_list = []
+    articles_for_countries_each_list = []
     articles_for_arts_each_list = []
     articles_for_arts_painting_methods_list = []
     articles_for_arts_painting_style_list = []
@@ -79,10 +86,8 @@ def run():
     articles_for_living_things_species_list = []
     articles_for_foods_ingredient_list = []
     articles_for_foods_cooking_methods_list = []
-
-    articles_for_movies_list = []
-    rating_for_movies_list = []
-    movies_list = []
+    articles_for_movies_each_list = []
+    rating_for_movies_each_list = []
 
     # For Knowledge
     # ====================================================================================================
@@ -95,7 +100,7 @@ def run():
         else:
             language = language_jp
 
-        articles_for_knowledge_list.append(
+        articles_for_knowledge_each_list.append(
             Article(
                 content=article_json["fields"].get("content"),
                 kicker=article_json["fields"].get("kicker"),
@@ -103,26 +108,31 @@ def run():
             )
         )
 
-        knowledge_list.append(
+        knowledge_each_list.append(
             Knowledge(
                 name=a["fields"].get("name"),
                 slug=a["fields"].get("slug"),
                 type=a["fields"].get("type"),
                 author=author,
-                genre_for_url=GenreForUrl.objects.get(name="knowledge"),
+                genre_for_url=GenreForUrl.objects.get(
+                    pk=a["fields"].get("genre_for_url")
+                ),
                 language=language,
                 notesite_url=a["fields"].get("notesite_url"),
+                is_published=True,
             )
         )
 
-    articles_for_knowledge_list = Article.objects.bulk_create(
-        articles_for_knowledge_list
+    articles_for_knowledge_each_list = Article.objects.bulk_create(
+        articles_for_knowledge_each_list
     )
 
-    for article, knowledge in zip(articles_for_knowledge_list, knowledge_list):
+    for article, knowledge in zip(
+        articles_for_knowledge_each_list, knowledge_each_list
+    ):
         knowledge.article = article
 
-    Knowledge.objects.bulk_create(knowledge_list)
+    Knowledge.objects.bulk_create(knowledge_each_list)
 
     # For Country
     # ====================================================================================================
@@ -135,7 +145,7 @@ def run():
         else:
             language = language_jp
 
-        articles_for_countries_list.append(
+        articles_for_countries_each_list.append(
             Article(
                 content=article_json["fields"].get("content"),
                 kicker=article_json["fields"].get("kicker"),
@@ -143,23 +153,23 @@ def run():
             )
         )
 
-        countries_list.append(
+        countries_each_list.append(
             Country(
                 name=a["fields"].get("name"),
                 slug=a["fields"].get("slug"),
-                genre_for_url=GenreForUrl.objects.get(name="countries"),
+                genre_for_url=GenreForUrl.objects.get(name="countries/each"),
                 language=language,
             )
         )
 
-    articles_for_countries_list = Article.objects.bulk_create(
-        articles_for_countries_list
+    articles_for_countries_each_list = Article.objects.bulk_create(
+        articles_for_countries_each_list
     )
 
-    for article, country in zip(articles_for_countries_list, countries_list):
+    for article, country in zip(articles_for_countries_each_list, countries_each_list):
         country.article = article
 
-    Country.objects.bulk_create(countries_list)
+    Country.objects.bulk_create(countries_each_list)
 
     # For Arts Arts
     # ====================================================================================================
@@ -203,9 +213,9 @@ def run():
     arts_methods_data = [
         item for item in arts_data if item.get("model") == "arts.paintingmethod"
     ]
-    print(arts_methods_data)
+    # print(arts_methods_data)
     for a in arts_methods_data:
-        print(a)
+        # print(a)
         pk_in_json = a["fields"].get("article")
         article_json = article_dict.get(pk_in_json)
         if a["fields"].get("language") == 1:
@@ -372,7 +382,7 @@ def run():
     ]
     for a in habitats_data:
         pk_in_json = a["fields"].get("article")
-        print(pk_in_json)
+        # print(pk_in_json)
         article_json = article_dict.get(pk_in_json)
         if a["fields"].get("language") == 1:
             language = language_en
@@ -530,6 +540,7 @@ def run():
 
     Ingredient.objects.bulk_create(foods_ingredient_list)
 
+    # For Movies
     # ====================================================================================================
     movies_movies_data = [
         item for item in movies_data if item.get("model") == "movies.movie"
@@ -545,7 +556,7 @@ def run():
         else:
             language = language_jp
 
-        articles_for_movies_list.append(
+        articles_for_movies_each_list.append(
             Article(
                 content=article_json["fields"].get("content"),
                 kicker=article_json["fields"].get("kicker"),
@@ -553,7 +564,7 @@ def run():
             )
         )
 
-        rating_for_movies_list.append(
+        rating_for_movies_each_list.append(
             MovieRating(
                 story=rating_json["fields"].get("story"),
                 social_effect=rating_json["fields"].get("social_effect"),
@@ -573,26 +584,30 @@ def run():
             )
         )
 
-        movies_list.append(
+        movies_each_list.append(
             Movie(
                 name=a["fields"].get("name"),
                 slug=a["fields"].get("slug"),
                 type=a["fields"].get("type"),
                 author=author,
-                genre_for_url=GenreForUrl.objects.get(name="movies"),
+                genre_for_url=GenreForUrl.objects.get(name="movies/each"),
                 language=language,
                 themoviedb_id=a["fields"].get("themoviedb_id"),
             )
         )
 
-    articles_for_movies_list = Article.objects.bulk_create(articles_for_movies_list)
+    articles_for_movies_each_list = Article.objects.bulk_create(
+        articles_for_movies_each_list
+    )
 
-    rating_for_movies_list = MovieRating.objects.bulk_create(rating_for_movies_list)
+    rating_for_movies_each_list = MovieRating.objects.bulk_create(
+        rating_for_movies_each_list
+    )
 
-    for article, movie in zip(articles_for_movies_list, movies_list):
+    for article, movie in zip(articles_for_movies_each_list, movies_each_list):
         movie.article = article
 
-    for rating, movie in zip(rating_for_movies_list, movies_list):
+    for rating, movie in zip(rating_for_movies_each_list, movies_each_list):
         movie.movie_rating = rating
 
-    Movie.objects.bulk_create(movies_list)
+    Movie.objects.bulk_create(movies_each_list)

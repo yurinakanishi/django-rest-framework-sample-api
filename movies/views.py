@@ -16,6 +16,7 @@ from .serializers import (
     MovieActorSerializerForGet,
     MovieActorSerializerForCreateUpdate,
     MovieActorSerializerForDestroy,
+    MovieSearchSerializer,
 )
 from accounts.permissions import IsAdminOrReadOnly, IsCreateUserOrReadOnly
 from rest_framework.permissions import (
@@ -26,18 +27,35 @@ from rest_framework.permissions import (
 )
 
 
-class MovieList(generics.ListAPIView):
-    queryset = Movie.objects.filter(language__name="en")
+class MovieSearchList(generics.ListAPIView):
+    serializer_class = MovieSearchSerializer
+    permission_classes = [IsAdminOrReadOnly]
+
+    def get_language_queryset(self):
+        lang = self.request.GET.get("lang", "en")
+        return Movie.objects.filter(language__name=lang)
+
+
+class BaseMovieList(generics.ListAPIView):
     serializer_class = MovieSerializerForGet
     lookup_field = "slug"
     permission_classes = [IsAdminOrReadOnly]
 
+    def get_language_queryset(self):
+        lang = self.request.GET.get("lang", "en")
+        return Movie.objects.filter(language__name=lang)
 
-class MovieListJp(generics.ListAPIView):
-    queryset = Movie.objects.filter(language__name="jp")
-    serializer_class = MovieSerializerForGet
-    lookup_field = "slug"
-    permission_classes = [IsAdminOrReadOnly]
+
+class MovieListWithPagination(BaseMovieList):
+    paginate_by = 30
+
+    def get_queryset(self):
+        return self.get_language_queryset()
+
+
+class MovieList(BaseMovieList):
+    def get_queryset(self):
+        return self.get_language_queryset()
 
 
 class MovieDetail(generics.RetrieveUpdateDestroyAPIView):

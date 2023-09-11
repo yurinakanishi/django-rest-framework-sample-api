@@ -49,6 +49,10 @@ class Habitat(models.Model):
     )
     tags = models.ManyToManyField(Tag, blank=True, related_name="habitat_tags")
 
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1
+    )
+
     def __str__(self):
         return self.name
 
@@ -88,6 +92,10 @@ class Species(models.Model):
         related_name="species_genre_for_url",
     )
 
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1
+    )
+
     def __str__(self):
         return self.name
 
@@ -116,6 +124,10 @@ class LivingThings(models.Model):
         related_name="living_things_genre_for_url",
     )
     tags = models.ManyToManyField(Tag, blank=True, related_name="living_things_tags")
+
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1
+    )
 
     def __str__(self):
         return self.name

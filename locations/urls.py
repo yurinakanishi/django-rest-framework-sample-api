@@ -6,11 +6,13 @@ from locations.views import (
     CountryCreate,
     CountryUpdate,
     CountryDestroy,
+    CountrySearchList,
 )
 
 urlpatterns = [
     path("countries/", CountryList.as_view(), name="country-list"),
     path("countries/create/", CountryCreate.as_view(), name="country-create"),
+    path("countries/search/", CountrySearchList.as_view(), name="country-search"),
     path("countries/<slug:slug>/", CountryDetail.as_view(), name="country-detail"),
     path(
         "countries/<slug:slug>/update/", CountryUpdate.as_view(), name="country-update"

@@ -5,6 +5,7 @@ from .models import Knowledge
 class KnowledgeAdmin(admin.ModelAdmin):
     # filter_horizontal = ("tag", "genre")
     display_fields = "name"
+    search_fields = ("name",)
     prepopulated_fields = {"slug": ("name",)}
 
 

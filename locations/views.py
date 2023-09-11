@@ -16,7 +16,17 @@ from .serializers import (
     CountrySerializerForGet,
     CountrySerializerForCreateUpdate,
     CountrySerializerForDestroy,
+    CountrySearchSerializer,
 )
+
+
+class CountrySearchList(generics.ListAPIView):
+    serializer_class = CountrySearchSerializer
+    permission_classes = [IsAdminOrReadOnly]
+
+    def get_language_queryset(self):
+        lang = self.request.GET.get("lang", "en")
+        return Country.objects.filter(language__name=lang)
 
 
 class CountryList(generics.ListAPIView):

@@ -45,6 +45,12 @@ class LivingThingsSerializerForCreateUpdate(serializers.ModelSerializer):
         return instance
 
 
+class LivingThingsSearchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = LivingThings
+        fields = ["name", "slug", "genre_for_url"]
+
+
 class LivingThingsSerializerForGet(serializers.ModelSerializer):
     article = ArticleSerializer()
     tags = TagSerializer(many=True)

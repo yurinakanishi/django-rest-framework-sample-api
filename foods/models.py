@@ -30,6 +30,10 @@ class CookingMethod(models.Model):
     )
     tags = models.ManyToManyField(Tag, blank=True, related_name="cooking_method_tags")
 
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1
+    )
+
     def __str__(self):
         return self.name
 

@@ -13,6 +13,7 @@ Web アプリケーション「Augmented World」のサーバーサイドリポ�
 - Google Cloud
 - Docker
 - GitHub Actions for CI/CD
+- JWT token authentication
 
 ## データベース
 

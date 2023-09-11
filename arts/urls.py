@@ -3,7 +3,6 @@ from rest_framework.routers import DefaultRouter
 
 from arts.views import (
     ArtEachList,
-    ArtEachListJp,
     ArtEachCreate,
     ArtEachDetail,
     ArtEachDestroy,
@@ -12,31 +11,28 @@ from arts.views import (
     ArtsPeriodCreate,
     ArtsPeriodDetail,
     ArtsPeriodList,
-    ArtsPeriodListJp,
     PaintingMethodCreate,
     PaintingMethodDetail,
     PaintingMethodList,
-    PaintingMethodListJp,
     PaintingMethodDestroy,
     PaintingMethodUpdate,
     PaintingStyleCreate,
     PaintingStyleDetail,
     PaintingStyleList,
-    PaintingStyleListJp,
     PaintingStyleDestroy,
     PaintingStyleUpdate,
     ArtistList,
-    ArtistListJp,
     ArtistUpdate,
     ArtistDestroy,
     ArtistDetail,
     ArtistCreate,
+    ArtSearchList,
 )
 
 urlpatterns = [
+    path("search/", ArtSearchList.as_view(), name="arts-search"),
     # ArtEach URLs
     path("each/", ArtEachList.as_view(), name="arts-each-list"),
-    path("jp/each/", ArtEachListJp.as_view(), name="jp-arts-each-list"),
     path("each/create/", ArtEachCreate.as_view(), name="arts-each-create"),
     path("each/<slug:slug>/", ArtEachDetail.as_view(), name="arts-each-detail"),
     path(
@@ -44,7 +40,6 @@ urlpatterns = [
     ),
     # ArtsPeriod URLs
     path("periods/", ArtsPeriodList.as_view(), name="arts-periods-list"),
-    path("jp/periods/", ArtsPeriodListJp.as_view(), name="jp-arts-periods-list"),
     path("periods/create/", ArtsPeriodCreate.as_view(), name="arts-periods-create"),
     path(
         "periods/<slug:slug>/", ArtsPeriodDetail.as_view(), name="arts-periods-detail"
@@ -61,11 +56,6 @@ urlpatterns = [
     ),
     # PaintingMethod URLs
     path("painting-methods/", PaintingMethodList.as_view(), name="arts-methods-list"),
-    path(
-        "jp/painting-methods/",
-        PaintingMethodListJp.as_view(),
-        name="jp-arts-methods-list",
-    ),
     path(
         "painting-methods/create/",
         PaintingMethodCreate.as_view(),
@@ -91,11 +81,6 @@ urlpatterns = [
         "painting-styles/",
         PaintingStyleList.as_view(),
         name="arts-painting-styles-list",
-    ),
-    path(
-        "jp/painting-styles/",
-        PaintingStyleListJp.as_view(),
-        name="jp-arts-painting-styles-list",
     ),
     path(
         "painting-styles/create/",

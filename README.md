@@ -17,6 +17,7 @@ This is the server-side repository for the web application "Augmented World". Th
 - Google Cloud
 - Docker
 - GitHub Actions for CI/CD
+- JWT token authentication
 
 ## Database
 

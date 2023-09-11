@@ -45,6 +45,12 @@ class MovieRatingSerializerForCreateUpdate(serializers.ModelSerializer):
         return instance
 
 
+class MovieSearchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Movie
+        fields = ["name", "slug", "genre_for_url"]
+
+
 class MovieRatingSerializerForGet(serializers.ModelSerializer):
     article = ArticleSerializer()
     tags = TagSerializer(many=True)

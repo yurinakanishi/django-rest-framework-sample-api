@@ -45,6 +45,12 @@ class FoodSerializerForCreateUpdate(serializers.ModelSerializer):
         return instance
 
 
+class FoodSearchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Food
+        fields = ["name", "slug", "genre_for_url"]
+
+
 class FoodSerializerForGet(serializers.ModelSerializer):
     article = ArticleSerializer()
     tags = TagSerializer(many=True)

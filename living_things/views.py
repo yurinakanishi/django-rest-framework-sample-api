@@ -13,6 +13,7 @@ from .serializers import (
     HabitatSerializerForGet,
     HabitatSerializerForCreateUpdate,
     HabitatSerializerForDestroy,
+    LivingThingsSearchSerializer,
 )
 from locations.serializers import CountrySerializer
 from locations.models import Country
@@ -27,16 +28,22 @@ from rest_framework.permissions import (
 )
 
 
+class LivingThingsSearchList(generics.ListAPIView):
+    serializer_class = LivingThingsSearchSerializer
+    permission_classes = [IsAdminOrReadOnly]
+
+    def get_language_queryset(self):
+        lang = self.request.GET.get("lang", "en")
+        return LivingThings.objects.filter(language__name=lang)
+
+
 class LivingThingsEachList(generics.ListAPIView):
-    queryset = LivingThings.objects.filter(language__name="en")
     serializer_class = LivingThingsSerializerForGet
     permission_classes = [IsAdminOrReadOnly]
 
-
-class LivingThingsEachListJp(generics.ListAPIView):
-    queryset = LivingThings.objects.filter(language__name="jp")
-    serializer_class = LivingThingsSerializerForGet
-    permission_classes = [IsAdminOrReadOnly]
+    def get_queryset(self):
+        lang = self.request.GET.get("lang", "en")
+        return LivingThings.objects.filter(language__name=lang)
 
 
 class LivingThingsEachDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -67,10 +74,18 @@ class LivingThingsEachDestroy(generics.DestroyAPIView):
     permission_classes = [IsCreateUserOrReadOnly]
 
 
+# ============================================================
+
+
 class LivingThingsSpecieList(generics.ListAPIView):
-    queryset = Species.objects.all()
     serializer_class = SpeciesSerializerForGet
     permission_classes = [IsAdminOrReadOnly]
+
+    def get_queryset(self):
+        lang = self.request.GET.get("lang")
+        if lang:
+            return Species.objects.filter(language__name=lang)
+        return Species.objects.all()
 
 
 class LivingThingsSpecieDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -99,6 +114,9 @@ class LivingThingsSpecieDestroy(generics.DestroyAPIView):
     serializer_class = SpeciesSerializerForDestroy
     lookup_field = "slug"
     permission_classes = [IsCreateUserOrReadOnly]
+
+
+# ============================================================
 
 
 # class LivingThingsCountryList(generics.ListAPIView):
@@ -134,11 +152,18 @@ class LivingThingsSpecieDestroy(generics.DestroyAPIView):
 #     lookup_field = "slug"
 #     permission_classes = [IsCreateUserOrReadOnly]
 
+# ============================================================
+
 
 class LivingThingsHabitatList(generics.ListAPIView):
-    queryset = Habitat.objects.all()
     serializer_class = HabitatSerializerForGet
     permission_classes = [IsAdminOrReadOnly]
+
+    def get_queryset(self):
+        lang = self.request.GET.get("lang")
+        if lang:
+            return Habitat.objects.filter(language__name=lang)
+        return Habitat.objects.all()
 
 
 class LivingThingsHabitatDetail(generics.RetrieveUpdateDestroyAPIView):

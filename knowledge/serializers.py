@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import Knowledge
 from general.serializers import TagSerializer, GenreForUrlSerializer, ArticleSerializer
 from general.models import Tag, GenreForUrl, Article
+from accounts.serializers import UserSerializer
 
 
 class KnowledgeSerializerForCreateUpdate(serializers.ModelSerializer):
@@ -45,10 +46,17 @@ class KnowledgeSerializerForCreateUpdate(serializers.ModelSerializer):
         return instance
 
 
+class KnowledgeSearchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Knowledge
+        fields = ["name", "slug", "genre_for_url"]
+
+
 class KnowledgeSerializerForGet(serializers.ModelSerializer):
     article = ArticleSerializer()
     tags = TagSerializer(many=True)
     genre_for_url = GenreForUrlSerializer()
+    author = UserSerializer()
 
     class Meta:
         model = Knowledge

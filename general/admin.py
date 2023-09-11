@@ -1,9 +1,13 @@
 from django.contrib import admin
-from .models import Article, Tag, GenreForUrl, Language
+from .models import Article, Tag, GenreForUrl, Language, Category
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    display_fields = "excerpt"
+    list_display = (
+        # "content",
+        "excerpt",
+    )
+    search_fields = ("excerpt",)
 
 
 class TagAdmin(admin.ModelAdmin):
@@ -19,7 +23,12 @@ class LanguageAdmin(admin.ModelAdmin):
     display_fields = "name"
 
 
+class CategoryAdmin(admin.ModelAdmin):
+    display_fields = "name"
+
+
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(Tag, TagAdmin)
 admin.site.register(GenreForUrl, GenreAdmin)
 admin.site.register(Language, LanguageAdmin)
+admin.site.register(Category, CategoryAdmin)
