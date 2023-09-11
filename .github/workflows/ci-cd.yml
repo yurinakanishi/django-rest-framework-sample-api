@@ -34,40 +34,40 @@ jobs:
   #       run: |
   #         python manage.py test
 
-  # build_and_push:
-  #   # needs: test
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v3
-  #     - name: Create .env file from GitHub Secrets
-  #       run: |
-  #         echo "DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}" >> .env
-  #         echo DJANGO_SETTINGS_MODULE=${{ secrets.DJANGO_SETTINGS_MODULE_PROD_DOCKER_POSTGRES }} >> .env
-  #         echo DJANGO_SUPERUSER_PASSWORD=${{ secrets.DJANGO_SUPERUSER_PASSWORD }} >> .env
-  #         echo DJANGO_SUPERUSER_NAME=${{ secrets.DJANGO_SUPERUSER_NAME }} >> .env
-  #         echo DJANGO_SUPERUSER_EMAIL=${{ secrets.DJANGO_SUPERUSER_EMAIL }} >> .env
-  #         echo POSTGRES_ENGIN=${{ secrets.POSTGRES_ENGINE }} >> .env
-  #         echo POSTGRES_USER=${{ secrets.POSTGRES_USER }} >> .env
-  #         echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> .env
-  #         echo POSTGRES_PORT=${{ secrets.POSTGRES_PORT }} >> .env
-  #         echo POSTGRES_DB=${{ secrets.POSTGRES_DB }} >> .env
+  build_and_push:
+    # needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Create .env file from GitHub Secrets
+        run: |
+          echo "DJANGO_SECRET_KEY=${{ secrets.DJANGO_SECRET_KEY }}" >> .env
+          echo DJANGO_SETTINGS_MODULE=${{ secrets.DJANGO_SETTINGS_MODULE_PROD_DOCKER_POSTGRES }} >> .env
+          echo DJANGO_SUPERUSER_PASSWORD=${{ secrets.DJANGO_SUPERUSER_PASSWORD }} >> .env
+          echo DJANGO_SUPERUSER_NAME=${{ secrets.DJANGO_SUPERUSER_NAME }} >> .env
+          echo DJANGO_SUPERUSER_EMAIL=${{ secrets.DJANGO_SUPERUSER_EMAIL }} >> .env
+          echo POSTGRES_ENGIN=${{ secrets.POSTGRES_ENGINE }} >> .env
+          echo POSTGRES_USER=${{ secrets.POSTGRES_USER }} >> .env
+          echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> .env
+          echo POSTGRES_PORT=${{ secrets.POSTGRES_PORT }} >> .env
+          echo POSTGRES_DB=${{ secrets.POSTGRES_DB }} >> .env
 
-  #     - name: Docker Compose Up
-  #       run: |
-  #         docker-compose up -d
-  #         docker images
+      - name: Docker Compose Up
+        run: |
+          docker-compose up -d
+          docker images
 
-  #     - name: Login to GitHub Container Registry
-  #       run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u yurite6174 --password-stdin
+      - name: Login to GitHub Container Registry
+        run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u yurite6174 --password-stdin
 
-  #     - name: Push to GitHub Container Registry
-  #       run: |
-  #         docker tag steveltn/https-portal:1 ghcr.io/yurite6174/steveltn/https-portal:1
-  #         docker tag augmented-world-backend-api_web:latest ghcr.io/yurite6174/augmented-world-backend-api_web:latest
-  #         docker tag postgres:latest ghcr.io/yurite6174/postgres:latest
-  #         docker push ghcr.io/yurite6174/steveltn/https-portal:1
-  #         docker push ghcr.io/yurite6174/augmented-world-backend-api_web:latest
-  #         docker push ghcr.io/yurite6174/postgres:latest
+      - name: Push to GitHub Container Registry
+        run: |
+          docker tag steveltn/https-portal:1 ghcr.io/yurite6174/steveltn/https-portal:1
+          docker tag augmented-world-backend-api_web:latest ghcr.io/yurite6174/augmented-world-backend-api_web:latest
+          docker tag postgres:latest ghcr.io/yurite6174/postgres:latest
+          docker push ghcr.io/yurite6174/steveltn/https-portal:1
+          docker push ghcr.io/yurite6174/augmented-world-backend-api_web:latest
+          docker push ghcr.io/yurite6174/postgres:latest
 
   deploy:
     # needs: build_and_push
