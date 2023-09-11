@@ -27,13 +27,13 @@ services:
       - db
 
   # Nginx
-  nginx:
-    container_name: nginx
-    build: ./nginx
-    ports:
-      - 80:80
-    depends_on:
-      - web
+  # nginx:
+  #   container_name: nginx
+  #   build: ./nginx
+  #   ports:
+  #     - 80:80
+  #   depends_on:
+  #     - web
 
   https-portal:
     image: steveltn/https-portal:1
