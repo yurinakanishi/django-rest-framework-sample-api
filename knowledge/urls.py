@@ -19,7 +19,7 @@ urlpatterns = [
     ),
     path("<str:type>/all/", KnowledgeList.as_view(), name="knowledge-list-all"),
     path(
-        "<str:type>/search/",
+        "search/",
         KnowledgeSearchList.as_view(),
         name="knowledge-search",
     ),
